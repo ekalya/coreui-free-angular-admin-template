@@ -1,0 +1,22 @@
+<div class="col-md-6 user-container">
+    <h2 style="margin: auto"> Company Details</h2>
+    <button class="btn btn-danger" style="width:100px" (click)="addUser()"> Add User</button>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="hidden">Id</th>
+        <th>Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let c of companies">
+        <td class="hidden">c.id</td>
+        <td>c.name</td>
+        <td>
+          <button class="btn btn-success" (click)="deleteCompany(c)"> Delete</button>
+          <button class="btn btn-success" (click)="editCompany(c)" style="margin-left: 20px;"> Edit</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
