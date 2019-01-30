@@ -1,0 +1,44 @@
+<div class="animated fadeIn">
+  <div class="row">
+
+
+      <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+              <strong>Company Details</strong>
+              <div class="btn-group float-right" dropdown>
+                  <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
+                    <i class="icon-settings"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+            </div>
+            <div class="card-body">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="hidden">Id</th>
+                  <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let c of companies">
+                  <td class="hidden"> {{ c.id }} </td>
+                  <td> {{ c.name }} </td>
+                  <td>
+                    <button class="btn btn-success" (click)="deleteCompany(c)"> Delete</button>
+                    <button class="btn btn-success" (click)="editCompany(c)" style="margin-left: 20px;"> Edit</button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><!--/.col-->
+  </div><!--/.row-->
+</div>
