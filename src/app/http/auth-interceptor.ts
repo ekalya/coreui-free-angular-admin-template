@@ -21,7 +21,6 @@ export class  AuthInterceptor implements HttpInterceptor {
     constructor(private authService: AuthService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('user before hardcode:::' + this.authService.currentUser);
         const auth = this.authService.currentUser ?
         'Basic ' + btoa(this.authService.currentUser.username + ':' + this.authService.currentUser.password) : null;
 

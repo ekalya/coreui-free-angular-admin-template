@@ -60,6 +60,10 @@ export const routes: Routes = [
     },
     children: [
       {
+        path: 'transactions',
+        loadChildren: './containers/transactions/transactions.module#TransactionsModule'
+      },
+      {
         path: 'setup',
         loadChildren: './containers/setup/setup.module#SetupModule'
       },

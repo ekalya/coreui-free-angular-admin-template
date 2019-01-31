@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   login(): Observable<User> {
-    return this.apiService.get<User>('/user').pipe(
+    return this.apiService.get<User>('/userdetails/current/').pipe(
       map(userData => {
         if (userData) {
           this.currentUser = (userData as User);
