@@ -11,7 +11,6 @@ import { PaymentTransaction } from '../../../models/payment-transaction';
 })
 export class TableComponent implements OnInit {
   paymentTransactions: PaymentTransaction[];
-  testUser = 'james';
   constructor(private paymentConfirmationService: PaymentConfirmationService) { }
 
   ngOnInit() {

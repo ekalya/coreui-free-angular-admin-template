@@ -8,12 +8,13 @@
         <div class="card-body">
 
           <!-- Search form -->
-          <form (keydown)="keyDownFunction($event)">
+          <form [formGroup]="searchForm"  (keydown)="keyDownFunction($event)">
            <div class="md-form my-0">
              <input 
              class="form-control mr-sm-2" 
              type="text" 
              formControlName="username"
+             [(ngModel)]="searchKey"
              placeholder="Search" 
              aria-label="Search">
            </div>
