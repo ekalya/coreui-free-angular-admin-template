@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
-import { User } from '../../models/user';
-import { AlertService } from '../../services/alert/alert.service';
+import { User, AuthService, AlertService } from '../core';
+
 
 @Component({
   selector: 'app-login-container',

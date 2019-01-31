@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { PaymentTransaction } from '../../models/payment-transaction';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PaymentTransaction } from '../../../core';
+
 
 @Component({
   selector: 'app-table-list',

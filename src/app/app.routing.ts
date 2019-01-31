@@ -7,9 +7,8 @@ import { DefaultLayoutComponent } from './containers';
 import { P401Component } from './views/error/401.component';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-import { LoginContainerComponent } from './containers/login/login-container.component';
+import { LoginContainerComponent } from './login';
 
 export const routes: Routes = [
   {
@@ -61,11 +60,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'transactions',
-        loadChildren: './containers/transactions/transactions.module#TransactionsModule'
+        loadChildren: './views/transactions/transactions.module#TransactionsModule'
       },
       {
         path: 'setup',
-        loadChildren: './containers/setup/setup.module#SetupModule'
+        loadChildren: './views/setup/setup.module#SetupModule'
       },
       {
         path: 'base',

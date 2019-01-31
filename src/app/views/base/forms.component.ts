@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AlertService } from '../../services/alert/alert.service';
+import { AlertService } from '../../core';
+
 
 @Component({
   templateUrl: 'forms.component.html'

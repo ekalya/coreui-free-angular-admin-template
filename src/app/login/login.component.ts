@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
-import { User } from '../../models/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../core';
 
 @Component({
   selector: 'app-login-view',

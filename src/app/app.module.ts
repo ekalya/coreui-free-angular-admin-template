@@ -4,12 +4,8 @@ import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
 
 import { AppComponent } from './app.component';
 
@@ -19,7 +15,6 @@ import { DefaultLayoutComponent } from './containers';
 import { P401Component } from './views/error/401.component';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
 const APP_CONTAINERS = [
@@ -41,12 +36,9 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { LoginContainerComponent } from './containers/login/login-container.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './http/auth-interceptor';
-import { AlertComponent } from './containers/alert/alert.component';
-import { AlertService } from './services/alert/alert.service';
-import { ApiService } from './services/api.service';
+import { CoreModule } from './core/core.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   imports: [
@@ -63,7 +55,9 @@ import { ApiService } from './services/api.service';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    CoreModule,
+    LoginModule
   ],
   declarations: [
     AppComponent,
@@ -71,22 +65,12 @@ import { ApiService } from './services/api.service';
     P401Component,
     P404Component,
     P500Component,
-    LoginComponent,
-    RegisterComponent,
-    LoginContainerComponent,
-    AlertComponent
+    RegisterComponent
   ],
   providers: [
-    ApiService,
-    AlertService,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-    multi: true
     }
   ],
   bootstrap: [ AppComponent ]

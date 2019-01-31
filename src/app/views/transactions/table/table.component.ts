@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PaymentConfirmation } from '../../../models/payment-confirmation';
-import { PaymentConfirmationService } from '../../../services/payment-confirmation.service';
-import { PaymentConfirmationList } from '../../../models/payment-confirmation-list';
-import { PaymentTransaction } from '../../../models/payment-transaction';
+import { PaymentTransaction, PaymentConfirmationService } from '../../../core';
+
 
 @Component({
   selector: 'app-table',

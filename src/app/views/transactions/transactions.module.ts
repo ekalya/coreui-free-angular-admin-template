@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { TransactionsRoutingModule } from './transactions-routing.module';
 import { TableComponent } from './table/table.component';
-import { TableListComponent } from '../../views/table-list/table-list.component';
+import { TableListComponent } from './pages/table-list.component';
+
 
 @NgModule({
   declarations: [
