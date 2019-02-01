@@ -9,9 +9,7 @@ import { PaymentTransaction } from '../../../core';
   styleUrls: ['./table-list.component.scss']
 })
 export class TableListComponent implements OnInit {
-  @Input() public testValue: string;
   @Input() public transactions: PaymentTransaction[];
-  @Output() public search: EventEmitter<String> = new EventEmitter();
   searchKey: string;
   searchForm: FormGroup;
   constructor(private fb: FormBuilder) {

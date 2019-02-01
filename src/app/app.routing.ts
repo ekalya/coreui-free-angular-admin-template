@@ -59,44 +59,20 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'transactions',
-        loadChildren: './views/transactions/transactions.module#TransactionsModule'
-      },
-      {
-        path: 'setup',
-        loadChildren: './views/setup/setup.module#SetupModule'
-      },
-      {
-        path: 'base',
-        loadChildren: './views/base/base.module#BaseModule'
-      },
-      {
-        path: 'buttons',
-        loadChildren: './views/buttons/buttons.module#ButtonsModule'
+        path: 'dashboard',
+        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'charts',
         loadChildren: './views/chartjs/chartjs.module#ChartJSModule'
       },
       {
-        path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
+        path: 'transactions',
+        loadChildren: './views/transactions/transactions.module#TransactionsModule'
       },
       {
-        path: 'icons',
-        loadChildren: './views/icons/icons.module#IconsModule'
-      },
-      {
-        path: 'notifications',
-        loadChildren: './views/notifications/notifications.module#NotificationsModule'
-      },
-      {
-        path: 'theme',
-        loadChildren: './views/theme/theme.module#ThemeModule'
-      },
-      {
-        path: 'widgets',
-        loadChildren: './views/widgets/widgets.module#WidgetsModule'
+        path: 'setup',
+        loadChildren: './views/setup/setup.module#SetupModule'
       }
     ]
   }
