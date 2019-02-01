@@ -4,13 +4,11 @@ import { CompanyComponent } from './company/company.component';
 import { SetupRoutingModule } from './setup-routing.module';
 import { BranchesComponent } from './branches/branches.component';
 import { BranchListComponent } from './branches/pages/branch-list.component';
-import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    SetupRoutingModule,
-    SharedModule
+    SetupRoutingModule
   ],
   declarations: [CompanyComponent, BranchesComponent, BranchListComponent]
 })

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DropdownSearchComponent } from './dropdown-search/dropdown-search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from './alert/alert.component';
-import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({
@@ -12,14 +11,12 @@ import { DataTablesModule } from 'angular-datatables';
     AlertComponent
   ],
   imports: [
-    CommonModule,
-    DataTablesModule
+    CommonModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    DataTablesModule,
     DropdownSearchComponent,
     AlertComponent
   ]

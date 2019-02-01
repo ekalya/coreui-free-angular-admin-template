@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthInterceptor } from './http/auth-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import {
-  AuthService,
-  AlertService,
-  ApiService,
-  BranchesService
+import { 
+  AuthService, 
+  AlertService, 
+  ApiService 
 } from './services';
 
 @NgModule({
@@ -18,7 +17,6 @@ import {
     AuthService,
     ApiService,
     AlertService,
-    BranchesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

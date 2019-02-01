@@ -30,4 +30,7 @@ export class TableComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
+
+
+
 }

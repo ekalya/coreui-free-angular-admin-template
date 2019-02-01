@@ -9,19 +9,19 @@
             <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
                 <thead>
                     <tr>
-                      <th>Customer Name</th>
+                      <th>Name</th>
                       <th>TransactionDate</th>
                       <th>Transaction Ref No</th>
                       <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let t of transactions">
-                      <td> {{ t.customerName }} </td>
-                      <td> {{ t.timeStamp }} </td>
-                      <td> {{ t.transactionRefNo }} </td>
+                    <tr *ngFor="let b of branches">
+                      <td> {{ b.Name }} </td>
+                      <td> {{ b.PhysicalLocation }} </td>
+                      <td> {{ b.TillNumbers.toString() }} </td>
                       <td>
-                        <span class="badge badge-success">new</span>
+                        <span class="badge badge-danger">Banned</span>
                       </td>
                     </tr>
                   </tbody> 

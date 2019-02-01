@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompanyComponent } from './company/company.component';
-import { BranchesComponent } from './branches/branches.component';
 
 const routes: Routes = [
   {
@@ -19,13 +18,6 @@ const routes: Routes = [
         component: CompanyComponent,
         data: {
           title: 'Company'
-        }
-      },
-      {
-        path: 'branches',
-        component: BranchesComponent,
-        data: {
-          title: 'Branches'
         }
       }
     ]

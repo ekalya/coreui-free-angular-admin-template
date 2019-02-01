@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PaymentTransaction, PaymentConfirmationService } from '../../../core';
 import { Subject } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit {
   paymentTransactions: PaymentTransaction[] = [];
   dtTrigger: Subject<PaymentTransaction[]> = new Subject<PaymentTransaction[]>();
   dtOptions: DataTables.Settings = {};
@@ -30,4 +30,7 @@ export class TableComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
+
+
+
 }
