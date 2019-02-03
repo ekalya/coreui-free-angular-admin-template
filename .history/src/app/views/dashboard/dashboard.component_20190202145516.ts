@@ -15,7 +15,9 @@ export class DashboardComponent implements OnInit {
   // mainChart
   public mainChartElements = 27;
   public mainChartData1: Array<number> = [];
+  public mainChartData2: Array<number> = [];
   public mainChartData3: Array<number> = [];
+  public mainChartData4: Array<number> = [];
   public mainChartTransactions: Array<DailyTransactionCounts> = [];
 
   public mainChartData: Array<any> = [
@@ -24,8 +26,16 @@ export class DashboardComponent implements OnInit {
       label: 'Current'
     },
     {
+      data: this.mainChartData2,
+      label: 'Previous'
+    },
+    {
       data: this.mainChartData3,
       label: 'BEP'
+    },
+    {
+      data: this.mainChartData4,
+      label: 'TEST'
     }
   ];
 
@@ -62,8 +72,8 @@ export class DashboardComponent implements OnInit {
         ticks: {
           beginAtZero: true,
           maxTicksLimit: 5,
-          stepSize: Math.ceil(50 / 5),
-          max: 50
+          stepSize: Math.ceil(300 / 6),
+          max: 300
         }
       }]
     },
@@ -88,9 +98,21 @@ export class DashboardComponent implements OnInit {
       borderColor: getStyle('--info'),
       pointHoverBackgroundColor: '#fff'
     },
+    { // brandSuccess
+      backgroundColor: 'transparent',
+      borderColor: getStyle('--success'),
+      pointHoverBackgroundColor: '#fff'
+    },
     { // brandDanger
       backgroundColor: 'transparent',
       borderColor: getStyle('--danger'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 1,
+      borderDash: [8, 5]
+    },
+    { // brandDanger
+      backgroundColor: 'transparent',
+      borderColor: getStyle('--warning'),
       pointHoverBackgroundColor: '#fff',
       borderWidth: 1,
       borderDash: [8, 5]
@@ -106,17 +128,31 @@ export class DashboardComponent implements OnInit {
   constructor(private _dateFormatPipe: DateFormatPipe,
     private paymentConfirmationService: PaymentConfirmationService) {}
   ngOnInit(): void {
-    this.paymentConfirmationService.getDailyTransactionsCount('dailyTransactions').subscribe(data => {
-      data.dailyPaymentConfirmation.filter(
-        r => (moment(r.date).toDate() >= moment().subtract(this.mainChartElements, 'days').toDate()) === true)
-        .sort((a, b) =>  new Date(a.date).getTime() - new Date(b.date).getTime() ).forEach(dt => {
-          this.mainChartData1.push(dt.count);
-          this.mainChartLabels.push(moment(dt.date).format('ddd'));
-      });
+    this.paymentConfirmationService.getDailyTransactionsCount('test').subscribe(data => {
+      console.log(data);
     });
     // generate random values for mainChart
     for (let i = 0; i <= this.mainChartElements; i++) {
-      this.mainChartData3.push(5);
+      this.mainChartData1.push(this.random(50, 200));
+      this.mainChartData2.push(this.random(80, 100));
+      this.mainChartData3.push(65);
+    }
+    var i = 0;
+    var d = new Date();
+    var daysback = 27;
+    for (i = daysback; i >= 0 ; i--) {
+      this.mainChartTransactions.push(new DailyTransactionCounts(moment().subtract(i, 'days').toDate(), this.random(50, 200)));
+    }
+
+
+    for (i = 0; i < this.mainChartTransactions.length ; i++) {
+      console.log(this.mainChartTransactions[i].date);
+      this.mainChartData4.push(this.mainChartTransactions[i].count);
+      this.mainChartLabels.push(moment(this.mainChartTransactions[i].date).format('ddd'));
+    }
+
+    for (i = 0; i < this.mainChartLabels.length ; i++) {
+      console.log(this.mainChartLabels[i]);
     }
   }
 }

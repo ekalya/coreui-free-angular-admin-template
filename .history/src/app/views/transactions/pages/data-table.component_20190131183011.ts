@@ -15,6 +15,8 @@ export class DataTableComponent implements OnInit {
   @Input() public dtOptions: DataTables.Settings;
   @Input() public dtTrigger: Subject<PaymentTransaction[]>;
 
+  
+
   constructor() { }
 
   ngOnInit() {
