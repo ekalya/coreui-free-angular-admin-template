@@ -1,0 +1,31 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-body">
+      <app-chart-body 
+      [mainChartData]="mainChartData" 
+      [mainChartLabels]="mainChartLabels" 
+      [mainChartOptions]="mainChartOptions" 
+      [mainChartColours]="mainChartColours" 
+      [mainChartLegend]="mainChartLegend" 
+      [mainChartType]="mainChartType"></app-chart-body>
+    </div>
+    <div class="card-footer">
+      <div class="row text-center">
+        <div class="col-sm-12 col-md mb-sm-2 mb-0">
+          <div class="text-muted">Total Transactions</div>
+          <strong>29.703 Users (40%)</strong>
+          <div class="progress progress-xs mt-2">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md mb-sm-2 mb-0">
+          <div class="text-muted">Total Amounts</div>
+          <strong>29</strong>
+          <div class="progress progress-xs mt-2">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

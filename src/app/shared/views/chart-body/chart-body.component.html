@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-sm-5">
+    <h4 class="card-title mb-0"> {{ cardTitle }} </h4>
+    <div class="small text-muted">Last 30 days</div>
+  </div><!--/.col-->
+</div><!--/.row-->
+<div class="chart-wrapper" style="height:300px;margin-top:40px;">
+  <canvas baseChart class="chart"
+  [datasets]="mainChartData"
+  [labels]="mainChartLabels"
+  [options]="mainChartOptions"
+  [colors]="mainChartColours"
+  [legend]="mainChartLegend"
+  [chartType]="mainChartType"></canvas>
+</div>
