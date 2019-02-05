@@ -1,7 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import { navItems } from './../../_nav';
 import { AuthService } from '../../core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +11,7 @@ export class DefaultLayoutComponent implements OnDestroy {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService) {
 
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
@@ -28,9 +27,8 @@ export class DefaultLayoutComponent implements OnDestroy {
     this.changes.disconnect();
   }
   logout() {
-    this.authService.logout().subscribe(() => {
-      console.log('logged out');
-      this.router.navigate(['/login']);
-    });
+    this.http.post('logout', {}).finally(() => {
+        this.authenticated = false;
+    }).subscribe();
   }
 }

@@ -12,7 +12,7 @@ export class DefaultLayoutComponent implements OnDestroy {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
-  constructor(private authService: AuthService, private router: Router) {
+  constructor( private router: Router) {
 
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
@@ -28,9 +28,6 @@ export class DefaultLayoutComponent implements OnDestroy {
     this.changes.disconnect();
   }
   logout() {
-    this.authService.logout().subscribe(() => {
-      console.log('logged out');
-      this.router.navigate(['/login']);
-    });
+    this.router.navigate(['/logout']);
   }
 }

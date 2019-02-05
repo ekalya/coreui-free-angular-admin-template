@@ -46,18 +46,8 @@ export class AuthService {
     );
   }
 
-  logout(): Observable<User> {
-    return this.apiService.get<User>('/userdetails/logout/').pipe(
-      map(userData => {
-        if (userData) {
-          this.currentUser.authenticated = true;
-        }
-        return this.currentUser;
-      }), catchError((err: any) => {
-          this.error = err;
-          return Observable.throw(err);
-      })
-    );
+  logout(): void {
+    this.currentUser.authenticated = false;
   }
 }
 
