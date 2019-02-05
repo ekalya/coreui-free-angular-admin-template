@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import { navItems } from './../../_nav';
-import { AuthService } from '../../core';
+import { AuthService, crumAction } from '../../core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,6 +12,7 @@ export class DefaultLayoutComponent implements OnDestroy {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
+  public crumActions: crumAction[] = [{name:'Create', url:'#'}, {name:'Details', url:'#'}, {name:'Edit', url:'#'}, {name:'Delete', url:'#'}];
   constructor(private authService: AuthService, private router: Router) {
 
     this.changes = new MutationObserver((mutations) => {

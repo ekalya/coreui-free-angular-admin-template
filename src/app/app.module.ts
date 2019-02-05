@@ -39,6 +39,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { LoginModule } from './login/login.module';
     TabsModule.forRoot(),
     ChartsModule,
     CoreModule,
-    LoginModule
+    LoginModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
