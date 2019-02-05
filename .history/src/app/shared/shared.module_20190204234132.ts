@@ -9,6 +9,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ChartFooterComponent } from './views/chart-footer/chart-footer.component';
 import { ArrayToCommaDelimitedPipe } from './pipes/array-to-comma-delimited.pipe';
 import { CrudActionsComponent } from './views/crud-actions/crud-actions.component';
+import { NbContextMenuModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CrudActionsComponent } from './views/crud-actions/crud-actions.componen
   imports: [
     CommonModule,
     DataTablesModule,
-    ChartsModule
+    ChartsModule,
+    NbContextMenuModule
   ],
   exports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { CrudActionsComponent } from './views/crud-actions/crud-actions.componen
     ChartBodyComponent,
     ChartFooterComponent,
     ArrayToCommaDelimitedPipe,
-    CrudActionsComponent
+    CrudActionsComponent,
+    NbContextMenuModule
   ]
 })
 export class SharedModule { }

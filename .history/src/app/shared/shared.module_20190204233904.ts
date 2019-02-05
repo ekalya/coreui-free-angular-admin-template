@@ -9,6 +9,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ChartFooterComponent } from './views/chart-footer/chart-footer.component';
 import { ArrayToCommaDelimitedPipe } from './pipes/array-to-comma-delimited.pipe';
 import { CrudActionsComponent } from './views/crud-actions/crud-actions.component';
+import { NbThemeModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [

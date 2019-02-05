@@ -1,0 +1,10 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
+
+// If you want to add something do it here
+@import "custom";

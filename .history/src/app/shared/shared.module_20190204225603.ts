@@ -10,6 +10,7 @@ import { ChartFooterComponent } from './views/chart-footer/chart-footer.componen
 import { ArrayToCommaDelimitedPipe } from './pipes/array-to-comma-delimited.pipe';
 import { CrudActionsComponent } from './views/crud-actions/crud-actions.component';
 
+
 @NgModule({
   declarations: [
     DropdownSearchComponent,

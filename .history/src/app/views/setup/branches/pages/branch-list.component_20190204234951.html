@@ -5,7 +5,16 @@
         <div class="card-header">
           <i class="fa fa-align-justify"></i> 
           <div class="row">
-            All Branches
+            <div class="col-md-9">All Branches</div>
+            <div class="col-md-1">
+                <ul id="context1" class="dropdown-menu">
+                    <li><a ng-click="edit()">Edit</a></li>
+                    <li><a ng-click="link()">Link</a></li>
+                    <li><a ng-click="delete()">Delete</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-click="properties()">Properties</a></li>
+                  </ul>
+            </div>
           </div>  
         </div>
         <div class="card-body">
