@@ -1,0 +1,53 @@
+<div class="animated fadeIn">
+  <div class="row">
+
+
+      <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+              <strong>Company Details</strong>
+            </div>
+            <div class="card-body">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="hidden">Id</th>
+                  <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let c of companies">
+                  <td class="hidden"> {{ c.id }} </td>
+                  <td> {{ c.name }} </td>
+                  <td>
+                    <button class="btn btn-success" (click)="deleteCompany(c)"> Delete</button>
+                    <button class="btn btn-success" (click)="editCompany(c)" style="margin-left: 20px;"> Edit</button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><!--/.col-->
+  </div><!--/.row-->
+</div>
+
+<ol class="breadcrumb">
+  <app-breadcrumb></app-breadcrumb>
+  <!-- Breadcrumb Menu-->
+  <li class="breadcrumb-menu d-md-down-none">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+      <a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>
+      <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
+          <i class="icon-list"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center"><strong>Actions</strong></div>
+        <a *ngFor="let a of crumActions | async" class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> {{ a.name }} </a>
+      </div>
+  </li>
+</ol>
