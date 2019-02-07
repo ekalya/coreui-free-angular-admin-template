@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 export class DataTableComponent implements OnInit {
   @Input() public transactions: PaymentTransaction[];
   @Input() public dtOptions: DataTables.Settings;
-  @Input() public dtTrigger: Subject<PaymentTransaction[]>;
+  @Input() public dtTrigger: Subject<boolean>;
 
   constructor() { }
 

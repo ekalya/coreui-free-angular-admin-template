@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as $ from 'jquery';
 import 'datatables.net';
-import { Branch } from '../../../../core/models';
+import { Branch, MenuItem } from '../../../../core/models';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
 export class BranchListComponent implements OnInit {
   @Input() public branches: Branch[];
   @Input() public dtOptions: DataTables.Settings;
-  @Input() public dtTrigger: Subject<Branch[]>;
+  @Input() public dtTrigger: Subject<boolean>;
 
   items = [{ title: 'Profile' }, { title: 'Log out' }];
 

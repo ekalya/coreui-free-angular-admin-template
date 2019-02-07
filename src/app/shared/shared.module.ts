@@ -10,6 +10,7 @@ import { ChartFooterComponent } from './views/chart-footer/chart-footer.componen
 import { ArrayToCommaDelimitedPipe } from './pipes/array-to-comma-delimited.pipe';
 import { CrudActionsComponent } from './views/crud-actions/crud-actions.component';
 import { MaterialModule } from './material/material.module';
+import { NgxPopper } from 'angular-popper';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MaterialModule } from './material/material.module';
     CommonModule,
     DataTablesModule,
     ChartsModule,
-    MaterialModule
+    MaterialModule,
+    NgxPopper
   ],
   exports: [
     CommonModule,

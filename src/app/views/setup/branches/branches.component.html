@@ -1,5 +1,15 @@
-<app-branch-list
- [branches]="branches" 
- [dtTrigger]="dtTrigger" 
- [dtOptions]="dtOptions">loading ...
-</app-branch-list>
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-align-justify"></i> All Branches 
+            <app-crud-actions (actionMenuClickEvent)="actionMenuClick($event)"></app-crud-actions> 
+        </div>
+        <div class="card-body">
+            <app-branch-list 
+            [branches]="branches" 
+            [dtTrigger]="dtTrigger" 
+            [dtOptions]="dtOptions">loading ...
+            </app-branch-list>
+        </div>
+    </div>
+</div>

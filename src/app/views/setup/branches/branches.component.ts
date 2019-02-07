@@ -1,8 +1,6 @@
-import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
-import { Branch, BranchesService, MenuService, MenuItem } from '../../../core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Branch, BranchesService } from '../../../core';
 import { Subject } from 'rxjs';
-import { NgRedux } from '@angular-redux/store';
-import { SET_MENU } from '../../../store/actions/menu-items';
 
 @Component({
   selector: 'app-branches',
@@ -11,21 +9,13 @@ import { SET_MENU } from '../../../store/actions/menu-items';
 })
 export class BranchesComponent implements OnInit, OnDestroy {
   branches: Branch[] = [];
-  dtTrigger: Subject<Branch[]> = new Subject<Branch[]>();
+  dtTrigger: Subject<boolean> = new Subject<boolean>();
   dtOptions: DataTables.Settings = {};
-  private createMenuClick: EventEmitter<any> = new EventEmitter<any>();
-  private menuItems: MenuItem[];
-  constructor(private branchesService: BranchesService,
-    private menuService: MenuService,
-    private ngRedux: NgRedux<any>) {
-    this.createMenuClick.subscribe((event) => {
-      console.log('menu item click.....' + event);
-    });
-     this.setMenu();
+  constructor(private branchesService: BranchesService) {
   }
 
   ngOnInit() {
-
+    console.log('On Init ............branch')
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10
@@ -33,24 +23,17 @@ export class BranchesComponent implements OnInit, OnDestroy {
 
     this.branchesService.getAll().subscribe(data => {
       this.branches = data;
-      this.dtTrigger.next(this.branches);
+      this.dtTrigger.next(true);
     });
   }
 
   ngOnDestroy(): void {
+    console.log('On destory ............branch')
     this.dtTrigger.unsubscribe();
   }
 
-  setMenu() {
-    this.menuItems = [
-      new MenuItem('Create', this.createMenuClick),
-      new MenuItem('Read', this.createMenuClick),
-      new MenuItem('Edit', this.createMenuClick),
-      new MenuItem('Delete', this.createMenuClick)];
-    this.menuService.sendMenu(this.menuItems);
-    this.ngRedux.dispatch({type: SET_MENU, payload: this.menuItems});
-    console.log(this.ngRedux.getState());
-
+  actionMenuClick(action: string) {
+    console.log(action);
   }
 
 }

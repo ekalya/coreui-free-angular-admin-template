@@ -1,34 +1,17 @@
-<div class="animated fadeIn">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-header">
-          <i class="fa fa-align-justify"></i> 
-          <div class="row">
-            All Branches
-          </div>  
-        </div>
-        <div class="card-body">
-            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
-                <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Physical Location</th>
-                      <th>Till Numbers</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let b of branches">
-                      <td> {{ b.name }} </td>
-                      <td> {{ b.physicalLocation }} </td>
-                      <td> {{ b.tillNumbers | arrayToCommaDelimited }} </td>
-                    </tr>
-                  </tbody> 
-            </table>
-        </div>
-      </div>
-    </div>
-    <!--/.col-->
-  </div>
-  <!--/.row-->
-</div>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
+    <thead>
+        <tr>
+          <th>Name</th>
+          <th>Physical Location</th>
+          <th>Till Numbers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let b of branches">
+          <td> {{ b.name }} </td>
+          <td> {{ b.physicalLocation }} </td>
+          <td> {{ b.tillNumbers | arrayToCommaDelimited }} </td>
+        </tr>
+      </tbody> 
+</table>
+

@@ -75,7 +75,7 @@
       </li>
     </ol>
     <div class="container-fluid">
-      <router-outlet (deactivate)="onDeactivate($event)" ></router-outlet>
+      <router-outlet  (activate)="onActivate()" (deactivate)="onDeactivate($event)" ></router-outlet>
     </div><!-- /.container-fluid -->
   </main>
 </div>

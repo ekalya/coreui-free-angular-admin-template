@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 
 import { AppComponent } from './app.component';
@@ -36,11 +35,12 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from './store/store.module';
+import { SharedModule } from './shared';
 
 @NgModule({
   imports: [
@@ -61,7 +61,8 @@ import { StoreModule } from './store/store.module';
     CoreModule,
     LoginModule,
     BrowserAnimationsModule,
-    StoreModule
+    StoreModule,
+    SharedModule
   ],
   declarations: [
     AppComponent,

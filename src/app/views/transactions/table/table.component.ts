@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 })
 export class TableComponent implements OnInit, OnDestroy {
   paymentTransactions: PaymentTransaction[] = [];
-  dtTrigger: Subject<PaymentTransaction[]> = new Subject<PaymentTransaction[]>();
+  dtTrigger: Subject<boolean> = new Subject<boolean>();
   dtOptions: DataTables.Settings = {};
   constructor(private paymentConfirmationService: PaymentConfirmationService) { }
 
@@ -23,7 +23,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
     this.paymentConfirmationService.getAll().subscribe(data => {
       this.paymentTransactions = data.paymentConfirmation;
-      this.dtTrigger.next(this.paymentTransactions);
+      this.dtTrigger.next(true);
     });
   }
 

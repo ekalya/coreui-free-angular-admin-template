@@ -1,11 +1,9 @@
-import {Component, OnDestroy, ComponentFactoryResolver, Input, OnInit} from '@angular/core';
+import {Component, OnDestroy, ComponentFactoryResolver, OnInit} from '@angular/core';
 import { navItems } from './../../_nav';
-import { AuthService, MenuService, MenuItem, User } from '../../core';
+import { AuthService, MenuService, MenuItem } from '../../core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription, Observable, Subject } from 'rxjs';
-import { EventEmitter } from 'protractor';
+import { Observable, Subject } from 'rxjs';
 import { select, NgRedux } from '@angular-redux/store';
-import { KeyValue } from '@angular/common';
 import { PURGE_MENU } from '../../store/actions/menu-items';
 
 @Component({
@@ -27,7 +25,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     private router: Router,
     private menuService: MenuService,
     private ngRedux: NgRedux<any>) {
-    this.changes = new MutationObserver((mutations) => {
+    this.changes = new MutationObserver(() => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
     });
 
@@ -68,8 +66,12 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     });
   }
   onDeactivate() {
+    console.log('On deactivate ............Router container')
     this.menuService.sendMenu([]);
     this.ngRedux.dispatch({type: PURGE_MENU, payload: []});
+  }
+  onActivate(){
+    console.log('On activate ............Router container')
   }
   menuClick(menuItem: MenuItem) {
     console.log(menuItem.name);
