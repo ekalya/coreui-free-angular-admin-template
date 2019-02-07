@@ -31,28 +31,13 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       attributes: true,
       attributeFilter: [ 'class' ]
     });
-
-
-    this.menuItems$.subscribe((items: any) => {
-      console.log('menu items arrived ..................' + items);
-      try
-      {
-       console.log(items['menuItems'].length);
-       items['menuItems'].forEach(item => {
-         console.log(item);
-       });
-
-      }
-      catch(error)
-      {
-       console.log(error);
-      }
-
-   });
-
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.menuItems$.subscribe(items => {
+       console.log('menu items arrived ..................' + items);
+    });
+  }
 
   ngOnDestroy(): void {
     this.changes.disconnect();

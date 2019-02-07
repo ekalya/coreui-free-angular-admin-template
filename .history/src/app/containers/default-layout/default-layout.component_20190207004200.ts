@@ -18,7 +18,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   public activatedRoute: ActivatedRoute;
   public componentFactoryResolver: ComponentFactoryResolver;
   public menuItems = this.menuService.getMenu();
-  @select() menuItems$: Observable<MenuItem[]>;
+  @select() menuItems$: Observable<any>;
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -35,19 +35,9 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
 
     this.menuItems$.subscribe((items: any) => {
       console.log('menu items arrived ..................' + items);
-      try
-      {
-       console.log(items['menuItems'].length);
-       items['menuItems'].forEach(item => {
-         console.log(item);
-       });
-
-      }
-      catch(error)
-      {
-       console.log(error);
-      }
-
+      console.log(items);
+      console.log(typeof items);
+      console.log(items['menuItems']);
    });
 
   }

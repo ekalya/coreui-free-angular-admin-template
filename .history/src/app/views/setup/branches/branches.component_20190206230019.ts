@@ -42,10 +42,18 @@ export class BranchesComponent implements OnInit, OnDestroy {
   }
 
   setMenu() {
-    this.menuItems = [{name: 'Create', action: this.createMenuClick}, {name: 'Read', action: this.createMenuClick}];
-    this.menuService.sendMenu(this.menuItems);
-    this.ngRedux.dispatch({type: SET_MENU, payload: this.menuItems});
-    console.log(this.ngRedux.getState());
+    this.menuItems = [
+      new MenuItem('Create', this.createMenuClick),
+      new MenuItem('Details', this.createMenuClick),
+      new MenuItem('Edit', this.createMenuClick),
+      new MenuItem('Delete', this.createMenuClick)];
+      this.menuService.sendMenu(this.menuItems);
+  
+      this.menuItems.forEach(item => {
+        console.log('Items to be dispatched:'+ item.name);
+      });
+
+      this.ngRedux.dispatch({type: SET_MENU, payload: this.menuItems});
 
   }
 

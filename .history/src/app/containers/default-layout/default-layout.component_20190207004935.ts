@@ -35,19 +35,22 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
 
     this.menuItems$.subscribe((items: any) => {
       console.log('menu items arrived ..................' + items);
+      console.log(items);
+      console.log(typeof items);
+      console.log(items['menuItems']);
+
       try
       {
        console.log(items['menuItems'].length);
-       items['menuItems'].forEach(item => {
-         console.log(item);
-       });
-
       }
-      catch(error)
+      catch (Exception ex)
       {
-       console.log(error);
+       console.log(ex);
+      } 
+      finally
+     {
+      console.log('finally');
       }
-
    });
 
   }

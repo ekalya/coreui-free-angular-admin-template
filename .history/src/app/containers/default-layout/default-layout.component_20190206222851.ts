@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ComponentFactoryResolver, Input, OnInit} from '@angular/core';
+import {Component, OnDestroy, ComponentFactoryResolver, Input} from '@angular/core';
 import { navItems } from './../../_nav';
 import { AuthService, MenuService, MenuItem, User } from '../../core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { select } from '@angular-redux/store';
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
-export class DefaultLayoutComponent implements OnInit, OnDestroy {
+export class DefaultLayoutComponent implements OnDestroy {
   public navItems = navItems;
   public sidebarMinimized = true;
   private changes: MutationObserver;
@@ -18,7 +18,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   public activatedRoute: ActivatedRoute;
   public componentFactoryResolver: ComponentFactoryResolver;
   public menuItems = this.menuService.getMenu();
-  @select() menuItems$: Observable<MenuItem[]>;
+  @select() user$: Observable<User>;
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -31,28 +31,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       attributes: true,
       attributeFilter: [ 'class' ]
     });
-
-
-    this.menuItems$.subscribe((items: any) => {
-      console.log('menu items arrived ..................' + items);
-      try
-      {
-       console.log(items['menuItems'].length);
-       items['menuItems'].forEach(item => {
-         console.log(item);
-       });
-
-      }
-      catch(error)
-      {
-       console.log(error);
-      }
-
-   });
-
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.changes.disconnect();

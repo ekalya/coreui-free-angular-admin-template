@@ -18,7 +18,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   public activatedRoute: ActivatedRoute;
   public componentFactoryResolver: ComponentFactoryResolver;
   public menuItems = this.menuService.getMenu();
-  @select() menuItems$: Observable<MenuItem[]>;
+  @select() menuItems$: Observable<any>;
 
   constructor(private authService: AuthService,
     private router: Router,
@@ -31,28 +31,14 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       attributes: true,
       attributeFilter: [ 'class' ]
     });
-
-
-    this.menuItems$.subscribe((items: any) => {
-      console.log('menu items arrived ..................' + items);
-      try
-      {
-       console.log(items['menuItems'].length);
-       items['menuItems'].forEach(item => {
-         console.log(item);
-       });
-
-      }
-      catch(error)
-      {
-       console.log(error);
-      }
-
-   });
-
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.menuItems$.subscribe(items => {
+       console.log('menu items arrived ..................' + items);
+       console.log(items.length);
+    });
+  }
 
   ngOnDestroy(): void {
     this.changes.disconnect();
