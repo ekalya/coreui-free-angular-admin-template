@@ -4,9 +4,7 @@ import { AuthService, MenuService, MenuItem, User } from '../../core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, Subject } from 'rxjs';
 import { EventEmitter } from 'protractor';
-import { select, NgRedux } from '@angular-redux/store';
-import { KeyValue } from '@angular/common';
-import { PURGE_MENU } from '../../store/actions/menu-items';
+import { select } from '@angular-redux/store';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,14 +17,12 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   public element: HTMLElement = document.body;
   public activatedRoute: ActivatedRoute;
   public componentFactoryResolver: ComponentFactoryResolver;
-  private subject = new Subject<MenuItem[]>();
-  public menuItems = this.subject.asObservable();
-  @select() menuItems$: Observable<MenuItem[]>;
+  public menuItems = this.menuService.getMenu();
+  @select() menuItems$: Observable<any>;
 
   constructor(private authService: AuthService,
     private router: Router,
-    private menuService: MenuService,
-    private ngRedux: NgRedux<any>) {
+    private menuService: MenuService) {
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
     });
@@ -37,22 +33,14 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     });
 
 
-    this.menuItems$.subscribe((items: MenuItem[]) => {
+    this.menuItems$.subscribe((items: any) => {
       console.log('menu items arrived ..................' + items);
-      try
-      {
-       this.subject.next(items['menuItems']);
-       items['menuItems'].forEach(item => {
-         console.log(item);
-       });
-
-      }
-      catch(error)
-      {
-        this.subject.next([]);
-       console.log(error);
-      }
-
+      console.log(items);
+      console.log(typeof items);
+      console.log(items['menuItems']);
+      items['menuItems'].forEach((k, v) => {
+        console.log(k);
+      });
    });
 
   }
@@ -69,7 +57,6 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   }
   onDeactivate() {
     this.menuService.sendMenu([]);
-    this.ngRedux.dispatch({type: PURGE_MENU, payload: []});
   }
   menuClick(menuItem: MenuItem) {
     console.log(menuItem.name);

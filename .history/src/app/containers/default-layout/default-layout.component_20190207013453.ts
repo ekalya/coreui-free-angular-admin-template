@@ -6,7 +6,6 @@ import { Subscription, Observable, Subject } from 'rxjs';
 import { EventEmitter } from 'protractor';
 import { select, NgRedux } from '@angular-redux/store';
 import { KeyValue } from '@angular/common';
-import { PURGE_MENU } from '../../store/actions/menu-items';
 
 @Component({
   selector: 'app-dashboard',
@@ -69,7 +68,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   }
   onDeactivate() {
     this.menuService.sendMenu([]);
-    this.ngRedux.dispatch({type: PURGE_MENU, payload: []});
+    this.ngRedux.dispatch({type: SET_MENU, payload: this.menuItems});
   }
   menuClick(menuItem: MenuItem) {
     console.log(menuItem.name);

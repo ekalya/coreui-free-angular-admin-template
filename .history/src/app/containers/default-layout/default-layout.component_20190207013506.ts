@@ -69,7 +69,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   }
   onDeactivate() {
     this.menuService.sendMenu([]);
-    this.ngRedux.dispatch({type: PURGE_MENU, payload: []});
+    this.ngRedux.dispatch({type: PURGE_MENU, payload: this.menuItems});
   }
   menuClick(menuItem: MenuItem) {
     console.log(menuItem.name);

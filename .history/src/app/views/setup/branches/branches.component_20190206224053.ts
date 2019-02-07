@@ -44,12 +44,13 @@ export class BranchesComponent implements OnInit, OnDestroy {
   setMenu() {
     this.menuItems = [
       new MenuItem('Create', this.createMenuClick),
-      new MenuItem('Read', this.createMenuClick),
+      new MenuItem('Details', this.createMenuClick),
       new MenuItem('Edit', this.createMenuClick),
       new MenuItem('Delete', this.createMenuClick)];
-    this.menuService.sendMenu(this.menuItems);
-    this.ngRedux.dispatch({type: SET_MENU, payload: this.menuItems});
-    console.log(this.ngRedux.getState());
+      this.menuService.sendMenu(this.menuItems);
+  
+
+      this.ngRedux.dispatch({type: SET_MENU, paylod: this.menuItems});
 
   }
 

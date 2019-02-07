@@ -1,32 +1,28 @@
-import {Component, OnDestroy, ComponentFactoryResolver, Input, OnInit} from '@angular/core';
+import {Component, OnDestroy, ComponentFactoryResolver, Input} from '@angular/core';
 import { navItems } from './../../_nav';
 import { AuthService, MenuService, MenuItem, User } from '../../core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, Subject } from 'rxjs';
 import { EventEmitter } from 'protractor';
-import { select, NgRedux } from '@angular-redux/store';
-import { KeyValue } from '@angular/common';
-import { PURGE_MENU } from '../../store/actions/menu-items';
+import { select } from '@angular-redux/store';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
-export class DefaultLayoutComponent implements OnInit, OnDestroy {
+export class DefaultLayoutComponent implements OnDestroy {
   public navItems = navItems;
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
   public activatedRoute: ActivatedRoute;
   public componentFactoryResolver: ComponentFactoryResolver;
-  private subject = new Subject<MenuItem[]>();
-  public menuItems = this.subject.asObservable();
-  @select() menuItems$: Observable<MenuItem[]>;
+  public menuItems = this.menuService.getMenu();
+  @select() user$: Observable<User>;
 
   constructor(private authService: AuthService,
     private router: Router,
-    private menuService: MenuService,
-    private ngRedux: NgRedux<any>) {
+    private menuService: MenuService) {
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
     });
@@ -35,29 +31,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       attributes: true,
       attributeFilter: [ 'class' ]
     });
-
-
-    this.menuItems$.subscribe((items: MenuItem[]) => {
-      console.log('menu items arrived ..................' + items);
-      try
-      {
-       this.subject.next(items['menuItems']);
-       items['menuItems'].forEach(item => {
-         console.log(item);
-       });
-
-      }
-      catch(error)
-      {
-        this.subject.next([]);
-       console.log(error);
-      }
-
-   });
-
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.changes.disconnect();
@@ -69,7 +43,6 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   }
   onDeactivate() {
     this.menuService.sendMenu([]);
-    this.ngRedux.dispatch({type: PURGE_MENU, payload: []});
   }
   menuClick(menuItem: MenuItem) {
     console.log(menuItem.name);
