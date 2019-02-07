@@ -4,9 +4,8 @@ import { AuthService, MenuService, MenuItem, User } from '../../core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, Subject } from 'rxjs';
 import { EventEmitter } from 'protractor';
-import { select, NgRedux } from '@angular-redux/store';
+import { select } from '@angular-redux/store';
 import { KeyValue } from '@angular/common';
-import { PURGE_MENU } from '../../store/actions/menu-items';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,8 +24,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService,
     private router: Router,
-    private menuService: MenuService,
-    private ngRedux: NgRedux<any>) {
+    private menuService: MenuService) {
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
     });
@@ -49,7 +47,6 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       }
       catch(error)
       {
-        this.subject.next([]);
        console.log(error);
       }
 
@@ -69,7 +66,6 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   }
   onDeactivate() {
     this.menuService.sendMenu([]);
-    this.ngRedux.dispatch({type: PURGE_MENU, payload: []});
   }
   menuClick(menuItem: MenuItem) {
     console.log(menuItem.name);

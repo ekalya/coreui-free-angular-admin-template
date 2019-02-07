@@ -1,0 +1,21 @@
+import { AUTHENTICATED_USER, LOGGED_OFF_USER } from '../actions/authentication';
+import { MenuItem } from '../../core/models/menu-item';
+import { SET_MENU, PURGE_MENU } from '../actions/menu-items';
+
+
+export const MenuItemsReducer = (state: any = [], action: any) => {
+    switch (action.type) {
+        case SET_MENU:
+        return Object.assign({}, state, {
+            action.payload
+        });
+
+        case PURGE_MENU:
+        return Object.assign({}, state, {
+            []
+        });
+
+        default:
+          return state;
+    }
+};
