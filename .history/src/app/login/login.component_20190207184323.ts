@@ -14,6 +14,8 @@ loginForm: FormGroup;
 constructor(
   private fb: FormBuilder
 ) {
+  this.model.username = 'admnin';
+  this.model.password = 'admin23';
 }
 
 ngOnInit(): void {

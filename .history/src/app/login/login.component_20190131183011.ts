@@ -13,8 +13,7 @@ loginForm: FormGroup;
 
 constructor(
   private fb: FormBuilder
-) {
-}
+) {}
 
 ngOnInit(): void {
   this.loginForm = this.fb.group({

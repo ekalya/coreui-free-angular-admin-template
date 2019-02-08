@@ -30,14 +30,14 @@ export class BranchesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('On destory ............branch');
+    console.log('On destory ............branch')
     this.dtTrigger.unsubscribe();
   }
 
   actionMenuClick(action: string) {
     console.log(action);
-    if (action === 'CREATE') {
-    this.router.navigateByUrl('/setup/branch');
+    if(action === 'CREATE'){
+    
     }
   }
 

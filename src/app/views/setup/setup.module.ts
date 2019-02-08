@@ -6,6 +6,8 @@ import { BranchesComponent } from './branches/branches.component';
 import { BranchListComponent } from './branches/pages/branch-list.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MaterialTestTableComponent } from './material-test-table/material-test-table.component';
+import { BranchComponent } from './branches/branch.component';
+import { BranchViewComponent } from './branches/pages/branch-view.component';
 
 @NgModule({
   imports: [
@@ -13,6 +15,6 @@ import { MaterialTestTableComponent } from './material-test-table/material-test-
     SetupRoutingModule,
     SharedModule
   ],
-  declarations: [CompanyComponent, BranchesComponent, BranchListComponent, MaterialTestTableComponent]
+  declarations: [CompanyComponent, BranchesComponent, BranchListComponent, MaterialTestTableComponent, BranchComponent, BranchViewComponent]
 })
 export class SetupModule { }

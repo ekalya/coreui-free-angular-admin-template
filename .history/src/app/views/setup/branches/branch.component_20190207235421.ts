@@ -1,0 +1,19 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-branch',
+  templateUrl: './branch.component.html',
+  styleUrls: ['./branch.component.scss']
+})
+export class BranchComponent implements OnInit {
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  OnSubmit(formGroup: FormGroup) {
+    console.log(formGroup.value);
+  }
+
+}
