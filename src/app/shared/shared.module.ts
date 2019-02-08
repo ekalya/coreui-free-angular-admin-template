@@ -13,6 +13,10 @@ import { MaterialModule } from './material/material.module';
 import { NgxPopper } from 'angular-popper';
 import { SaveActionComponent } from './views/save-action/save-action.component';
 import { SubmitResetComponent } from './views/submit-reset/submit-reset.component';
+import { ListComponent } from './views/list/list.component';
+import { ItemListComponent } from './views/list/item-list/item-list.component';
+import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
+import { DynamicFormInputControlComponent } from './views/dynamic-form-input-control/dynamic-form-input-control.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +27,20 @@ import { SubmitResetComponent } from './views/submit-reset/submit-reset.componen
     ArrayToCommaDelimitedPipe,
     CrudActionsComponent,
     SaveActionComponent,
-    SubmitResetComponent
+    SubmitResetComponent,
+    ListComponent,
+    ItemListComponent,
+    DynamicFormComponent,
+    DynamicFormInputControlComponent
   ],
   imports: [
     CommonModule,
     DataTablesModule,
     ChartsModule,
     MaterialModule,
-    NgxPopper
+    NgxPopper,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
@@ -45,7 +55,11 @@ import { SubmitResetComponent } from './views/submit-reset/submit-reset.componen
     ArrayToCommaDelimitedPipe,
     CrudActionsComponent,
     MaterialModule,
-    SubmitResetComponent
+    SubmitResetComponent,
+    ListComponent,
+    ItemListComponent,
+    DynamicFormComponent,
+    DynamicFormInputControlComponent
   ]
 })
 export class SharedModule { }

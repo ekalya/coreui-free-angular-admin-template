@@ -1,4 +1,5 @@
-
+<div class="card">
+  <div class="card-body">
 <form [formGroup]="branchForm"  (ngSubmit)="onSubmit()">
 <div class="form-group">
   <label for="name">Name</label>
@@ -26,6 +27,12 @@
   <input type="text" formControlName="telephoneNumber" class="form-control" id="telephoneNumber" placeholder="000 0000 000 000">
 </div>
 </form>
+<br>
+<app-list></app-list>
+<br>
+<app-dynamic-form [formMetaData]="formMetaData"></app-dynamic-form>
+</div>
 <div class="card-footer">
   <app-submit-reset [dirty]="branchForm.dirty" [valid]="branchForm.valid" (actionMenuClickEvent)="actionMenuClick($event)"></app-submit-reset>
+</div>
 </div>
