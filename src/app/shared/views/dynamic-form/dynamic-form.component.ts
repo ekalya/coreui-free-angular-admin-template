@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InputControlService } from '../../../core/services/input-control.service';
 import { InputControlBase } from '../../../core';
 import { FormGroup } from '@angular/forms';
@@ -13,15 +13,16 @@ export class DynamicFormComponent implements OnInit {
 
   @Input() formMetaData: InputControlBase<any>[] = [];
   form: FormGroup;
-  payLoad = '';
-  
+  @Output() formValues: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+
   constructor(private ics: InputControlService) { }
 
   ngOnInit() {
     this.form = this.ics.toFormGroup(this.formMetaData);
   }
   onSubmit() {
-    this.payLoad = JSON.stringify(this.form.value);
+    this.formValues.emit(this.form);
+    this.form.reset();
   }
 
 }

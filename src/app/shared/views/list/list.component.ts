@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
+import { ListItem } from '../../../core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
@@ -6,13 +9,29 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  @Input() lList: string[] = []; 
-  constructor() { }
+  @Input() lList: Subject<Array<ListItem>> = new Subject<Array<ListItem>>();
+  
+  lListForward: Subject<Array<ListItem>> = new Subject<Array<ListItem>>();
+  items: Observable<Array<ListItem>> = this.lListForward.asObservable();
+
+  @Input() listItems: Array<ListItem> = [];
+
+  @Output() itemListChangeEmitter: EventEmitter<Array<ListItem>> = new EventEmitter<Array<ListItem>>();
+
+  constructor() {
+
+  }
 
   ngOnInit() {
+    this.lList.subscribe(data => {
+      this.listItems = data;
+      this.lListForward.next(data);
+      console.log(data);
+    });
   }
-  clearList() {
-    this.lList = [];
+  removeItem(item: ListItem) {
+    this.listItems  = this.listItems.filter(t => t.description !== item.description);
+    this.itemListChangeEmitter.emit(this.listItems);
+    this.lList.next(this.listItems);
   }
-
 }
