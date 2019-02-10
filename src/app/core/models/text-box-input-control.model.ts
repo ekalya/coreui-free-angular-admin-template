@@ -1,4 +1,4 @@
-import { InputControlBase } from '.';
+import { InputControlBase } from './input-control-base.model';
 
 export class TextBoxInputControl  extends InputControlBase<string> {
     controlType = 'textbox';

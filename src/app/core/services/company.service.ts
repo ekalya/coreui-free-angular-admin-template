@@ -7,7 +7,7 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class CompanyService {
-  resource = '/company';
+  resource = '/company/';
   constructor(private apiService: ApiService) { }
 
   create(company: Company): Observable<Company> {

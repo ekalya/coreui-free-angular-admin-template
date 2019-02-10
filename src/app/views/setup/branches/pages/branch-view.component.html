@@ -2,17 +2,6 @@
   <div class="card-body">
     <form [formGroup]="branchForm"  (ngSubmit)="onSubmit()">
     <div class="form-group">
-    <label for="name">Name</label>
-    <input 
-    type="text" 
-    formControlName="name" 
-    class="form-control" 
-    id="name" 
-    placeholder="Enter your branch name"
-    required
-    minlength="2">
-    </div>
-    <div class="form-group">
     <label for="physicalLocation">Physical Location</label>
     <input type="text" 
     formControlName="physicalLocation" 
@@ -36,7 +25,7 @@
       (formValues)="formValues($event)"></app-dynamic-form>
       </div>
       <div class="card-body">
-        <app-list [lList]="listItemsEmitter" (itemListChangeEmitter)="itemListChangeEmitter($event)"></app-list>
+        <app-list [listItemsReceiver]="listItemsEmitter" (removeItemEmitter)="removeItemEmitter($event)"></app-list>
       </div>
     </div>
   </div>

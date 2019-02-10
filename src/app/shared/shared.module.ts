@@ -11,10 +11,8 @@ import { ArrayToCommaDelimitedPipe } from './pipes/array-to-comma-delimited.pipe
 import { CrudActionsComponent } from './views/crud-actions/crud-actions.component';
 import { MaterialModule } from './material/material.module';
 import { NgxPopper } from 'angular-popper';
-import { SaveActionComponent } from './views/save-action/save-action.component';
 import { SubmitResetComponent } from './views/submit-reset/submit-reset.component';
 import { ListComponent } from './views/list/list.component';
-import { ItemListComponent } from './views/list/item-list/item-list.component';
 import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
 import { DynamicFormInputControlComponent } from './views/dynamic-form-input-control/dynamic-form-input-control.component';
 
@@ -26,10 +24,8 @@ import { DynamicFormInputControlComponent } from './views/dynamic-form-input-con
     ChartFooterComponent,
     ArrayToCommaDelimitedPipe,
     CrudActionsComponent,
-    SaveActionComponent,
     SubmitResetComponent,
     ListComponent,
-    ItemListComponent,
     DynamicFormComponent,
     DynamicFormInputControlComponent
   ],
@@ -57,7 +53,6 @@ import { DynamicFormInputControlComponent } from './views/dynamic-form-input-con
     MaterialModule,
     SubmitResetComponent,
     ListComponent,
-    ItemListComponent,
     DynamicFormComponent,
     DynamicFormInputControlComponent
   ]

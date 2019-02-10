@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { ListItem } from '../../../core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -9,29 +9,20 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  @Input() lList: Subject<Array<ListItem>> = new Subject<Array<ListItem>>();
-  
-  lListForward: Subject<Array<ListItem>> = new Subject<Array<ListItem>>();
-  items: Observable<Array<ListItem>> = this.lListForward.asObservable();
-
-  @Input() listItems: Array<ListItem> = [];
-
-  @Output() itemListChangeEmitter: EventEmitter<Array<ListItem>> = new EventEmitter<Array<ListItem>>();
+  items: BehaviorSubject<Array<ListItem>> = new BehaviorSubject<Array<ListItem>>([]);
+  @Input() listItemsReceiver: EventEmitter<Array<ListItem>> = new EventEmitter<Array<ListItem>>();
+  @Output() removeItemEmitter: EventEmitter<ListItem> = new EventEmitter<ListItem>();
 
   constructor() {
 
   }
 
   ngOnInit() {
-    this.lList.subscribe(data => {
-      this.listItems = data;
-      this.lListForward.next(data);
-      console.log(data);
+    this.listItemsReceiver.subscribe(data => {
+       this.items.next(data);
     });
   }
   removeItem(item: ListItem) {
-    this.listItems  = this.listItems.filter(t => t.description !== item.description);
-    this.itemListChangeEmitter.emit(this.listItems);
-    this.lList.next(this.listItems);
+    this.removeItemEmitter.emit(item);
   }
 }

@@ -16,7 +16,8 @@ export class TillnumberMetadataService {
       new TextBoxInputControl({
         key: 'tillnumber',
         label: 'Tillnumber',
-        value: '',
+        placeholder: 'Enter till number',
+        value: '0878',
         required: true,
         order: 1
       })

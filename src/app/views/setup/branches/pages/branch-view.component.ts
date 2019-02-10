@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { TillnumberMetadataService, ListItem } from '../../../../core';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-branch-view',
@@ -10,14 +11,15 @@ import { TillnumberMetadataService, ListItem } from '../../../../core';
 export class BranchViewComponent implements OnInit {
   tillnumberFormMetadata: any[];
   @Output() public OnSubmitEvent: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() listItemsEmitter: EventEmitter<Array<ListItem>> = new EventEmitter<Array<ListItem>>();
-  listItems: Array<ListItem> = [];
+  @Output() public listItemsEmitter: EventEmitter<Array<ListItem>> = new EventEmitter<Array<ListItem>>();
 
+  listItems: Array<ListItem> = [];
   branchForm = this.fb.group({
     name: ['', Validators.required],
     physicalLocation: ['', Validators.required],
     telephoneNumber: ['']
   });
+
   constructor(private fb: FormBuilder, tillnumberMetadataService: TillnumberMetadataService) {
     this.tillnumberFormMetadata = tillnumberMetadataService.getMetadata();
     console.log(this.tillnumberFormMetadata);
@@ -32,16 +34,20 @@ export class BranchViewComponent implements OnInit {
       this.OnSubmitEvent.emit(this.branchForm);
     }
   }
-  itemListChangeEmitter(items: Array<ListItem>){
-    console.log('list:' + items);
-    this.listItems = items;
+  removeItemEmitter(item: ListItem) {
+    console.log('remove item from list:' + item);
+    this.listItems = this.listItems.filter(t => t.description !== item.description);
+    this.fireListChangeEvent();
   }
   formValues(formValues: FormGroup) {
-    console.log('form values:' + JSON.stringify(formValues.value));
+  console.log('form values:' + JSON.stringify(formValues.value));
    let listItem: ListItem = new ListItem(formValues.value.id, formValues.value['tillnumber']);
-   console.log(listItem);
    this.listItems.push(listItem);
-   this.listItemsEmitter.emit(this.listItems);
+   this.fireListChangeEvent();
+  }
+  fireListChangeEvent() {
+    console.log('emit changes.........');
+    this.listItemsEmitter.emit(this.listItems);
   }
 
 }
