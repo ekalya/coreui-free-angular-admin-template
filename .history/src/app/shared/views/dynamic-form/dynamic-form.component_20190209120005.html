@@ -1,0 +1,20 @@
+<div>
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+   
+      <div *ngFor="let ctrl of formMetaData" class="form-row">
+        <app-dynamic-form-input-control [ctrl]="ctrl" [form]="form"></app-dynamic-form-input-control>
+      </div>
+   
+      <div class="form-row">
+              <button 
+              type="button" 
+              class="btn btn-sm btn-primary"
+              (click)= "actionMenuClick('CREATE')">
+              <i class="icon-plus"></i> 
+              Create 
+              </button
+        <button type="submit" [disabled]="!form.valid">Save</button>
+      </div>
+    </form>
+   
+  </div>

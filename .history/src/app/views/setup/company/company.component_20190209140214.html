@@ -1,0 +1,15 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-align-justify"></i> Company Details 
+        </div>
+        <div class="card-body">
+            <app-dynamic-form 
+            [formMetaData]="tillnumberFormMetadata" 
+            (formValues)="formValues($event)"></app-dynamic-form>
+        </div>
+        <div class="card-footer">
+          <app-submit-reset [dirty]="form.dirty" [valid]="form.valid" (actionMenuClickEvent)="actionMenuClick($event)"></app-submit-reset>
+        </div>
+    </div>
+  </div>

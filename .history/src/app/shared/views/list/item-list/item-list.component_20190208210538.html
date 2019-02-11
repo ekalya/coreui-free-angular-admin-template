@@ -1,0 +1,57 @@
+<form [formGroup]="itemForm"  (keydown)="keyDownFunction($event)">
+  <div class="form-row">
+    <div class="col-auto">
+        <div class="form-group">
+            <label class="form-col-form-label" for="description"> "Description" </label>
+            <input 
+            type="text"
+            formControlName="description" 
+            id="description"
+            name="description"
+            [(ngModel)]="model.description"
+            placeholder="Description" 
+            class="form-control">
+        </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-auto">
+          <button 
+          type="button"
+          id="addCommand"
+          name="addCommand" 
+          class="btn btn-sm btn-primary"
+          (click)="onSubmit()">
+          <i class="icon-plus"></i> 
+          Add 
+          </button>
+    </div>
+  </div>
+</form>
+
+<br />
+<h6>List:</h6>
+<div *ngIf="(items | async)?.length!=0">
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of items | async">
+      <td><span>{{ t.description }}</span></td>
+      <td>
+          <button 
+          type="button" 
+          class="btn btn-sm btn-danger"
+          (click)= "removeItem(t)">
+          <i class="cui-circle-x"></i> 
+          Delete 
+          </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

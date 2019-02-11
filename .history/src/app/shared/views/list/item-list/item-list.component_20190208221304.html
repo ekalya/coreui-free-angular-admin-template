@@ -1,0 +1,25 @@
+<h6>List:</h6>
+<div *ngIf="(items | async)?.length!=0">
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of items | async">
+      <td>{{ t.description }}</td>
+      <td>
+          <button 
+          type="button" 
+          class="btn btn-sm btn-danger"
+          (click)= "removeItem(t)">
+          <i class="cui-circle-x"></i> 
+          Delete 
+          </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

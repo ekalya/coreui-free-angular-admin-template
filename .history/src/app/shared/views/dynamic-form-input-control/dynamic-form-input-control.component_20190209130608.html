@@ -1,0 +1,28 @@
+<div [formGroup]="form">
+    <div class="form-group">
+        <label [attr.for]="ctrl.key">{{ctrl.label}}</label>
+        <input 
+        type="text" 
+        formControlName="name" 
+        class="form-control" 
+        id="name" 
+        placeholder="Enter your branch name"
+        required
+        minlength="2">
+        </div>
+    <label [attr.for]="ctrl.key">{{ctrl.label}}</label>
+   
+    <div [ngSwitch]="ctrl.controlType">
+      
+      <input *ngSwitchCase="'textbox'" [formControlName]="ctrl.key"
+              [id]="ctrl.key" [type]="ctrl.type" [class]="form-control" 
+              [placeholder]="ctrl.placeholder">
+   
+      <select [id]="ctrl.key" *ngSwitchCase="'dropdown'" [formControlName]="ctrl.key">
+        <option *ngFor="let opt of ctrl.options" [value]="opt.key">{{opt.value}}</option>
+      </select>
+   
+    </div> 
+   
+    <div class="errorMessage" *ngIf="!isValid">{{ctrl.label}} is required</div>
+  </div>

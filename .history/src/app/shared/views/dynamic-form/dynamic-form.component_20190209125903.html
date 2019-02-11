@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-body">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+   
+      <div *ngFor="let ctrl of formMetaData" class="form-group">
+        <app-dynamic-form-input-control [ctrl]="ctrl" [form]="form"></app-dynamic-form-input-control>
+      </div>
+   
+      <div class="form-row">
+          <button 
+          type="submit"
+          [disabled]="!form.valid" 
+          class="btn btn-sm btn-primary">
+          <i class="icon-plus"></i> 
+          Save 
+          </button>
+      </div>
+    </form>
+   
+  </div>
+  </div>
