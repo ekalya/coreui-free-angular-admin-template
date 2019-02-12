@@ -1,0 +1,132 @@
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
+import { Car } from './car';
+
+/**
+ * @title Table with pagination
+ */
+@Component({
+  selector: 'material-test-table',
+  styleUrls: ['./material-test-table.component.scss'],
+  templateUrl: './material-test-table.component.html',
+})
+export class MaterialTestTableComponent implements OnInit {
+  cars: Car[];
+  cols: any[];
+  first: number =  0;
+
+  brands: SelectItem[];
+
+  colors: SelectItem[];
+
+  yearFilter: number;
+
+  yearTimeout: any;
+
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  ngOnInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+
+    this.brands = [
+      { label: 'All Brands', value: null },
+      { label: 'Audi', value: 'Audi' },
+      { label: 'BMW', value: 'BMW' },
+      { label: 'Fiat', value: 'Fiat' },
+      { label: 'Honda', value: 'Honda' },
+      { label: 'Jaguar', value: 'Jaguar' },
+      { label: 'Mercedes', value: 'Mercedes' },
+      { label: 'Renault', value: 'Renault' },
+      { label: 'VW', value: 'VW' },
+      { label: 'Volvo', value: 'Volvo' }
+  ];
+
+  this.colors = [
+      { label: 'White', value: 'White' },
+      { label: 'Green', value: 'Green' },
+      { label: 'Silver', value: 'Silver' },
+      { label: 'Black', value: 'Black' },
+      { label: 'Red', value: 'Red' },
+      { label: 'Maroon', value: 'Maroon' },
+      { label: 'Brown', value: 'Brown' },
+      { label: 'Orange', value: 'Orange' },
+      { label: 'Blue', value: 'Blue' }
+  ];
+  
+    this.cars = [
+      {vin: '15413541', year: 2005, brand: 'toyota', color: 'red'},
+      {vin: '1565766541', year: 2007, brand: 'mazda', color: 'white'},
+      {vin: '1543341', year: 2009, brand: 'nissan', color: 'black'},
+      {vin: '15413541', year: 2005, brand: 'toyota', color: 'red'},
+      {vin: '1565766541', year: 2007, brand: 'mazda', color: 'white'},
+      {vin: '1543341', year: 2009, brand: 'nissan', color: 'black'},
+      {vin: '15413541', year: 2005, brand: 'toyota', color: 'red'},
+      {vin: '1565766541', year: 2007, brand: 'mazda', color: 'white'},
+      {vin: '1543341', year: 2009, brand: 'nissan', color: 'black'},
+      {vin: '15413541', year: 2005, brand: 'toyota', color: 'red'},
+      {vin: '1565766541', year: 2007, brand: 'mazda', color: 'white'},
+      {vin: '1543341', year: 2009, brand: 'nissan', color: 'black'},
+      {vin: '15413541', year: 2005, brand: 'toyota', color: 'red'},
+      {vin: '1565766541', year: 2007, brand: 'mazda', color: 'white'},
+      {vin: '1543341', year: 2009, brand: 'nissan', color: 'black'}
+    ];
+
+    this.cols = [
+      { field: 'vin', header: 'Vin' },
+      { field: 'year', header: 'Year' },
+      { field: 'brand', header: 'Brand' },
+      { field: 'color', header: 'Color' }
+  ];
+  }
+
+
+  reset() {
+    this.first = 0;
+  }
+
+  onYearChange(event, dt) {
+    if (this.yearTimeout) {
+        clearTimeout(this.yearTimeout);
+    }
+
+    this.yearTimeout = setTimeout(() => {
+        tt.filter(event.value, 'year', 'gt');
+    }, 250);
+}
+}
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
+  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
+  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
+  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
+  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
+  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
+  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
+  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
+  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
+  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
+];

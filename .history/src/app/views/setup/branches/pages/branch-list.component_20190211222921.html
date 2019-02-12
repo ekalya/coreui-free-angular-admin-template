@@ -1,0 +1,17 @@
+<table id="example" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
+    <thead>
+        <tr>
+          <th>Name</th>
+          <th>Physical Location</th>
+          <th>Till Numbers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let b of branches">
+          <td> {{ b.name }} </td>
+          <td> {{ b.physicalLocation }} </td>
+          <td> {{ b.tillNumbers | arrayToCommaDelimited }} </td>
+        </tr>
+      </tbody> 
+</table>
+
