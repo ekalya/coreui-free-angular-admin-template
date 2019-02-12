@@ -36,4 +36,60 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   <mat-card-footer>footer</mat-card-footer>
 </mat-card>
+
+<div class="card">
+    <p-table  #tt [columns]="cols" [value]="cars" [paginator]="true" [rows]="5" 
+    selectionMode="single" [(selection)]="selectedCar" >
+        <ng-template pTemplate="caption">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+            </tr>
+        </ng-template>
+        
+    </p-table>
+
+</div>
+<div class="card">
+  
+          
+            <button class="btn-danger" (click)="deleteRow()">delete row</button>
+            <button class="btn-primary" (click)="addRow()">add row</button>
+            Selected: {{selectedName}}
+          
+
+
+      <table id="clientsT" class="table table-hover" cellspacing="0">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Company</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let client of clients; let i = index" (click)="selectRow(i, client)" [ngClass] = "{'highlight' : i == selectedRow}">
+              <td>{{client.firstName}}</td>
+              <td>{{client.lastName}}</td>
+              <td>{{client.company}}</td>
+            </tr>
+          </tbody>
+        </table>
+  
+    
+</div>
+
 </div>

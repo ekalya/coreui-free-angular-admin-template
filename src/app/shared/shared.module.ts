@@ -15,6 +15,7 @@ import { SubmitResetComponent } from './views/submit-reset/submit-reset.componen
 import { ListComponent } from './views/list/list.component';
 import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
 import { DynamicFormInputControlComponent } from './views/dynamic-form-input-control/dynamic-form-input-control.component';
+import { PrimeNGModule } from './prime-ng/prime-ng.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DynamicFormInputControlComponent } from './views/dynamic-form-input-con
     DataTablesModule,
     ChartsModule,
     MaterialModule,
+    PrimeNGModule,
     NgxPopper,
     FormsModule,
     ReactiveFormsModule
@@ -51,6 +53,7 @@ import { DynamicFormInputControlComponent } from './views/dynamic-form-input-con
     ArrayToCommaDelimitedPipe,
     CrudActionsComponent,
     MaterialModule,
+    PrimeNGModule,
     SubmitResetComponent,
     ListComponent,
     DynamicFormComponent,
