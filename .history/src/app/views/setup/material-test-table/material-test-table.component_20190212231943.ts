@@ -19,22 +19,17 @@ export class MaterialTestTableComponent implements OnInit  {
   @Output() branchSelected: EventEmitter<Branch> = new EventEmitter();
   selectedRow: number;
   dtTrigger: Subject<boolean> = new Subject<boolean>();
-  dtOptions: DataTables.Settings = {};
   selectedName: string;
   constructor(private branchesService: BranchesService, private el: ElementRef) {}
 
   ngOnInit() {
     console.log('init ......');
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
     this.branchesService.getAll().subscribe(data => {
       this.branches = data;
       console.log('data arrived .....');
       this.dtTrigger.next(true);
+      this.loadBranches();
     });
-    this.loadBranches();
   }
   loadBranches() {
     if (this.tableWidget) {

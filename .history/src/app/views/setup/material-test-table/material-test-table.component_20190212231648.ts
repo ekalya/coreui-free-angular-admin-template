@@ -18,22 +18,12 @@ export class MaterialTestTableComponent implements OnInit  {
   branches: Branch[] = [];
   @Output() branchSelected: EventEmitter<Branch> = new EventEmitter();
   selectedRow: number;
-  dtTrigger: Subject<boolean> = new Subject<boolean>();
-  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<boolean>;
   selectedName: string;
   constructor(private branchesService: BranchesService, private el: ElementRef) {}
 
   ngOnInit() {
     console.log('init ......');
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
-    this.branchesService.getAll().subscribe(data => {
-      this.branches = data;
-      console.log('data arrived .....');
-      this.dtTrigger.next(true);
-    });
     this.loadBranches();
   }
   loadBranches() {
@@ -42,7 +32,11 @@ export class MaterialTestTableComponent implements OnInit  {
       // you can also remove all rows and add new
       // this.tableWidget.clear().rows.add(this.shipments).draw();
     }
-    
+    this.branchesService.getAll().subscribe(data => {
+      this.branches = data;
+      console.log('data arrived .....');
+      this.dtTrigger.next(true);
+    });
     let tableOptions: any = {
       data: this.branches,
       dom: 'rt',

@@ -12,28 +12,16 @@ import { Subject } from 'rxjs';
   styleUrls: ['./material-test-table.component.scss'],
   templateUrl: './material-test-table.component.html',
 })
-export class MaterialTestTableComponent implements OnInit  {
+export class MaterialTestTableComponent implements OnInit, AfterViewInit  {
   private branchesTable: any;
   public tableWidget: any;
   branches: Branch[] = [];
   @Output() branchSelected: EventEmitter<Branch> = new EventEmitter();
   selectedRow: number;
-  dtTrigger: Subject<boolean> = new Subject<boolean>();
-  dtOptions: DataTables.Settings = {};
-  selectedName: string;
   constructor(private branchesService: BranchesService, private el: ElementRef) {}
 
   ngOnInit() {
     console.log('init ......');
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
-    this.branchesService.getAll().subscribe(data => {
-      this.branches = data;
-      console.log('data arrived .....');
-      this.dtTrigger.next(true);
-    });
     this.loadBranches();
   }
   loadBranches() {
@@ -42,7 +30,10 @@ export class MaterialTestTableComponent implements OnInit  {
       // you can also remove all rows and add new
       // this.tableWidget.clear().rows.add(this.shipments).draw();
     }
-    
+    this.branchesService.getAll().subscribe(data => {
+      this.branches = data;
+      console.log('data arrived .....');
+    });
     let tableOptions: any = {
       data: this.branches,
       dom: 'rt',
@@ -65,7 +56,6 @@ export class MaterialTestTableComponent implements OnInit  {
 
   public selectRow(index: number, row: Branch) {
   this.selectedRow = index;
-  this.selectedName = row.name;
   }
 
 }

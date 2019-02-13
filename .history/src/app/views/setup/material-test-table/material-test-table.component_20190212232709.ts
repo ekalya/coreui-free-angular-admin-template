@@ -27,7 +27,7 @@ export class MaterialTestTableComponent implements OnInit  {
     console.log('init ......');
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10
+      pageLength: 3
     };
     this.branchesService.getAll().subscribe(data => {
       this.branches = data;
