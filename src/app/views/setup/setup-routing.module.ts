@@ -4,6 +4,7 @@ import { CompanyComponent } from './company/company.component';
 import { BranchesComponent } from './branches/branches.component';
 import { MaterialTestTableComponent } from './material-test-table/material-test-table.component';
 import { BranchComponent } from './branches/branch.component';
+import { AuthGuard } from '../../core';
 
 const routes: Routes = [
   {
@@ -40,6 +41,7 @@ const routes: Routes = [
       {
         path: 'materialtable',
         component: MaterialTestTableComponent,
+        canActivate: [AuthGuard],
         data: {
           title: 'Material Table'
         }

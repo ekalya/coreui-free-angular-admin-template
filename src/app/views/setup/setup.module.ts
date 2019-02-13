@@ -15,6 +15,10 @@ import { BranchViewComponent } from './branches/pages/branch-view.component';
     SetupRoutingModule,
     SharedModule
   ],
-  declarations: [CompanyComponent, BranchesComponent, BranchListComponent, MaterialTestTableComponent, BranchComponent, BranchViewComponent]
+  declarations: [
+    CompanyComponent, 
+    BranchesComponent, 
+    BranchListComponent, 
+    MaterialTestTableComponent, BranchComponent, BranchViewComponent]
 })
 export class SetupModule { }
