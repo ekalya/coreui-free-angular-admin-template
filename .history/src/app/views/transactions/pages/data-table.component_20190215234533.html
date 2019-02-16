@@ -1,0 +1,40 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> All transactions
+        </div>
+        <div class="card-body">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
+                <thead>
+                    <tr>
+                      <th>Customer Name</th>
+                      <th>TransactionDate</th>
+                      <th>Transaction Ref No</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let t of transactions">
+                      <td> {{ t.customerName }} </td>
+                      <td> {{ t.timeStamp }} </td>
+                      <td> {{ t.transactionRefNo }} </td>
+                      <td *ngIf="utilized(t); else notShow">
+                        <span class="badge badge-success">utilized</span>
+                      </td>
+                      <ng-template #notShow>
+                        <td>
+                          <span class="badge badge-danger">new</span>
+                        </td>
+                      </ng-template>
+                    </tr>
+                  </tbody> 
+            </table>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>

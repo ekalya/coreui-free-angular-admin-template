@@ -1,0 +1,58 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="branchForm"  (ngSubmit)="onSubmit()">
+
+    <!-- Name-->
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" 
+        formControlName="name" 
+        class="form-control" 
+        id="name"
+        [(ngModel)]="branch.name"
+        placeholder="Enter your branch name"
+        required
+        minlength="2">
+    </div>
+    <!-- Physical Location-->
+    <div class="form-group">
+    <label for="physicalLocation">Physical Location</label>
+    <input type="text" 
+    formControlName="physicalLocation" 
+    class="form-control" 
+    id="physicalLocation"
+    [(ngModel)]="branch.physicalLocation" 
+    placeholder="Enter your branch physical location"
+    required
+    minlength="2">
+    </div>
+    <!-- Telephone number -->
+    <div class="form-group">
+    <label for="telephone">Telephone Number</label>
+    <input type="text" 
+    formControlName="telephone" 
+    class="form-control" 
+    id="telephone" 
+    [(ngModel)]="branch.telephone"
+    placeholder="000 0000 000 000">
+    </div>
+    </form>
+    <br>
+    <!-- form to add till numbers-->
+    <div class="card">
+      <div class="card-header">
+      <app-dynamic-form 
+      [formMetaData]="tillnumberFormMetadata" 
+      (formValues)="tillNumberFormValues($event)"></app-dynamic-form>
+      </div>
+      <div class="card-body">
+        <app-list [listItemsReceiver]="listItemsEmitter" 
+        (removeItemEmitter)="removeItemEmitter($event)"
+        [items]="items"></app-list>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <app-submit-reset  (actionMenuClickEvent)="actionMenuClick($event)"></app-submit-reset>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="card">
+  Selected: {{selectedName}}
+  <table  id="clientsT"  datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-hover" cellspacing="0">
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Physical Location</th>
+            <th>Tills</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let b of branches; let i = index" (click)="selectRow(i, b)" [ngClass] = "{'highlight' : i == selectedRow}">
+            <td>{{b.name}}</td>
+            <td>{{b.physicalLocation}}</td>
+            <td>{{b.tillNumbers | arrayToCommaDelimited}}</td>
+          </tr>
+      </tbody>
+  </table>
+</div>
