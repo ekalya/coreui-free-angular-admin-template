@@ -7,3 +7,5 @@ export * from './branches.service';
 export * from './menu.service';
 export * from './tillnumber-metadata.service';
 export * from './bank.service';
+export * from './user.service';
+export * from './user-role.service';

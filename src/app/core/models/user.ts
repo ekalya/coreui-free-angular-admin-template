@@ -12,4 +12,8 @@ export class User {
   credentialsNonExpired: boolean;
   authenticated: boolean;
   password: string;
+
+  constructor() {
+    this.roles = [];
+  }
 }

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { InputControlBase } from '..';
-import { TextBoxInputControl } from '../models/text-box-input-control.model';
-
+import { InputControlBase, TextBoxInputControl } from '../../../../core/models';
 @Injectable({
   providedIn: 'root'
 })
-export class TillnumberMetadataService {
+export class UserDetailsUIService {
 
   // TODO: get from a remote source of question metadata
   // TODO: make asynchronous
@@ -13,9 +11,9 @@ export class TillnumberMetadataService {
  
     let metadata: InputControlBase<any>[] = [
       new TextBoxInputControl({
-        key: 'tillnumber',
-        label: 'Till Number',
-        placeholder: 'Enter till number',
+        key: 'username',
+        label: 'Name',
+        placeholder: 'Enter username',
         value: '',
         required: true,
         order: 1

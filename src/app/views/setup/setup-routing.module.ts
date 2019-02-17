@@ -37,6 +37,11 @@ const routes: Routes = [
         data: {
           title: 'Branch'
         }
+      },
+      {
+        path: 'users',
+        loadChildren: './users/users.module#UsersModule',
+        canActivate: [AuthGuard]
       }
     ]
   }

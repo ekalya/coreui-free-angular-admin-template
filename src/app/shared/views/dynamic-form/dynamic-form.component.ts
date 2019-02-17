@@ -10,28 +10,38 @@ import { FormGroup } from '@angular/forms';
   providers: [InputControlService]
 })
 export class DynamicFormComponent implements OnInit {
-  model: any;
+  @Input() public model: any;
   @Input() public formMetaData: InputControlBase<any>[] = [];
   form: FormGroup;
   @Output() public formValues: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Input() public modelReceiver: EventEmitter<any> = new EventEmitter<any>();
+  @Input() public hideSaveButton: boolean;
+  @Output() public formEmitterEvent: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   constructor(private ics: InputControlService) {
-   this.model = {name: 'jogn'};
   }
 
   ngOnInit() {
     this.form = this.ics.toFormGroup(this.formMetaData);
-    this.modelReceiver.subscribe(model => {
-      this.setValues(model);
+
+    this.form.valueChanges.subscribe(status => {
+      console.log(status);
+      this.formEmitterEvent.emit(this.form);
     });
+
+    this.modelReceiver.subscribe(model => {
+      this.model = model;
+      this.setValues();
+    });
+    this.setValues();
   }
   onSubmit() {
     this.formValues.emit(this.form);
     this.form.reset();
   }
-  setValues(model: any) {
-   this.form.value.name = 'James';
-   this.form.patchValue(model);
+  setValues() {
+    if (this.model !== null) {
+      this.form.patchValue(this.model);
+    }
   }
 
 }

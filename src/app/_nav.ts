@@ -47,6 +47,11 @@ export const navItems: NavData[] = [
         name: 'Branches',
         url: '/setup/branches',
         icon: 'icon-puzzle'
+      },
+      {
+        name: 'Users',
+        url: '/setup/users/',
+        icon: 'icon-puzzle'
       }
     ]
   }

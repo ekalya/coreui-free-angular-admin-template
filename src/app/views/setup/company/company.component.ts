@@ -3,9 +3,6 @@ import { Company, CompanyService } from '../../../core';
 import { FormGroup } from '@angular/forms';
 
 import { CompanyUIService } from './company-ui.service';
-import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
-import {plainToClass} from 'class-transformer';
-import { CommaExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-company',
@@ -35,7 +32,7 @@ export class CompanyComponent implements OnInit {
   formValues(form: FormGroup) {
     this.model.name = form.value.name;
     this.model.physicalAddress = form.value.physicalAddress;
-    this.companyService.update(this.model).subscribe( (data: Company) => {
+    this.companyService.update(this.model).subscribe( () => {
     });
   }
 
