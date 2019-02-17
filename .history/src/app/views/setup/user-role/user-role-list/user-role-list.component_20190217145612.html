@@ -1,0 +1,15 @@
+<div class="animated fadeIn">
+  <div class="card">
+      <div class="card-header">
+          <i class="fa fa-align-justify"></i> Users role list 
+          <app-crud-actions (actionMenuClickEvent)="actionMenuClick($event)"></app-crud-actions> 
+      </div>
+      <div class="card-body">
+        <app-user-role-list-view
+        [roles] = "roles"
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        (selectedUserEmitter)="selectedUserChange($event)">loading ... </app-user-role-list-view>
+      </div>
+  </div>
+</div>

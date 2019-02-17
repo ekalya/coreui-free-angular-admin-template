@@ -1,0 +1,16 @@
+<p-pickList
+#pl
+[source]="available"
+[target]="assigned"
+[responsive]="true"
+sourceHeader="Available authorities"
+targetHeader="Assigned"
+filterBy="name"
+(onMoveToTarget)="onMoveToTarget($event)"
+(onMoveToSource)="onMoveToSource($event)">
+  <ng-template let-authority pTemplate="item">
+      <div class="ui-helper-clearfix">
+          <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{authority.authority_user}}</div>
+      </div>
+  </ng-template>
+</p-pickList>

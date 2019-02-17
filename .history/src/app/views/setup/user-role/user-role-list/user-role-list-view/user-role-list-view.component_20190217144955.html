@@ -1,0 +1,13 @@
+
+<table  id="userRolesTable"  datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-hover" cellspacing="0">
+  <thead>
+    <tr>
+        <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let r of roles; let i = index" (click)="selectRow(i, r)" [ngClass] = "{'highlight' : i == selectedRow}">
+        <td>{{ r.name }}</td>
+      </tr>
+  </tbody>
+</table>

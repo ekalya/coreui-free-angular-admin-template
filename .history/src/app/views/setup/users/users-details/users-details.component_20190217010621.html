@@ -1,0 +1,23 @@
+<div class="animated fadeIn">
+  <div class="card">
+      <div class="card-header">
+          <i class="fa fa-align-justify"></i> User details 
+      </div>
+      <div class="card-body">
+          <app-dynamic-form 
+          [formMetaData]="userFormMetadata" 
+          (formValues)="formValues($event)"
+          [modelReceiver]="modelEmitter"
+          [model]="model"
+          [hideSaveButton]="true"
+          (formEmitterEvent)="formEmitterEventValues($event)"></app-dynamic-form>
+          <app-user-roles-pick-list
+          [assigned]="model.roles"
+          (assignedChanges)="assignedChanges($event)"> loading ....</app-user-roles-pick-list>
+      </div>
+      <div class="card-footer">
+        <app-submit-reset  (actionMenuClickEvent)="submitResetActionMenuClick($event)"
+        [mode]="mode"></app-submit-reset>
+      </div>
+  </div>
+</div>

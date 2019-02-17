@@ -1,0 +1,15 @@
+<p-pickList
+#pl
+[source]="available"
+[target]="owned"
+[responsive]="true"
+sourceHeader="Available roles"
+targetHeader="Assigned"
+filterBy="name">
+  <ng-template let-role pTemplate="item">
+      <div class="ui-helper-clearfix">
+          <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{role.name}}</div>
+      </div>
+  </ng-template>
+</p-pickList>
+<button type="button" pButton (click)="pl.resetFilter()" label="Reset"></button>

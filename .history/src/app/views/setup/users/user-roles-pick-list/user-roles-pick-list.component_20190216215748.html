@@ -1,0 +1,7 @@
+<p-pickList [source]="available" [target]="owned">
+  <ng-template let-role pTemplate="item">
+      <div class="ui-helper-clearfix">
+          <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{role.name}}</div>
+      </div>
+  </ng-template>
+</p-pickList>
