@@ -1,4 +1,5 @@
 <div class="animated fadeIn">
+    <p-toast></p-toast>
     <div class="card">
         <div class="card-header">
             <i class="fa fa-align-justify"></i> Company Details 
@@ -7,6 +8,7 @@
             <app-dynamic-form 
             [formMetaData]="companyFormMetadata" 
             (formValues)="formValues($event)"
+            [model]="model"
             [modelReceiver]="modelEmitter"></app-dynamic-form>
         </div>
     </div>

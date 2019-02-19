@@ -4,6 +4,7 @@ import { CompanyComponent } from './company/company.component';
 import { BranchesComponent } from './branches/branches.component';
 import { BranchComponent } from './branches/branch.component';
 import { AuthGuard } from '../../core';
+import { BankListComponent } from './banks/bank-list/bank-list.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,13 @@ const routes: Routes = [
         component: BranchComponent,
         data: {
           title: 'Branch'
+        }
+      },
+      {
+        path: 'banks',
+        loadChildren: './banks/banks.module#BanksModule',
+        data: {
+          title: 'Banks'
         }
       },
       {

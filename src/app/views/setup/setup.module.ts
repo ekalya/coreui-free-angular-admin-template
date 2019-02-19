@@ -19,6 +19,7 @@ import { BranchViewComponent } from './branches/pages/branch-view.component';
     BranchesComponent,
     BranchListComponent,
     BranchComponent,
-    BranchViewComponent]
+    BranchViewComponent
+  ]
 })
 export class SetupModule { }

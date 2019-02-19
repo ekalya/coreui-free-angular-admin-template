@@ -1,6 +1,17 @@
-<app-data-table
- [transactions]="paymentTransactions" 
- [dtTrigger]="dtTrigger" 
- [dtOptions]="dtOptions">
- loading ...
-</app-data-table>
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-align-justify"></i> Transactions List 
+        </div>
+        <div class="card-body">
+            <app-data-table
+            [transactions]="paymentTransactions" 
+            [dtTrigger]="dtTrigger" 
+            [dtOptions]="dtOptions">
+            loading ...
+            </app-data-table>
+        </div>
+    </div>
+  </div>
+
+

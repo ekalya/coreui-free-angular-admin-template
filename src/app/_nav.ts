@@ -29,14 +29,14 @@ export const navItems: NavData[] = [
       {
         name: 'Table',
         url: '/transactions/table',
-        icon: 'icon-puzzle'
+        icon: 'icon-list'
       }
     ]
   },
   {
     name: 'Setup',
     url: '/setup',
-    icon: 'icon-puzzle',
+    icon: 'icon-settings',
     children: [
       {
         name: 'Company',
@@ -49,9 +49,14 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
+        name: 'Banks',
+        url: '/setup/banks',
+        icon: 'icon-puzzle'
+      },
+      {
         name: 'Users',
         url: '/setup/users/',
-        icon: 'icon-puzzle'
+        icon: 'icon-user'
       },
       {
         name: 'User Roles',

@@ -1,35 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { User, UserService } from '../../../../core';
+import {Component, OnInit, EventEmitter, ElementRef, Output } from '@angular/core';
+import * as $ from 'jquery';
+import 'datatables.net';
+import 'datatables.net-bs4';
+import { BankService, Bank } from '../../../../core';
 import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-
+/**
+ * @title Table with pagination
+ */
 @Component({
-  selector: 'app-users-list',
-  templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss'],
-  providers: [MessageService]
+  selector: 'app-bank-list',
+  templateUrl: './bank-list.component.html',
+  styleUrls: ['./bank-list.component.scss'],
+  providers: [ MessageService ]
 })
-export class UsersListComponent implements OnInit {
-  users: User[];
+export class BankListComponent implements OnInit  {
+  private banksTable: any;
+  public tableWidget: any;
+  banks: Bank[] = [];
+  selectedRow: number;
   dtTrigger: Subject<boolean> = new Subject<boolean>();
   dtOptions: DataTables.Settings = {};
-  selectedUser: User = new User();
-  constructor(private router: Router, private usersService: UserService,
-    private messageService: MessageService) { }
+  selectedBank: Bank = new Bank();
+  constructor(private bankService: BankService, private el: ElementRef,
+    private messageService: MessageService,
+    private router: Router) {}
 
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10
     };
-    this.usersService.getAll().subscribe(users => {
-      this.users = users;
+    this.bankService.getAll().subscribe(banks => {
+      this.banks = banks;
       this.dtTrigger.next(true);
     });
   }
+
   actionMenuClick(action: string) {
-    if (action === 'CREATE') {
+    /*if (action === 'CREATE') {
       this.router.navigate(['/setup/users/userdetails'], {queryParams: {user: JSON.stringify(new User()), mode: action}});
     } else if (action === 'EDIT') {
       if (this.selectedUser.username === undefined || this.selectedUser.username === null) {
@@ -43,11 +53,12 @@ export class UsersListComponent implements OnInit {
         return;
       }
       this.router.navigate(['/setup/users/userdetails'], {queryParams: {user: JSON.stringify(this.selectedUser), mode: action}});
-    }
-  }
-  selectedUserChange(user: User) {
-    this.selectedUser = user;
-    console.log(this.selectedUser.username);
+    }*/
   }
 
+
+  selectedBankChange(bank: Bank) {
+    this.selectedBank = bank;
+    console.log(this.selectedBank.name);
+  }
 }

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, AuthService, AlertService } from '../core';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-login-container',
   templateUrl: './login-container.component.html',
-  styleUrls: ['./login-container.component.scss']
+  styleUrls: ['./login-container.component.scss'],
+  providers: [ MessageService]
 })
 export class LoginContainerComponent implements OnInit {
   model: User = {
@@ -21,9 +23,10 @@ export class LoginContainerComponent implements OnInit {
     authenticated: false,
     password: ''
   };
-  constructor(private authService: AuthService, 
-    private router: Router, 
-    private alertService: AlertService) { 
+  constructor(private authService: AuthService,
+    private router: Router,
+    private alertService: AlertService,
+    private messageService: MessageService) {
     this.authService.logout();
   }
 
@@ -45,9 +48,9 @@ export class LoginContainerComponent implements OnInit {
         this.router.navigate([this.authService.redirectUrl]);
       }
     }, err => {
-      this.alertService.error(this.authService.error.message);
+      this.messageService.add({severity: 'error', summary: 'Login failed', detail: 'Login failed'});
     }, ()  =>  {
-      //end ......
+
     });
   }
 

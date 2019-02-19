@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TillNumber } from '../../core';
-import { stringify } from '@angular/core/src/render3/util';
+import { TillNumber, Role } from '../../core';
 
 @Pipe({
   name: 'arrayToCommaDelimited'
@@ -8,11 +7,11 @@ import { stringify } from '@angular/core/src/render3/util';
 export class ArrayToCommaDelimitedPipe implements PipeTransform {
 
   transform(value: TillNumber[], args?: any): any {
-    let tillsList = '';
+    let sList = '';
     value.forEach(item => {
-      tillsList = tillsList +  (tillsList.length > 0 ? ',' : '') + (item as TillNumber).number;
+      sList = sList +  (sList.length > 0 ? ',' : '') + (item as TillNumber).number;
     });
-    return tillsList;
+    return sList;
   }
 
 }

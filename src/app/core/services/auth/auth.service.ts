@@ -35,7 +35,9 @@ export class AuthService {
     return this.apiService.get<User>('/userdetails/current/').pipe(
       map(userData => {
         if (userData) {
+          const password = this.currentUser.password;
           this.currentUser = (userData as User);
+          this.currentUser.password = password;
           this.currentUser.authenticated = true;
         }
         return this.currentUser;

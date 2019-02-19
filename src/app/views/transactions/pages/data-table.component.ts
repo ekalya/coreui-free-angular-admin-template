@@ -14,7 +14,7 @@ export class DataTableComponent implements OnInit {
   @Input() public transactions: PaymentTransaction[];
   @Input() public dtOptions: DataTables.Settings;
   @Input() public dtTrigger: Subject<boolean>;
-
+  selectedRow: number;
   constructor() { }
 
   ngOnInit() {
@@ -24,6 +24,10 @@ export class DataTableComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  selectRow(index: number, paymentTransaction: PaymentTransaction) {
+    this.selectedRow = index;
   }
 
 }

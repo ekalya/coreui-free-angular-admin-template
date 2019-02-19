@@ -42,6 +42,6 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       this.router.navigate(['/login']);
     });
   }
-  onDeactivate() {}
+  onDeactivate(event: any) {}
   onActivate() {}
 }

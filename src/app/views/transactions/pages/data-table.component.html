@@ -1,40 +1,25 @@
-<div class="animated fadeIn">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-header">
-          <i class="fa fa-align-justify"></i> All transactions
-        </div>
-        <div class="card-body">
-            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
-                <thead>
-                    <tr>
-                      <th>Customer Name</th>
-                      <th>Mobile Number</th>
-                      <th>TransactionDate</th>
-                      <th>Transaction Ref No</th>
-                      <th>Till Number</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let t of transactions">
-                      <td> {{ t.customerName }} </td>
-                      <td> {{ t.mobileNumber }} </td>
-                      <td> {{ t.timeStamp }} </td>
-                      <td> {{ t.transactionRefNo }} </td>
-                      <td> {{ t.tillNumber }} </td>
-                      <td>
-                        <span *ngIf="utilized(t) == false" class="badge badge-danger">New</span>
-                        <span *ngIf="utilized(t) == true" class="badge badge-success">Utilized</span>
-                      </td>
-                    </tr>
-                  </tbody> 
-            </table>
-        </div>
-      </div>
-    </div>
-    <!--/.col-->
-  </div>
-  <!--/.row-->
-</div>
+<table id="transactionsTable"  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
+    <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Mobile Number</th>
+          <th>TransactionDate</th>
+          <th>Transaction Ref No</th>
+          <th>Till Number</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of transactions; let i = index" (click)="selectRow(i, t)"  [ngClass] = "{'highlight' : i == selectedRow}">
+          <td> {{ t.customerName }} </td>
+          <td> {{ t.mobileNumber }} </td>
+          <td> {{ t.timeStamp }} </td>
+          <td> {{ t.transactionRefNo }} </td>
+          <td> {{ t.tillNumber }} </td>
+          <td>
+            <span *ngIf="utilized(t) == false" class="badge badge-danger">New</span>
+            <span *ngIf="utilized(t) == true" class="badge badge-success">Utilized</span>
+          </td>
+        </tr>
+      </tbody> 
+</table>

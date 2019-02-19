@@ -116,9 +116,9 @@ export class DashboardComponent implements OnInit {
       yAxes: [{
         ticks: {
           beginAtZero: true,
-          maxTicksLimit: 40,
-          stepSize: Math.ceil(40000 / 40),
-          max: 40000
+          maxTicksLimit: 20,
+          stepSize: Math.ceil(20000 / 20),
+          max: 20000
         }
       }]
     },

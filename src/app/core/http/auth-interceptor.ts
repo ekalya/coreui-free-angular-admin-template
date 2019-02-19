@@ -3,22 +3,17 @@ import { AuthService } from '../services/auth/auth.service';
 import {
     HttpInterceptor,
     HttpRequest,
-    HttpResponse,
     HttpHandler,
     HttpEvent,
-    HttpErrorResponse,
-    HttpHeaders
-} from '@angular/common/http';
+    HttpErrorResponse} from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
-import { map, catchError, retry } from 'rxjs/operators';
-import { User } from '../models/user';
+import { catchError, retry } from 'rxjs/operators';
 import { HttpError } from './error';
-import { copyStyles } from '@angular/animations/browser/src/util';
 
 @Injectable()
 export class  AuthInterceptor implements HttpInterceptor {
-    
+
     constructor(private authService: AuthService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -29,22 +24,22 @@ export class  AuthInterceptor implements HttpInterceptor {
             headers: req.headers.set('X-Requested-With', 'XMLHttpRequest')
                                 .set('authorization', auth)
                                 .set('Content-Type', 'application/json')
-          });
-          return next.handle(xhr)
-          .pipe(
+        });
+        return next.handle(xhr)
+        .pipe(
             retry(1),
             catchError((error: HttpErrorResponse) => {
-                let errorMessage: HttpError  = {code: 0, message: ''};
+                const errorMessage: HttpError  = {code: 0, message: ''};
                 if (error.error instanceof ErrorEvent) {
                     // client-side error
                     errorMessage.message = error.error.message;
-                  } else {
+                } else {
                     // server-side error
                     errorMessage.code = error.status;
                     errorMessage.message = error.message;
-                  }
+                }
                 return throwError(errorMessage);
             })
-          );
+        );
     }
 }
