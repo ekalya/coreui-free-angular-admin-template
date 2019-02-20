@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
-import { User, Bank } from '../../../../../core';
+import { User, Bank, TableColumn } from '../../../../../core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -16,6 +16,13 @@ export class BankListViewComponent implements OnInit {
 
   private banksTable: any;
   public tableWidget: any;
+  cols: TableColumn[] = [
+    new TableColumn('code', 'Code'),
+    new TableColumn('name', 'Name'),
+    new TableColumn('postalAddress', 'Postal Address'),
+    new TableColumn('physicalAddress', 'Physical Address'),
+    new TableColumn('telephone', 'Telephone')
+  ];
   constructor(private el: ElementRef) { }
 
   ngOnInit() {
@@ -49,6 +56,9 @@ export class BankListViewComponent implements OnInit {
   selectRow(index: number, bank: Bank) {
     this.selectedRow = index;
     this.selectedBankEmitter.emit(bank);
+  }
+  selectedItemChange(item: any) {
+    console.log(item);
   }
 
 }

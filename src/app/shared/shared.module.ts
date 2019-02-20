@@ -16,6 +16,7 @@ import { ListComponent } from './views/list/list.component';
 import { DynamicFormComponent } from './views/dynamic-form/dynamic-form.component';
 import { DynamicFormInputControlComponent } from './views/dynamic-form-input-control/dynamic-form-input-control.component';
 import { PrimeNGModule } from './prime-ng/prime-ng.module';
+import { DynamicListComponent } from './views/dynamic-list/dynamic-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PrimeNGModule } from './prime-ng/prime-ng.module';
     SubmitResetComponent,
     ListComponent,
     DynamicFormComponent,
-    DynamicFormInputControlComponent
+    DynamicFormInputControlComponent,
+    DynamicListComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,8 @@ import { PrimeNGModule } from './prime-ng/prime-ng.module';
     SubmitResetComponent,
     ListComponent,
     DynamicFormComponent,
-    DynamicFormInputControlComponent
+    DynamicFormInputControlComponent,
+    DynamicListComponent
   ]
 })
 export class SharedModule { }

@@ -4,10 +4,10 @@
         <app-crud-actions (actionMenuClickEvent)="actionMenuClick($event)"></app-crud-actions> 
     </div>
     <div class="card-body">
-      <app-bank-list-view
-      [banks] = "banks"
-      [dtOptions]="dtOptions"
-      [dtTrigger]="dtTrigger"
-      (selectedBankEmitter)="selectedBankChange($event)"></app-bank-list-view>
+        <app-bank-list-view
+        [banks] = "banks"
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        (selectedBankEmitter)="selectedBankChange($event)"></app-bank-list-view>
     </div>
 </div>

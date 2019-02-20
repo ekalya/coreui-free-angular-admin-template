@@ -23,3 +23,4 @@ export * from './text-box-input-control.model';
 export * from './input-type.enum';
 export * from './bank';
 export * from './bank-branch';
+export * from './table-column';

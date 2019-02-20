@@ -9,4 +9,7 @@ export class Bank {
     telephone: string;
     email: string;
     branches: BankBranch[];
+    constructor() {
+        this.branches = [];
+    }
 }

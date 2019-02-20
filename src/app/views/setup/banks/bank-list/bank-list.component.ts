@@ -39,21 +39,21 @@ export class BankListComponent implements OnInit  {
   }
 
   actionMenuClick(action: string) {
-    /*if (action === 'CREATE') {
-      this.router.navigate(['/setup/users/userdetails'], {queryParams: {user: JSON.stringify(new User()), mode: action}});
+    if (action === 'CREATE') {
+      this.router.navigate(['/setup/banks/bankdetails'], {queryParams: {bank: JSON.stringify(new Bank()), mode: action}});
     } else if (action === 'EDIT') {
-      if (this.selectedUser.username === undefined || this.selectedUser.username === null) {
+      if (this.selectedBank.code === undefined || this.selectedBank.code === null) {
         this.messageService.add({severity: 'error', summary: 'No selected record', detail: 'No selected record'});
         return;
       }
-      this.router.navigate(['/setup/users/userdetails'], {queryParams: {user: JSON.stringify(this.selectedUser), mode: action}});
+      this.router.navigate(['/setup/banks/bankdetails'], {queryParams: {bank: JSON.stringify(this.selectedBank), mode: action}});
     } else if (action === 'DETAILS') {
-      if (this.selectedUser.username === undefined || this.selectedUser.username === null) {
+      if (this.selectedBank.code === undefined || this.selectedBank.code === null) {
         this.messageService.add({severity: 'error', summary: 'No selected record', detail: 'No selected record'});
         return;
       }
-      this.router.navigate(['/setup/users/userdetails'], {queryParams: {user: JSON.stringify(this.selectedUser), mode: action}});
-    }*/
+      this.router.navigate(['/setup/banks/bankdetails'], {queryParams: {bank: JSON.stringify(this.selectedBank), mode: action}});
+    }
   }
 
 

@@ -5,9 +5,10 @@ import { BanksRoutingModule } from './banks-routing.module';
 import { BankListComponent } from './bank-list/bank-list.component';
 import { SharedModule } from '../../../shared';
 import { BankListViewComponent } from './bank-list/bank-list-view/bank-list-view.component';
+import { BankDetailsComponent } from './bank-details/bank-details.component';
 
 @NgModule({
-  declarations: [BankListComponent, BankListViewComponent],
+  declarations: [BankListComponent, BankListViewComponent, BankDetailsComponent],
   imports: [
     CommonModule,
     BanksRoutingModule,
