@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InputControlBase, TextBoxInputControl } from '../../../../core/models';
+import { InputControlPassword } from '../../../../core/controls/input-control-password.control';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +19,7 @@ export class UserDetailsUIService {
         required: true,
         order: 1
       }),
-      new TextBoxInputControl({
+      new InputControlPassword ({
         key: 'password',
         label: 'Password',
         type: 'password',

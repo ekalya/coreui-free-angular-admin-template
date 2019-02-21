@@ -55,6 +55,11 @@ const routes: Routes = [
         path: 'user-role',
         loadChildren: './user-role/user-role.module#UserRoleModule',
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'tests',
+        loadChildren: './test/test.module#TestModule',
+        canActivate: [AuthGuard]
       }
     ]
   }

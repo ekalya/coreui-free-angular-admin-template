@@ -62,6 +62,11 @@ export const navItems: NavData[] = [
         name: 'User Roles',
         url: '/setup/user-role/',
         icon: 'icon-puzzle'
+      },
+      {
+        name: 'Test Page',
+        url: '/setup/tests/',
+        icon: 'icon-puzzle'
       }
     ]
   }

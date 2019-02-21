@@ -38,7 +38,8 @@ export class DynamicFormComponent implements OnInit {
     this.form.reset();
   }
   setValues() {
-    if (this.model !== null) {
+    console.log(this.model);
+    if (this.model !== undefined) {
       this.form.patchValue(this.model);
     }
   }
