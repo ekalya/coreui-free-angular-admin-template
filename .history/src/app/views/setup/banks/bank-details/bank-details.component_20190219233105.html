@@ -1,0 +1,42 @@
+<div class="animated fadeIn">
+  <div class="card">
+      <div class="card-header">
+          <i class="fa fa-align-justify"></i> Bank details <p-toast></p-toast>
+      </div>
+      <div class="card-body">
+          <app-dynamic-form 
+          [formMetaData]="bankFormMetadata" 
+          [model]="model"
+          [hideSaveButton]="true"
+          (formEmitterEvent)="formEmitterEventValues($event)"></app-dynamic-form>
+
+          <app-dynamic-form 
+          [formMetaData]="bankFormMetadata" 
+          [model]="selectedBranch"
+          [hideSaveButton]="false"
+          (formEmitterEvent)="branchFormEmitterEventValues($event)"></app-dynamic-form>
+
+          <div class="card">
+              <div class="card-header">
+                <i class="fa fa-align-justify"></i> Branch list
+                <div class="card-header-actions">
+                    <button 
+                    type="button" 
+                    class="btn btn-sm btn-primary"
+                    (click)= "addSaveActionMenuClick()">
+                    <i class="icon-plus"></i> 
+                    {{ action }} 
+                    </button>
+                    </div>
+              </div>
+              <div class="card-body">
+                <app-dynamic-list [list]="model.branches" [cols]="cols"></app-dynamic-list>
+              </div>
+          </div>
+      </div>
+      <div class="card-footer">
+        <app-submit-reset  (actionMenuClickEvent)="submitResetActionMenuClick($event)"
+        [mode]="mode"></app-submit-reset>
+      </div>
+  </div>
+</div>

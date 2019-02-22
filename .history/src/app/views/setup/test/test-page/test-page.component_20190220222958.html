@@ -1,0 +1,16 @@
+<div class="content-section implementation">
+  <p-toast [style]="{marginTop: '80px'}"></p-toast>
+<p-panel>
+  <p-header>
+      <div class="ui-helper-clearfix">
+          <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Dynamic form</span>
+          <p-splitButton [style]="{'float':'right'}" label="Save" icon="pi pi-check" (onClick)="save()" [model]="items"></p-splitButton>
+      </div>
+  </p-header>
+  <app-dynamic-form [formMetaData]="controls"></app-dynamic-form>
+  <p-footer>
+      <button pButton type="button" icon="pi pi-plus" label="New" class="ui-button-info" style="margin-right: .25em"></button>
+      <button pButton type="button" icon="pi pi-search" label="View" class="ui-button-success"></button>
+  </p-footer>
+</p-panel>
+</div>

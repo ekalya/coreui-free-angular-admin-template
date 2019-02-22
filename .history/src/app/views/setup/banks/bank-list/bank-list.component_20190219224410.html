@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-header">
+        <i class="fa fa-align-justify"></i> Banks List <p-toast></p-toast>
+        <app-crud-actions (actionMenuClickEvent)="actionMenuClick($event)"></app-crud-actions> 
+    </div>
+    <div class="card-body">
+        <app-bank-list-view
+        [banks] = "banks"
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        (selectedBankEmitter)="selectedBankChange($event)"></app-bank-list-view>
+    </div>
+</div>

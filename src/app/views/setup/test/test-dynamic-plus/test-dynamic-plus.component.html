@@ -1,0 +1,12 @@
+<div class="content-section implementation">
+  <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+  <app-dynamic-list-plus
+  [title]="title"
+  [listItems]="listItems"
+  [cols]="cols"
+  [controls]="controls"
+  (itemAddedEvent)="itemAddedEvent($event)"
+  (itemUpdatedEvent)="itemUpdatedEvent($event)"></app-dynamic-list-plus>
+
+</div>
