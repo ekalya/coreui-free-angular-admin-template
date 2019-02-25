@@ -63,7 +63,10 @@ delete() {
 }
 listActionMenuClick(data) {
   console.log(data.action);
+  console.log('start ....');
   console.log(data.object);
+  console.log(this.dataSharingService.data.selectedObject);
+  console.log('end .....');
   let navigationExtras: NavigationExtras = {
     queryParams: {
         "bank": data.object,

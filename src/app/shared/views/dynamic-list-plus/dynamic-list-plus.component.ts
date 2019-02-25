@@ -91,6 +91,7 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
       action: this.action
     };
 
+    console.log(this.listItems[this.listItems.indexOf(this.selectedObject)]);
     this.listActionMenuClick.emit({object: this.listItems[this.listItems.indexOf(this.selectedObject)], action: this.action});
     this.model = this.listItems[this.listItems.indexOf(this.selectedObject)];
     this.showForm = true;
@@ -115,9 +116,7 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
     this.listItems = listItems;
   }
   onRowSelect(event) {
-    this.obj = this.cloneObj(event.data);
-    this.model = this.cloneObj(this.selectedObject);
-    this.selectedItem = this.cloneObj(this.listItems[this.listItems.indexOf(this.selectedObject)]);
+    this.model = this.listItems[this.listItems.indexOf(this.selectedObject)];
     console.log(this.listItems[this.listItems.indexOf(this.selectedObject)]);
   }
   cloneObj(c: any): any {
