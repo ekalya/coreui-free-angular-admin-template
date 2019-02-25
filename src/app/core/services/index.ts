@@ -10,3 +10,5 @@ export * from './bank.service';
 export * from './user.service';
 export * from './user-role.service';
 export * from './authority.service';
+export * from './data-sharing.service';
+

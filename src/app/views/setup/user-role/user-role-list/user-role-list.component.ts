@@ -3,6 +3,7 @@ import { Role, UserRoleService } from '../../../../core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { DynamicFormActions } from '../../../../core/enums';
 
 @Component({
   selector: 'app-user-role-list',
@@ -28,16 +29,16 @@ export class UserRoleListComponent implements OnInit {
       this.dtTrigger.next(true);
     });
   }
-  actionMenuClick(action: string) {
-    if (action === 'CREATE') {
+  actionMenuClick(action: DynamicFormActions) {
+    if (action === DynamicFormActions.Create) {
       this.router.navigate(['/setup/user-role/userroledetails'], {queryParams: {role: JSON.stringify(new Role()), mode: action}});
-    } else if (action === 'EDIT') {
+    } else if (action === DynamicFormActions.Update) {
       if (this.selectedRole.name === undefined || this.selectedRole.name === null) {
         this.messageService.add({severity: 'error', summary: 'No selected record', detail: 'No selected record'});
         return;
       }
       this.router.navigate(['/setup/user-role/userroledetails'], {queryParams: {role: JSON.stringify(this.selectedRole), mode: action}});
-    } else if (action === 'DETAILS') {
+    } else if (action === DynamicFormActions.Read) {
       if (this.selectedRole.name === undefined || this.selectedRole.name === null) {
         this.messageService.add({severity: 'error', summary: 'No selected record', detail: 'No selected record'});
         return;

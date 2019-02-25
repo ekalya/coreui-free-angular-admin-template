@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { InputControlBase, TextBoxInputControl, Bank } from '../../../../core/models';
-import { InputControlDynamicList } from '../../../../core/controls';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class BankDetailsUIService {
+export class BankBranchDetailsUIService {
   constructor() {
   }
   getMetadata() {
@@ -73,4 +73,9 @@ export class BankDetailsUIService {
   return columns;
   }
 }
+
+
+
+
+
 

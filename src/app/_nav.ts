@@ -18,10 +18,6 @@ export const navItems: NavData[] = [
     icon: 'icon-speedometer'
   },
   {
-    title: true,
-    name: 'Components'
-  },
-  {
     name: 'Transactions',
     url: '/transactions',
     icon: 'icon-puzzle',

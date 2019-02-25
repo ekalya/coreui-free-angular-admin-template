@@ -7,7 +7,6 @@
           <app-dynamic-form 
           [formMetaData]="userRoleFormMetadata" 
           [model]="model"
-          [hideSaveButton]="true"
           (formEmitterEvent)="formEmitterEventValues($event)"></app-dynamic-form>
           <app-role-authority-pick-list
           [assigned]="model.authorities"

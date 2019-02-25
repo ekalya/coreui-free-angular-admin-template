@@ -17,7 +17,7 @@ import {SplitButtonModule} from 'primeng/splitbutton';
 import {MenuModule} from 'primeng/menu';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {ContextMenuModule} from 'primeng/contextmenu';
-
+import { DialogModule } from 'primeng/primeng';
 @NgModule({
   declarations: [],
   imports: [
@@ -43,7 +43,8 @@ import {ContextMenuModule} from 'primeng/contextmenu';
     ToastModule,
     DynamicDialogModule,
     ButtonModule,
-    ContextMenuModule
+    ContextMenuModule,
+    DialogModule
   ],
   exports: [
     TableModule,
@@ -62,7 +63,8 @@ import {ContextMenuModule} from 'primeng/contextmenu';
     MenuModule,
     DynamicDialogModule,
     ButtonModule,
-    ContextMenuModule
+    ContextMenuModule,
+    DialogModule
   ],
   providers: [MessageService]
 })

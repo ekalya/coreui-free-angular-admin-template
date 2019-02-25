@@ -3,7 +3,8 @@ import { MessageService } from 'primeng/api';
 import { BankDetailsUIService } from '../../banks/bank-details/bank-details-ui.service';
 import { BankService, Bank } from '../../../../core';
 import { FormGroup } from '@angular/forms';
-
+import { Router, NavigationExtras } from '@angular/router';
+import { DataSharingService } from '../../../../core/services';
 @Component({
   selector: 'app-test-dynamic-plus',
   templateUrl: './test-dynamic-plus.component.html',
@@ -30,13 +31,21 @@ export class TestDynamicPlusComponent implements OnInit {
 constructor(
   private messageService: MessageService,
   private bankService: BankService,
-  private bankDetailsUIService: BankDetailsUIService) {
+  private bankDetailsUIService: BankDetailsUIService,
+  private router: Router,
+  private dataSharingService: DataSharingService) {
   this.controls = this.bankDetailsUIService.getMetadata();
+  console.log(this.controls);
 }
 
 ngOnInit(): void {
   this.bankService.getAll().subscribe(data => {
     this.listItems = data;
+    data.forEach(b => {
+         b.branches.forEach(br => {
+           console.log(br.name);
+         });
+    });
   });
 
 }
@@ -51,6 +60,30 @@ update() {
 
 delete() {
     this.messageService.add({severity: 'info', summary: 'Success', detail: 'Data Deleted'});
+}
+listActionMenuClick(data) {
+  console.log(data.action);
+  console.log(data.object);
+  let navigationExtras: NavigationExtras = {
+    queryParams: {
+        "bank": data.object,
+        "mode": data.action
+    }
+};
+this.dataSharingService.data.selectedObject = data.object;
+this.dataSharingService.data.action = data.action;
+console.log( this.dataSharingService.data.selectedObject);
+console.log( this.dataSharingService.data.action);
+//this.dataSharingService.data = {bank: dynamicFormsBridge.data, mode: DynamicFormActions.Update};
+
+this.router.navigate(['/setup/banks/bankdetails'], navigationExtras);
+ // if (dynamicFormsBridge.dynamicFormActions === DynamicFormActions.Create) {
+   // this.router.navigate(['/setup/banks/bankdetails'], navigationExtras);
+  //} else if (dynamicFormsBridge.dynamicFormActions === DynamicFormActions.Update) {
+   // this.router.navigate(['/setup/banks/bankdetails'], navigationExtras);
+  //} else if (dynamicFormsBridge.dynamicFormActions === DynamicFormActions.Read) {
+   // this.router.navigate(['/setup/banks/bankdetails'], navigationExtras);
+  //}
 }
 itemAddedEvent(form: FormGroup) {
     this.form = form;

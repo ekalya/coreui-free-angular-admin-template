@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ButtonActions } from '../../../core/enums';
 
 @Component({
   selector: 'app-submit-reset',
@@ -20,9 +21,15 @@ export class SubmitResetComponent implements  OnInit {
     }
   }
 
-  actionMenuClick(action: string) {
+  actionMenuClick(action: ButtonActions) {
     console.log('submit component  ');
     this.actionMenuClickEvent.emit(action);
+  }
+  reset() {
+    this.actionMenuClick(ButtonActions.RESET);
+  }
+  submit() {
+    this.actionMenuClick(ButtonActions.SUBMIT);
   }
 
 }
