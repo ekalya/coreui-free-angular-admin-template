@@ -40,6 +40,9 @@ constructor(
 }
 
 ngOnInit(): void {
+  this.dataSharingService.currentDataSet.subscribe(data => {
+    console.log(data);
+  })
   this.bankService.getAll().subscribe(data => {
     this.listItems = data;
     data.forEach(b => {
@@ -48,6 +51,10 @@ ngOnInit(): void {
          });
     });
   });
+
+  this.bankService.selectedBank.subscribe((b: Bank) => {
+    console.log(b);
+  })
 
 }
 
@@ -66,24 +73,24 @@ listActionMenuClick(data) {
   console.log('start ....');
   console.log(this.selectedBank);
   console.log(data.action);
+  this.dataSharingService.changeDataSet(this.selectedBank);
   console.log('end .....');
-  let navigationExtras: NavigationExtras = {
-    queryParams: {
-        "bank": JSON.stringify(this.selectedBank),
-        "mode": data.action
-    }
-};
-console.log(navigationExtras);
+
 //this.dataSharingService.data = {bank: dynamicFormsBridge.data, mode: DynamicFormActions.Update};
 
-this.router.navigate(['/setup/banks/bankdetails'], navigationExtras);
- // if (dynamicFormsBridge.dynamicFormActions === DynamicFormActions.Create) {
-   // this.router.navigate(['/setup/banks/bankdetails'], navigationExtras);
-  //} else if (dynamicFormsBridge.dynamicFormActions === DynamicFormActions.Update) {
-   // this.router.navigate(['/setup/banks/bankdetails'], navigationExtras);
-  //} else if (dynamicFormsBridge.dynamicFormActions === DynamicFormActions.Read) {
-   // this.router.navigate(['/setup/banks/bankdetails'], navigationExtras);
-  //}
+
+  if (data.action === 'CREATE') {
+    this.dataSharingService.changeDataSet(new Bank());
+    this.dataSharingService.changeActionSet('CREATE');
+  this.router.navigate(['/setup/banks/bankdetails']);
+  } else if (data.action === 'UPDATE') {
+    this.dataSharingService.changeActionSet('UPDATE');
+    this.dataSharingService.changeDataSet(this.cloneObj(this.selectedBank));
+    console.log(this.selectedBank);
+    this.router.navigate(['/setup/banks/bankdetails']);
+  } else if (data.action === 'READ') {
+    this.router.navigate(['/setup/banks/bankdetails']);
+  }
 }
 itemAddedEvent(form: FormGroup) {
     this.form = form;
@@ -117,6 +124,19 @@ itemUpdatedEvent(data: any) {
 }
 itemSelectionChange(event) {
   console.log(event);
+  console.log(this.model);
   this.selectedBank = event;
+  console.log(this.selectedBank);
+  this.model =this.cloneObj(this.selectedBank);
+  console.log(this.model);
+  this.bankService.changeCurrentBank(this.selectedBank);
+  console.log(this.selectedBank);
+}
+cloneObj(c: any): any {
+  let obj = {};
+  for (let prop in c) {
+      obj[prop] = c[prop];
+  }
+  return obj;
 }
 }

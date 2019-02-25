@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { InputControlService } from '../../../core/services/input-control.service';
 import { InputControlBase } from '../../../core';
 import { FormGroup } from '@angular/forms';
@@ -9,7 +9,8 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./dynamic-form.component.scss'],
   providers: [InputControlService]
 })
-export class DynamicFormComponent implements OnInit {
+export class DynamicFormComponent implements OnInit, OnChanges {
+
   @Input() public model: any;
   @Input() public formMetaData: InputControlBase<any>[] = [];
   @Input() public modelReceiver: EventEmitter<any> = new EventEmitter<any>();
@@ -23,9 +24,12 @@ export class DynamicFormComponent implements OnInit {
   @Output() public closeFormEventEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private ics: InputControlService) {
-  }
+    private ics: InputControlService) {}
 
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.setValues();
+  }
   ngOnInit() {
     this.form = this.ics.toFormGroup(this.formMetaData);
     this.form.valueChanges.subscribe(status => {
@@ -42,9 +46,10 @@ export class DynamicFormComponent implements OnInit {
     this.formValues.emit(this.form);
   }
   setValues() {
-    if (this.model !== undefined) {
-      this.form.patchValue(this.model);
+    if(this.model === undefined || this.form === undefined) {
+      return;
     }
+    this.form.patchValue(this.model);
   }
   closeForm() {
     this.closeFormEventEmitter.emit(true);

@@ -9,7 +9,7 @@ import { InputControlBase, DataSharingService } from '../../../core';
   styleUrls: ['./dynamic-list-plus.component.scss'],
   providers: [DialogService, MessageService]
 })
-export class DynamicListPlusComponent implements OnInit, OnChanges {
+export class DynamicListPlusComponent {
 
   @Input() public title: string;
   @Input() public listItems: any[];
@@ -23,14 +23,26 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
   @Output() public itemAddedEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() public itemUpdatedEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() public itemSelectionChange: EventEmitter<any> = new EventEmitter<any>();
+
+
+  /**
+   * Property to enable diable input form
+   */
+  @Input() public enableInputForm: Boolean = false;
+  /**
+   * property to select the input form.
+   * 1 = Inline form, 2 = Dialog form
+   */
+  @Input() public inputForm: Number = 1;
+
   selectedItem: any;
   selectedObject: any;
   obj: any = {};
   first: number = 0;
-  showForm: boolean;
-  displayDialog: boolean;
+  displayForm: boolean;
   action: string;
-
+  hideSaveButton: boolean;
+  hideCloseButton: boolean;
   items: MenuItem[] = [
     {label: 'Details', icon: 'pi pi-search', command: () => {
         this.details();
@@ -40,22 +52,15 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
     }},
     {label: 'Delete', icon: 'pi pi-times-circle', command: () => {
         this.delete();
-    }},
-    {label: 'Shwo Dialog', icon: 'pi pi-times-circle', command: () => {
-        this.showDialog();
     }}
   ];
 
   constructor(
     public dialogService: DialogService,
-    private messageService: MessageService,
-    private dataSharingService: DataSharingService) {
-      this.showForm = false;
-  }
-  ngOnInit(): void {
-  }
-  ngOnChanges(changes: SimpleChanges) {
-
+    private messageService: MessageService) {
+      this.displayForm = false;
+      this.hideSaveButton = true;
+      this.hideCloseButton = true;
   }
 
   reset() {
@@ -65,7 +70,9 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
   add() {
     this.action = 'CREATE';
     this.listActionMenuClick.emit({action: this.action});
-    this.showForm = true;
+    this.displayForm = true;
+    this.hideSaveButton = false;
+    this.hideCloseButton = true;
   }
 
   details() {
@@ -76,7 +83,9 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
     }
     this.listActionMenuClick.emit({action: this.action});
     this.model = this.listItems[this.listItems.indexOf(this.selectedObject)];
-    this.showForm = true;
+    this.displayForm = true;
+    this.hideSaveButton = true;
+    this.hideCloseButton = false;
   }
   update() {
     this.action = 'UPDATE';
@@ -86,10 +95,11 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
     }
 
 
-    console.log(this.listItems[this.listItems.indexOf(this.selectedObject)]);
     this.listActionMenuClick.emit({action: this.action});
     this.model = this.cloneObj(this.listItems[this.listItems.indexOf(this.selectedObject)]);
-    this.showForm = true;
+    this.displayForm = true;
+    this.hideSaveButton = false;
+    this.hideCloseButton = true;
   }
 
   delete() {
@@ -101,18 +111,20 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
     this.listActionMenuClick.emit({action: this.action});
   }
   modelFormSaveAction(form: FormGroup) {
-    this.showForm = false;
+    this.displayForm = false;
     let listItems = [...this.listItems];
     if (this.action === 'CREATE') {
      listItems.push(form.value);
+     this.itemAddedEvent.emit(form.value);
     } else {
      listItems[this.listItems.indexOf(this.selectedObject)] = form.value;
+     listItems[this.listItems.indexOf(this.selectedObject)].id = this.selectedObject.id
+     this.itemUpdatedEvent.emit(form.value);
     }
     this.listItems = listItems;
   }
   onRowSelect(event) {
     this.model = this.listItems[this.listItems.indexOf(this.selectedObject)];
-    console.log(this.listItems[this.listItems.indexOf(this.selectedObject)]);
     this.itemSelectionChange.emit(this.listItems[this.listItems.indexOf(this.selectedObject)]);
   }
   cloneObj(c: any): any {
@@ -123,15 +135,12 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
     return obj;
   }
   closeFormEvent(status: any) {
-    this.showForm = false;
+    this.displayForm = false;
   }
   dynamicDialogCloseEvent(event) {
-    this.displayDialog = false;
+    this.displayForm = false;
   }
   save() {
-    this.displayDialog = false;
-  }
-  showDialog() {
-    this.displayDialog = true;
+    this.displayForm = false;
   }
 }

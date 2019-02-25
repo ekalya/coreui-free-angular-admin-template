@@ -10,10 +10,13 @@
           (formEmitterEvent)="formEmitterEventValues($event)"></app-dynamic-form>
           <app-dynamic-list-plus
           [title]="branch_list_title"
-          [listItems]="branches"
+          [listItems]="model.branches"
           [controls]="branch_controls"
+          [enableInputForm]="true"
+          [inputForm]="1"
           (itemAddedEvent)="itemAddedEvent($event)"
           (itemUpdatedEvent)="itemUpdatedEvent($event)"
+          (itemSelectionChange)="branchSelectedItemChange($event)"
           [model]="branchModel"
           [cols]="branchColumns"></app-dynamic-list-plus>
       </div>

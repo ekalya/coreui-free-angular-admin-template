@@ -10,12 +10,14 @@
     </div>
 </p-header>
     <!-- Form to add to List-->
-    <div *ngIf="showForm">
+    <div *ngIf="enableInputForm === true && inputForm === 1 && displayForm === true">
     <app-dynamic-form  
     [formMetaData]="controls" 
     [model]="model"
     [action]="action"
     (formValues)="modelFormSaveAction($event)"
+    [hideSaveButton]="hideSaveButton"
+    [hideCloseButton]="hideCloseButton"
     (closeFormEventEmitter)="closeFormEvent($event)"></app-dynamic-form>
     </div>
 
@@ -67,13 +69,16 @@
             page: {{state.page + 1}}
         </ng-template>
     </p-table>
-    <p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
-            <div class="ui-g ui-fluid" *ngIf="obj">
-                    <app-dynamic-form  
-                    [formMetaData]="controls" 
-                    [model]="obj"
-                    [action]="action"
-                    (closeFormEventEmitter)="dynamicDialogCloseEvent($event)"></app-dynamic-form>
+    <p-dialog *ngIf="enableInputForm === true && inputForm === 2 && displayForm === true" header="Details" [(visible)]="displayForm" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+            <div class="ui-g ui-fluid" *ngIf="model">
+                <app-dynamic-form  
+                [formMetaData]="controls" 
+                [model]="model"
+                [action]="action"
+                [hideSaveButton]="hideSaveButton"
+                [hideCloseButton]="hideCloseButton"
+                (formValues)="modelFormSaveAction($event)"
+                (closeFormEventEmitter)="closeFormEvent($event)"></app-dynamic-form>
             </div>
         </p-dialog>
     <p-contextMenu #cm [model]="items"></p-contextMenu>

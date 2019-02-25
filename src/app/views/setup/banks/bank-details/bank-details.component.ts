@@ -26,6 +26,7 @@ export class BankDetailsComponent implements OnInit {
   branchModel: BankBranch = new BankBranch();
   selectedBranch = new BankBranch();
   showBranchForm: boolean;
+  action: string;
   cols: TableColumn[] = [
     new TableColumn('code', 'Code'),
     new TableColumn('name', 'Name'),
@@ -39,15 +40,6 @@ export class BankDetailsComponent implements OnInit {
     private bankBranchDetailsUIService: BankBranchDetailsUIService,
     private route: ActivatedRoute,
     private dataSharingService: DataSharingService) {
-      this.route
-      .queryParams
-      .subscribe(params => {
-        console.log(params);
-        console.log(params['bank']);
-        this.model = JSON.parse(params['bank']);
-        console.log(this.model);
-      });
-
     this.bankFormMetadata = this.bankDetailsUIService.getMetadata();
     this.branch_controls = this.bankBranchDetailsUIService.getMetadata();
     this.branchColumns = this.bankBranchDetailsUIService.getColumns();
@@ -56,8 +48,21 @@ export class BankDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSharingService.currentDataSet.subscribe(data => {
+      console.log(data);
+    });
+    this.dataSharingService.currentActionSet.subscribe(data => {
+      console.log(data);
+      this.action = data;
+    });
+    this.bankService.selectedBank.subscribe((b: Bank) => {
+      console.log('selected bank');
+      console.log(b);
+      this.model = b;
+    });
   }
   formEmitterEventValues(form: FormGroup) {
+    console.log('change data using form as source......')
     this.form = form;
     this.model.code = this.form.value.code;
     this.model.name = this.form.value.name;
@@ -65,8 +70,8 @@ export class BankDetailsComponent implements OnInit {
     this.model.postalAddress = this.form.value.postalAddress;
     this.model.telephone = this.form.value.telephone;
     this.model.email = this.form.value.email;
-    this.model.branches = this.form.value.branches;
-    console.log(form.value);
+    //this.model.branches = this.form.value.branches;
+    //console.log(form.value);
   }
   branchSaveAction(form: FormGroup) {
     const branch: BankBranch = new BankBranch();
@@ -87,17 +92,16 @@ export class BankDetailsComponent implements OnInit {
     this.selectedBranch.postalAddress = form.value.postalAddress;
     this.selectedBranch.telephone = form.value.telephone;
     this.selectedBranch.email = form.value.email;
-    console.log(form.value);
+    //console.log(form.value);
   }
   submitResetActionMenuClick(action: ButtonActions) {
     console.log(this.model);
     console.log(this.form.value);
     console.log(action);
     console.log(ButtonActions.SUBMIT);
-    console.log(this.dynamicFormsBridge.dynamicFormActions);
     if (action.valueOf() === ButtonActions.SUBMIT.valueOf()) {
         console.log('inside process submitt...........');
-        if (this.dynamicFormsBridge.dynamicFormActions.valueOf() === DynamicFormActions.Create.valueOf()) {
+        if (this.action === 'CREATE') {
           console.log('create.............');
           this.bankService.create(this.model).subscribe(data => {
             this.messageService.add({severity: 'success', summary: 'Created successfully', detail: 'Successfully Created'});
@@ -121,9 +125,23 @@ export class BankDetailsComponent implements OnInit {
   }
   itemAddedEvent(newBranch: BankBranch) {
     console.log(' branch added....');
+    console.log(newBranch);
+    console.log(this.model);
+    if(this.model.branches === undefined){
+      this.model.branches = [];
+    }
+    this.model.branches.push(newBranch);
   }
-  itemUpdatedEvent(newBranch: BankBranch) {
+  itemUpdatedEvent(updatedBranch: BankBranch) {
     console.log(' branch updated....');
+    console.log(updatedBranch);
+    let branches = [...this.model.branches];
+    branches[branches.indexOf(this.selectedBranch)] = updatedBranch;
+    this.model.branches = branches;
+
+  }
+  branchSelectedItemChange(selectedBranch: BankBranch) {
+    this.selectedBranch = selectedBranch;
   }
 
   valueChange(event) {
