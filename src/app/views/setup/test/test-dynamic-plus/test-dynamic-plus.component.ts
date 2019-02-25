@@ -15,6 +15,7 @@ export class TestDynamicPlusComponent implements OnInit {
 
   title = 'Banks';
   listItems: Bank[] = [];
+  selectedBank: Bank;
 
   cols: any[] = [
     { field: 'code', header: 'Code' },
@@ -62,21 +63,17 @@ delete() {
     this.messageService.add({severity: 'info', summary: 'Success', detail: 'Data Deleted'});
 }
 listActionMenuClick(data) {
-  console.log(data.action);
   console.log('start ....');
-  console.log(data.object);
-  console.log(this.dataSharingService.data.selectedObject);
+  console.log(this.selectedBank);
+  console.log(data.action);
   console.log('end .....');
   let navigationExtras: NavigationExtras = {
     queryParams: {
-        "bank": data.object,
+        "bank": JSON.stringify(this.selectedBank),
         "mode": data.action
     }
 };
-this.dataSharingService.data.selectedObject = data.object;
-this.dataSharingService.data.action = data.action;
-console.log( this.dataSharingService.data.selectedObject);
-console.log( this.dataSharingService.data.action);
+console.log(navigationExtras);
 //this.dataSharingService.data = {bank: dynamicFormsBridge.data, mode: DynamicFormActions.Update};
 
 this.router.navigate(['/setup/banks/bankdetails'], navigationExtras);
@@ -118,5 +115,8 @@ itemUpdatedEvent(data: any) {
   });
 
 }
-
+itemSelectionChange(event) {
+  console.log(event);
+  this.selectedBank = event;
+}
 }

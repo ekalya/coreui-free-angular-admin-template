@@ -39,20 +39,19 @@ export class BankDetailsComponent implements OnInit {
     private bankBranchDetailsUIService: BankBranchDetailsUIService,
     private route: ActivatedRoute,
     private dataSharingService: DataSharingService) {
-      console.log(dataSharingService.data.selectedObject);
-      console.log( this.dataSharingService.data.action);
-
-      this.model = this.dataSharingService.data.selectedObject;
-      this.dynamicFormsBridge.dynamicFormActions = dataSharingService.data.action;
-
-      console.log(this.model);
-      console.log(this.dynamicFormsBridge.dynamicFormActions);
+      this.route
+      .queryParams
+      .subscribe(params => {
+        console.log(params);
+        console.log(params['bank']);
+        this.model = JSON.parse(params['bank']);
+        console.log(this.model);
+      });
 
     this.bankFormMetadata = this.bankDetailsUIService.getMetadata();
     this.branch_controls = this.bankBranchDetailsUIService.getMetadata();
     this.branchColumns = this.bankBranchDetailsUIService.getColumns();
     this.branch_list_title = 'Branches List';
-    this.dynamicFormsBridge.showSaveButton = false;
     this.showBranchForm = false;
   }
 

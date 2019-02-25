@@ -22,7 +22,7 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
   @Output() public listActionMenuClick: EventEmitter<any> = new EventEmitter<any>();
   @Output() public itemAddedEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() public itemUpdatedEvent: EventEmitter<any> = new EventEmitter<any>();
-
+  @Output() public itemSelectionChange: EventEmitter<any> = new EventEmitter<any>();
   selectedItem: any;
   selectedObject: any;
   obj: any = {};
@@ -64,7 +64,7 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
 
   add() {
     this.action = 'CREATE';
-    this.listActionMenuClick.emit({object: null, action: this.action});
+    this.listActionMenuClick.emit({action: this.action});
     this.showForm = true;
   }
 
@@ -74,7 +74,7 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
       this.messageService.add({severity: 'error', summary: 'No record selected', detail: 'This action requires an item to be selected'});
         return;
     }
-    this.listActionMenuClick.emit({object: this.listItems[this.listItems.indexOf(this.selectedObject)], action: this.action});
+    this.listActionMenuClick.emit({action: this.action});
     this.model = this.listItems[this.listItems.indexOf(this.selectedObject)];
     this.showForm = true;
   }
@@ -86,14 +86,9 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
     }
 
 
-    this.dataSharingService.data = {
-      selectedObject: this.listItems[this.listItems.indexOf(this.selectedObject)],
-      action: this.action
-    };
-
     console.log(this.listItems[this.listItems.indexOf(this.selectedObject)]);
-    this.listActionMenuClick.emit({object: this.listItems[this.listItems.indexOf(this.selectedObject)], action: this.action});
-    this.model = this.listItems[this.listItems.indexOf(this.selectedObject)];
+    this.listActionMenuClick.emit({action: this.action});
+    this.model = this.cloneObj(this.listItems[this.listItems.indexOf(this.selectedObject)]);
     this.showForm = true;
   }
 
@@ -103,7 +98,7 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
       this.messageService.add({severity: 'error', summary: 'No record selected', detail: 'This action requires an item to be selected'});
       return;
     }
-    this.listActionMenuClick.emit({object: this.listItems[this.listItems.indexOf(this.selectedObject)], action: this.action});
+    this.listActionMenuClick.emit({action: this.action});
   }
   modelFormSaveAction(form: FormGroup) {
     this.showForm = false;
@@ -118,6 +113,7 @@ export class DynamicListPlusComponent implements OnInit, OnChanges {
   onRowSelect(event) {
     this.model = this.listItems[this.listItems.indexOf(this.selectedObject)];
     console.log(this.listItems[this.listItems.indexOf(this.selectedObject)]);
+    this.itemSelectionChange.emit(this.listItems[this.listItems.indexOf(this.selectedObject)]);
   }
   cloneObj(c: any): any {
     let obj = {};
