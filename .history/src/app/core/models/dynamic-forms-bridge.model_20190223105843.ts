@@ -1,0 +1,6 @@
+import { DynamicFormActions } from '../enums';
+
+export class DynamicFormsBridge {
+    dynamicFormActions: DynamicFormActions;
+    data: any;
+}

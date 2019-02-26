@@ -1,0 +1,27 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <div *ngFor="let ctrl of formMetaData">
+      <div class="form-group">
+    <app-dynamic-form-input-control [ctrl]="ctrl" [form]="form"
+    (valueChange)="valueChange(ctrl.key,$event)"></app-dynamic-form-input-control>
+    </div>
+  </div>
+
+  <div class="form-row">
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button
+      type="submit"
+      pButton 
+      icon="fa fa-check"
+      label="Save"
+      [disabled]="!form.valid"
+      [hidden]="!dynamicFormsBridge.showSaveButton"></button>
+      
+      <button type="button"
+      pButton
+      icon="fa fa-close"
+      label="Close"
+      (click)="closeForm()"
+      [hidden]="!dynamicFormsBridge.showCloseButton"></button>
+      </div>
+  </div>
+</form>

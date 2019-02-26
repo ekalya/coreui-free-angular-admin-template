@@ -1,0 +1,68 @@
+<div [formGroup]="form">
+    <div class="form-group">
+    <label [attr.for]="ctrl.key">{{ctrl.label}}</label>
+    <div [ngSwitch]="ctrl.controlType">
+      <!-- Textbox control-->
+      <input *ngSwitchCase="'textbox'"
+        [type]="ctrl.type" 
+        [formControlName]="ctrl.key" 
+        class="form-control" 
+        [id]="ctrl.key"
+        [placeholder]="ctrl.placeholder"
+        pInputText>
+
+        <input *ngSwitchCase="'textboxfilter'"
+        [type]="ctrl.type" 
+        [formControlName]="ctrl.key" 
+        class="form-control" 
+        [id]="ctrl.key"
+        [placeholder]="ctrl.placeholder"
+        pInputText
+        [pKeyFilter]="ctrl.keyFilter">
+
+
+        <input *ngSwitchCase="'password'" [formControlName]="ctrl.key"
+        [id]="ctrl.key" type="password" pPassword >
+
+
+        <div *ngSwitchCase="'date'" class="ui-g-12 ui-md-4">
+              <p-calendar [formControlName]="ctrl.key" [showIcon]="true"></p-calendar>
+        </div>
+
+        <p-listbox *ngSwitchCase="'multiselect'" [options]="ctrl.options" [formControlName]="ctrl.key" multiple="multiple" checkbox="checkbox" filter="filter" optionLabel="label">
+            <p-header>
+            </p-header>
+        </p-listbox>
+
+        <div *ngSwitchCase="'picklist'">
+          <p-pickList  [source]="ctrl.options" [target]="ctrl.value" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="label" 
+              dragdrop="true" sourceFilterPlaceholder="Search by label" targetFilterPlaceholder="Search by label" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}"
+              [showSourceControls]='false'
+              [showTargetControls]='false'>
+            <ng-template let-item pTemplate="item">
+              <div class="ui-helper-clearfix">
+                  <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{item.label}}</div>
+              </div>
+            </ng-template>
+          </p-pickList>
+        </div>
+      
+      <!--  Dropdown List -->
+      <select [id]="ctrl.key" *ngSwitchCase="'dropdown'" [formControlName]="ctrl.key">
+        <option *ngFor="let opt of ctrl.options" [value]="opt.key">{{opt.value}}</option>
+      </select>
+
+      <!-- Dynamic List -->
+      <app-dynamic-list-plus *ngSwitchCase="'dynamiclist'"
+          [title]="ctrl.placeholder"
+          [listItems]="ctrl.value"
+          [controls]="ctrl.controls"
+          (itemAddedEvent)="ctrl.itemAddedEvent($event)"
+          (itemUpdatedEvent)="ctrl.itemUpdatedEvent($event)"
+          [model]="ctrl.model"
+          [cols]="ctrl.columns"></app-dynamic-list-plus>
+   
+    </div> 
+   
+    <div class="errorMessage" *ngIf="!isValid">{{ctrl.label}} is required</div>
+  </div>

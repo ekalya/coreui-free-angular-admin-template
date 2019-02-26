@@ -1,0 +1,17 @@
+<div class="animated fadeIn">
+  <div class="card">
+      <div class="card-header">
+          <i class="fa fa-align-justify"></i> Bank details <p-toast></p-toast>
+      </div>
+      <div class="card-body">
+          <app-dynamic-form 
+          [formMetaData]="bankFormMetadata" 
+          [model]="model"
+          (formEmitterEvent)="formEmitterEventValues($event)"></app-dynamic-form>
+      </div>
+      <div class="card-footer">
+        <app-submit-reset  (actionMenuClickEvent)="submitResetActionMenuClick($event)"
+        [mode]="mode"></app-submit-reset>
+      </div>
+  </div>
+</div>

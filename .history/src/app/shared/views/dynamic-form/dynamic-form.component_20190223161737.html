@@ -1,0 +1,26 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <div *ngFor="let ctrl of formMetaData">
+      <div class="form-group">
+    <app-dynamic-form-input-control [ctrl]="ctrl" [form]="form"></app-dynamic-form-input-control>
+    </div>
+  </div>
+
+  <div class="form-row">
+      <button 
+      type="submit"
+      [disabled]="!form.valid" 
+      class="btn btn-sm btn-primary"
+      [hidden]="hideSaveButton">
+      <i class="icon-plus"></i> 
+      Save 
+      </button>
+      <button 
+      type="submit"
+      [disabled]="!form.valid" 
+      class="btn btn-sm btn-primary"
+      [hidden]="hideSaveButton">
+      <i class="icon-x"></i> 
+      Close 
+      </button>
+  </div>
+</form>

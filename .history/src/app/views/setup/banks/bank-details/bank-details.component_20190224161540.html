@@ -1,0 +1,27 @@
+<div class="animated fadeIn">
+  <div class="card">
+      <div class="card-header">
+          <i class="fa fa-align-justify"></i> Bank details <p-toast></p-toast>
+      </div>
+      <div class="card-body">
+          <app-dynamic-form 
+          [formMetaData]="bankFormMetadata" 
+          [model]="model"
+          [dynamicFormsBridge]="dynamicFormsBridge"
+          (formEmitterEvent)="formEmitterEventValues($event)"></app-dynamic-form>
+          <app-dynamic-list-plus
+          [title]="branch_list_title"
+          [listItems]="branches"
+          [controls]="branch_controls"
+          (itemAddedEvent)="itemAddedEvent($event)"
+          (itemUpdatedEvent)="itemUpdatedEvent($event)"
+          (valueChange)=" valueChange($event)"
+          [model]="branchModel"
+          [cols]="branchColumns"></app-dynamic-list-plus>
+      </div>
+      <div class="card-footer">
+        <app-submit-reset  (actionMenuClickEvent)="submitResetActionMenuClick($event)"
+        [mode]="mode"></app-submit-reset>
+      </div>
+  </div>
+</div>
