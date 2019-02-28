@@ -11,4 +11,6 @@ export * from './user.service';
 export * from './user-role.service';
 export * from './authority.service';
 export * from './data-sharing.service';
+export * from './currency-service.service';
+
 

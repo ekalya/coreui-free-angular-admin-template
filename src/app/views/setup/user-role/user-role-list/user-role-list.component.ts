@@ -30,15 +30,15 @@ export class UserRoleListComponent implements OnInit {
     });
   }
   actionMenuClick(action: DynamicFormActions) {
-    if (action === DynamicFormActions.Create) {
+    if (action === DynamicFormActions.CREATE) {
       this.router.navigate(['/setup/user-role/userroledetails'], {queryParams: {role: JSON.stringify(new Role()), mode: action}});
-    } else if (action === DynamicFormActions.Update) {
+    } else if (action === DynamicFormActions.UPDATE) {
       if (this.selectedRole.name === undefined || this.selectedRole.name === null) {
         this.messageService.add({severity: 'error', summary: 'No selected record', detail: 'No selected record'});
         return;
       }
       this.router.navigate(['/setup/user-role/userroledetails'], {queryParams: {role: JSON.stringify(this.selectedRole), mode: action}});
-    } else if (action === DynamicFormActions.Read) {
+    } else if (action === DynamicFormActions.READ) {
       if (this.selectedRole.name === undefined || this.selectedRole.name === null) {
         this.messageService.add({severity: 'error', summary: 'No selected record', detail: 'No selected record'});
         return;

@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { UserRoleDetailsUIService } from './user-role-details-ui.service';
+import { ButtonActions, DynamicFormActions } from '../../../../core/enums';
 
 @Component({
   selector: 'app-user-role-details',
@@ -15,7 +16,7 @@ export class UserRoleDetailsComponent implements OnInit {
   userRoleFormMetadata: any[];
   model: Role = new Role();
   modelEmitter: EventEmitter<Role> = new EventEmitter<Role>();
-  mode: string;
+  mode: DynamicFormActions = DynamicFormActions.READ;
   form: FormGroup;
   constructor(private userRoleService: UserRoleService,
     private userRoleMetadataService: UserRoleDetailsUIService,
@@ -24,7 +25,7 @@ export class UserRoleDetailsComponent implements OnInit {
       this.userRoleFormMetadata = this.userRoleMetadataService.getMetadata();
 
       const json = this.route.snapshot.queryParams['role'];
-      this.mode = this.route.snapshot.queryParams['mode'];
+      this.mode = (this.route.snapshot.queryParams['mode'] as DynamicFormActions);
       if (json === JSON.stringify({})) {
         this.model = new Role();
       } else {
@@ -43,17 +44,17 @@ export class UserRoleDetailsComponent implements OnInit {
   assignedChanges(authorities: Authority[]) {
     this.model.authorities = authorities;
   }
-  submitResetActionMenuClick(action: string) {
-    if (action === 'SUBMIT') {
-        if (this.mode === 'CREATE') {
-          this.userRoleService.create(this.model).subscribe(data => {
-            this.messageService.add({severity: 'success', summary: 'Created successfully', detail: 'Successfully Created'});
-          });
-        } else if (this.mode === 'EDIT') {
-          this.userRoleService.update(this.model).subscribe(data => {
-            this.messageService.add({severity: 'success', summary: 'Saved successfully', detail: 'Successfully updated'});
-          });
-        }
+  submitResetActionMenuClick(action: ButtonActions) {
+    if (action === ButtonActions.SUBMIT) {
+      if (this.mode == DynamicFormActions.CREATE) {
+        this.userRoleService.create(this.model).subscribe(data => {
+          this.messageService.add({severity: 'success', summary: 'Created successfully', detail: 'Successfully Created'});
+        });
+      } else if (this.mode == DynamicFormActions.UPDATE) {
+        this.userRoleService.update(this.model).subscribe(data => {
+          this.messageService.add({severity: 'success', summary: 'Saved successfully', detail: 'Successfully updated'});
+        });
+      }
     }
   }
 }

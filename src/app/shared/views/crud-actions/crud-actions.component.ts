@@ -17,16 +17,16 @@ export class CrudActionsComponent implements OnInit {
     this.actionMenuClickEvent.emit(action);
   }
   Create() { 
-    this.actionMenuClickEvent.emit(DynamicFormActions.Create);
+    this.actionMenuClickEvent.emit(DynamicFormActions.CREATE);
   }
   Read() { 
-    this.actionMenuClickEvent.emit(DynamicFormActions.Read);
+    this.actionMenuClickEvent.emit(DynamicFormActions.READ);
   }
   Update() { 
-    this.actionMenuClickEvent.emit(DynamicFormActions.Update);
+    this.actionMenuClickEvent.emit(DynamicFormActions.UPDATE);
   }
   Delete() { 
-    this.actionMenuClickEvent.emit(DynamicFormActions.Delete);
+    this.actionMenuClickEvent.emit(DynamicFormActions.DELETE);
   }
 
 }
