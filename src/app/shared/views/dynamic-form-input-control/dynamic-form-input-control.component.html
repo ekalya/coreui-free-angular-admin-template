@@ -65,7 +65,11 @@
           (valueChange)="valueChange.emit($event)"
           [model]="ctrl.model"
           [cols]="ctrl.columns"></app-dynamic-list-plus>
-   
+
+    <!-- Toggle button -->
+    <p-toggleButton *ngSwitchCase="'togglebutton'" 
+    [formControlName]="ctrl.key"></p-toggleButton>
+
     </div> 
    
     <div class="errorMessage" *ngIf="!isValid">{{ctrl.label}} is required</div>

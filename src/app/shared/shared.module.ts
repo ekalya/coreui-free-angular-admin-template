@@ -32,7 +32,7 @@ import { DynamicListPlusComponent } from './views/dynamic-list-plus/dynamic-list
     DynamicFormComponent,
     DynamicFormInputControlComponent,
     DynamicListComponent,
-    DynamicListPlusComponent
+    DynamicListPlusComponent,
   ],
   imports: [
     CommonModule,

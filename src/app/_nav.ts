@@ -50,6 +50,11 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
+        name: 'Currencies',
+        url: '/setup/currency',
+        icon: 'icon-puzzle'
+      },
+      {
         name: 'Users',
         url: '/setup/users/',
         icon: 'icon-user'

@@ -1,0 +1,11 @@
+<app-dynamic-list-plus
+[title]="title"
+[listItems]="listItems"
+[controls]="controls"
+[enableInputForm]="true"
+[inputForm]="1"
+(itemAddedEvent)="itemAddedEvent($event)"
+(itemUpdatedEvent)="itemUpdatedEvent($event)"
+(itemSelectionChange)="currencySelectedItemChange($event)"
+[model]="model"
+[cols]="cols"></app-dynamic-list-plus>

@@ -47,6 +47,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'currency',
+        loadChildren: './currency/currency.module#CurrencyModule',
+        data: {
+          title: 'Currencies'
+        }
+      },
+      {
         path: 'users',
         loadChildren: './users/users.module#UsersModule',
         canActivate: [AuthGuard]

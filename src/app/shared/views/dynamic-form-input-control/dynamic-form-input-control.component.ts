@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InputControlBase } from '../../../core';
 import { FormGroup } from '@angular/forms';
+import {  ToggleButton } from 'primeng/primeng';
 
 @Component({
   selector: 'app-dynamic-form-input-control',

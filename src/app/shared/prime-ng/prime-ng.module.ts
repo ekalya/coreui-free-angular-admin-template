@@ -17,7 +17,8 @@ import {SplitButtonModule} from 'primeng/splitbutton';
 import {MenuModule} from 'primeng/menu';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {ContextMenuModule} from 'primeng/contextmenu';
-import { DialogModule } from 'primeng/primeng';
+import { DialogModule, ToggleButtonModule , CheckboxModule, TriStateCheckboxModule} from 'primeng/primeng';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -44,7 +45,11 @@ import { DialogModule } from 'primeng/primeng';
     DynamicDialogModule,
     ButtonModule,
     ContextMenuModule,
-    DialogModule
+    DialogModule,
+    ToggleButtonModule,
+    CheckboxModule,
+    TriStateCheckboxModule
+
   ],
   exports: [
     TableModule,
@@ -64,7 +69,10 @@ import { DialogModule } from 'primeng/primeng';
     DynamicDialogModule,
     ButtonModule,
     ContextMenuModule,
-    DialogModule
+    DialogModule,
+    ToggleButtonModule,
+    CheckboxModule,
+    TriStateCheckboxModule
   ],
   providers: [MessageService]
 })

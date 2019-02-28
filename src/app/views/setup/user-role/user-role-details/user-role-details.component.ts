@@ -43,9 +43,16 @@ export class UserRoleDetailsComponent implements OnInit {
   }
   assignedChanges(authorities: Authority[]) {
     this.model.authorities = authorities;
+    authorities.forEach(a => {
+      console.log(a);
+    })
   }
   submitResetActionMenuClick(action: ButtonActions) {
     if (action === ButtonActions.SUBMIT) {
+      this.model.authorities.forEach(a => {
+        console.log(a);
+      });
+      console.log(this.model);
       if (this.mode == DynamicFormActions.CREATE) {
         this.userRoleService.create(this.model).subscribe(data => {
           this.messageService.add({severity: 'success', summary: 'Created successfully', detail: 'Successfully Created'});
