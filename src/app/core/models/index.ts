@@ -26,4 +26,6 @@ export * from './bank-branch';
 export * from './table-column';
 export * from './dynamic-forms-bridge.model';
 export * from './currency.model';
+export * from './location.model';
+export * from './organization-unit-type';
 

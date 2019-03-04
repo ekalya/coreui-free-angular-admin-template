@@ -56,16 +56,22 @@ export class CurrenciesListComponent implements OnInit {
   }
   itemUpdatedEvent(updatedCurrency: Currency) {
     let listItems = [...this.listItems];
-    if(updatedCurrency.isBaseCurrency === false){
+    if (updatedCurrency.isBaseCurrency === false) {
       updatedCurrency.isBaseCurrency = null;
     }
-    if(updatedCurrency.id === undefined){
+    if (updatedCurrency.id === undefined) {
       this.currencyService.create(updatedCurrency).subscribe(curr => {
         this.listItems.push(curr);
       });
     } else {
       this.currencyService.update(updatedCurrency).subscribe(curr => {
         listItems[this.listItems.indexOf(this.selectedCurrency)] = curr;
+        /* If the newly updated currency is flagged base, flag off the other base currs */
+        if (updatedCurrency.isBaseCurrency === true) {
+          listItems.filter( cur => (cur.code !== updatedCurrency.code &&  cur.isBaseCurrency === true)).forEach( existingBase => {
+            existingBase.isBaseCurrency = false;
+          });
+        }
       });
     }
     this.listItems = listItems;

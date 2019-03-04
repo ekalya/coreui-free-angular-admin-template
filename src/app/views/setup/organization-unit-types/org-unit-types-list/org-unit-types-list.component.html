@@ -1,0 +1,5 @@
+<p-toast></p-toast>
+
+<h3>Organization Unit Types</h3>
+<p-tree [value]="orgHierachy" selectionMode="single" [(selection)]="selectedUnit" [contextMenu]="cm"></p-tree>
+<p-contextMenu #cm [model]="items"></p-contextMenu>

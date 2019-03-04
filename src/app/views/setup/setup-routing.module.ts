@@ -54,6 +54,20 @@ const routes: Routes = [
         }
       },
       {
+        path: 'location',
+        loadChildren: './location/location.module#LocationModule',
+        data: {
+          title: 'Locations'
+        }
+      },
+      {
+        path: 'organization-unit-types',
+        loadChildren: './organization-unit-types/organization-unit-types.module#OrganizationUnitTypesModule',
+        data: {
+          title: 'Org Unit Types'
+        }
+      },
+      {
         path: 'users',
         loadChildren: './users/users.module#UsersModule',
         canActivate: [AuthGuard]
