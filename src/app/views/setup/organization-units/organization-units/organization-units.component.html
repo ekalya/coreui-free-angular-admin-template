@@ -1,0 +1,4 @@
+<p-toast></p-toast>
+<h3>organization-units</h3>
+<p-tree [value]="orgUnits" layout="horizontal" selectionMode="single" [(selection)]="selectedOrgUnit" [contextMenu]="cm" ></p-tree>
+<p-contextMenu #cm [model]="items"></p-contextMenu>

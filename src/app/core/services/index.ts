@@ -15,6 +15,7 @@ export * from './currency.service';
 export * from './location.service';
 export * from './node.service';
 export * from './organization-unit-types.service';
+export * from './organization-unit.service';
 
 
 

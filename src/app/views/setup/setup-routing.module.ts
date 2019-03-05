@@ -68,6 +68,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'organization-units',
+        loadChildren: './organization-units/organization-units.module#OrganizationUnitsModule',
+        data: {
+          title: 'Org Units'
+        }
+      },
+      {
         path: 'users',
         loadChildren: './users/users.module#UsersModule',
         canActivate: [AuthGuard]

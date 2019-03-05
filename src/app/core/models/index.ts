@@ -28,4 +28,6 @@ export * from './dynamic-forms-bridge.model';
 export * from './currency.model';
 export * from './location.model';
 export * from './organization-unit-type';
+export * from './organization-unit.model';
+
 
