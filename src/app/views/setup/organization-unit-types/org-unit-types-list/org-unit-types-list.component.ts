@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {TreeNode, MessageService, MenuItem} from 'primeng/api';
 import { OrganizationUnitTypesService } from '../../../../core/services';
+import { OrganizationUnitType } from '../../../../core';
 
 @Component({
 selector: 'app-org-unit-types-list',
@@ -32,7 +33,9 @@ ngOnInit() {
 
 
 addChild(node: TreeNode) {
-    this.selectedUnit.children.push({label: 'test'});
+    this.selectedUnit.children.push({label: 'test', parent: this.selectedUnit});
+    console.log(this.selectedUnit);
+
     this.messageService.add({severity: 'success', summary: 'Created successfully', detail: 'Successfully Created'});
 }
 
