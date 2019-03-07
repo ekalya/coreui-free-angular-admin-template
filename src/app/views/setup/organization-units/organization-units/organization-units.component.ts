@@ -20,7 +20,7 @@ items: MenuItem[];
 
 inputForm: Number = 2;
 enableInputForm: Boolean = true;
-displayForm: Boolean = false;
+displayOrgDetailsForm: Boolean = false;
 
 controls: InputControlBase<any>[] = [];
 model: OrganizationUnit;
@@ -45,7 +45,7 @@ constructor(
 ngOnInit() {
     this.organizationUnitService.getAll().subscribe(data => {
     this.orgUnits = data;
-    console.log(data);
+    console.log(this.orgUnits);
 });
 this.items = [
     {label: 'Add child', icon: 'fa fa-plus-square', command: (event) => this.addChild(this.selectedOrgUnit)},
@@ -60,25 +60,27 @@ this.cols = this.locationUIService.getColumns();
 this.title = 'Locations';
 }
 addChild(node: TreeNode) {
-    this.displayForm = true;
+    this.displayOrgDetailsForm = true;
     this.hideCloseButton = false;
     this.hideSaveButton = false;
     this.model = new OrganizationUnit();
     this.action = 'CREATE';
 }
 details(node: TreeNode) {
+    console.log(this.selectedOrgUnit);
     this.model = this.selectedOrgUnit as OrganizationUnit;
+    console.log(this.model);
     this.action = 'READ';
     this.hideCloseButton = false;
     this.hideSaveButton = true;
-    this.displayForm = true;
+    this.displayOrgDetailsForm = true;
 }
 edit(node: TreeNode) {
     this.model = this.selectedOrgUnit as OrganizationUnit;
     this.action = 'UPDATE';
     this.hideCloseButton = false;
     this.hideSaveButton = false;
-    this.displayForm = true;
+    this.displayOrgDetailsForm = true;
 }
 deleteChild(node: TreeNode) {
     this.selectedOrgUnit.parent.children = [];
@@ -95,23 +97,24 @@ private expandRecursive(node: TreeNode, isExpand: boolean) {
     }
 }
 modelFormSaveAction(form: FormGroup) {
-    this.displayForm = false;
+    this.displayOrgDetailsForm = false;
     this.hideCloseButton = true;
     this.hideSaveButton = true;
     let orgUnit = new OrganizationUnit();
     orgUnit.name = form.value.name;
     orgUnit.label = form.value.name;
+    orgUnit.parent = this.selectedOrgUnit as OrganizationUnit;
+    this.controls.filter(ctrl => ctrl.key === 'location').forEach( ct => {
+        orgUnit.location = ct.value;
+    });
     if( this.action === 'CREATE') {
         this.selectedOrgUnit.children.push(orgUnit);
     }
     else {
         this.selectedOrgUnit.label = orgUnit.name;
         (this.selectedOrgUnit as  OrganizationUnit).name = orgUnit.name;
+        (this.selectedOrgUnit as  OrganizationUnit).location = orgUnit.location;
     }
-
-    console.log(this.selectedOrgUnit);
-
-
     let orgUnits = [...this.orgUnits];
     orgUnits[orgUnits.indexOf(this.selectedOrgUnit)] = this.selectedOrgUnit;
     this.orgUnits = orgUnits;
@@ -125,7 +128,7 @@ modelFormSaveAction(form: FormGroup) {
     });
 }
 closeFormEvent(event) {
-this.displayForm = false;
+this.displayOrgDetailsForm = false;
 }
 selectedItemChange(event) {
     this.selectedValue = event.name;

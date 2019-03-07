@@ -6,7 +6,12 @@
 <p-header>
     <div class="ui-helper-clearfix">
         <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px"> <i class="fa fa-align-justify"></i> {{ title }} </span>
-        <p-splitButton [style]="{'float':'right'}" label="Add" icon="pi pi-plus" (onClick)="add()" [model]="items"></p-splitButton>
+        <p-splitButton
+        [style]="{'float':'right'}"
+        label="Add" icon="pi pi-plus"
+        (onClick)="add()"
+        [model]="items"
+        [hidden]="menuHidden"></p-splitButton>
     </div>
 </p-header>
     <!-- Form to add to List-->

@@ -18,7 +18,6 @@ import { DynamicFormInputControlComponent } from './views/dynamic-form-input-con
 import { PrimeNGModule } from './prime-ng/prime-ng.module';
 import { DynamicListComponent } from './views/dynamic-list/dynamic-list.component';
 import { DynamicListPlusComponent } from './views/dynamic-list-plus/dynamic-list-plus.component';
-import { SingleSelectComponent } from './views/single-select/single-select.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +32,7 @@ import { SingleSelectComponent } from './views/single-select/single-select.compo
     DynamicFormComponent,
     DynamicFormInputControlComponent,
     DynamicListComponent,
-    DynamicListPlusComponent,
-    SingleSelectComponent
+    DynamicListPlusComponent
   ],
   imports: [
     CommonModule,
@@ -65,8 +63,7 @@ import { SingleSelectComponent } from './views/single-select/single-select.compo
     DynamicFormComponent,
     DynamicFormInputControlComponent,
     DynamicListComponent,
-    DynamicListPlusComponent,
-    SingleSelectComponent
+    DynamicListPlusComponent
   ],
   entryComponents: [
     DynamicFormComponent

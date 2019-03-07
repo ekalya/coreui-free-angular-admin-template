@@ -70,14 +70,25 @@
     <p-toggleButton *ngSwitchCase="'togglebutton'" 
     [formControlName]="ctrl.key"></p-toggleButton>
 
-    <!-- Single select list-->
-    <div *ngSwitchCase="'singleselect'">
-      <app-single-select
-        [listItems]="ctrl.options"
-        [cols]="ctrl.cols"
-        [title]="ctrl.title"
-        [displayValueKey]="ctrl.displayValueKey"></app-single-select>
+    <!--start: Single select list-->
+    <div  *ngSwitchCase="'singleselect'" >
+      <div class="ui-inputgroup">
+      <input type="text"
+      pInputText placeholder="select item"
+      [formControlName]="ctrl.key" 
+      class="form-control" 
+      [id]="ctrl.key">   
+      <button pButton type="button" icon="fa fa-list" class="ui-button-warn" (click)="toggleList()"></button>
+      </div>
+            
+      <app-dynamic-list-plus *ngIf="displayList"
+      [title]="ctrl.title"
+      [listItems]="ctrl.options"
+      (itemSelectionChange)="itemSelectedItemChange($event)"
+      [cols]="ctrl.cols"
+      [menuHidden]="true"></app-dynamic-list-plus>
     </div>
+    <!--start: Single select list-->
 
     </div> 
    

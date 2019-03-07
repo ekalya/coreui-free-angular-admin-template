@@ -2,22 +2,14 @@
 <h3>organization-units</h3>
 <p-tree [value]="orgUnits" layout="horizontal" selectionMode="single" [(selection)]="selectedOrgUnit" [contextMenu]="cm" ></p-tree>
 <p-contextMenu #cm [model]="items"></p-contextMenu>
-<p-dialog *ngIf="enableInputForm === true && inputForm === 2 && displayForm === true"
+<p-dialog *ngIf="displayOrgDetailsForm === true"
 header="Details" 
-[(visible)]="displayForm" 
+[(visible)]="displayOrgDetailsForm" 
 [responsive]="true" 
 showEffect="fade"
 [modal]="true" 
-[style]="{width: '300px'}"
-class="ui-g ui-fluid">
+[style]="{width: '300px'}">
     <div class="ui-g ui-fluid" *ngIf="model">
-        <app-dynamic-form  
-        [formMetaData]="controls" 
-        [model]="model"
-        [action]="action"
-        [hideSaveButton]="hideSaveButton"
-        [hideCloseButton]="hideCloseButton"
-        (formValues)="modelFormSaveAction($event)"
-        (closeFormEventEmitter)="closeFormEvent($event)"></app-dynamic-form>
+     <app-organization-unit-details [model]="model"></app-organization-unit-details>
     </div>
 </p-dialog>

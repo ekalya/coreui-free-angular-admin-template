@@ -34,7 +34,7 @@ export class DynamicListPlusComponent {
    * 1 = Inline form, 2 = Dialog form
    */
   @Input() public inputForm: Number = 1;
-
+  @Input() public menuHidden: boolean;
   selectedItem: any;
   selectedObject: any;
   obj: any = {};

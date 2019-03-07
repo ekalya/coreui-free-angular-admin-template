@@ -1,0 +1,25 @@
+<p-toast></p-toast>
+<app-dynamic-form  
+[formMetaData]="controls" 
+[model]="model"
+[hideSaveButton]="hideSaveButton"
+[hideCloseButton]="hideCloseButton"
+(formEmitterEvent)="formEmitterEvent($event)"></app-dynamic-form>
+
+<!-- location -->
+<div class="ui-inputgroup">
+    <input type="text"
+    [value]="locationName"
+    pInputText placeholder="select item"
+    class="form-control" 
+    [id]="location">   
+    <button pButton type="button" icon="fa fa-list" class="ui-button-warn" (click)="toggleShowLocationsList()"></button>
+</div>        
+<app-dynamic-list-plus *ngIf="displayLocationsList"
+[title]="locations_list_title"
+[listItems]="locations"
+(itemSelectionChange)="itemSelectedItemChange($event)"
+[cols]="locationsColumns"
+[menuHidden]="true"></app-dynamic-list-plus>
+<!-- location -->
+<app-submit-reset (actionMenuClickEvent)="actionMenuClickEvent($event)"></app-submit-reset>

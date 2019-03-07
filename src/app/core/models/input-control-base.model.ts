@@ -8,6 +8,7 @@ export class InputControlBase<T> {
     controlType: string;
     placeholder?: string;
     keyFilter: string;
+    displayValueKey: string;
 
     constructor(options: {
         value?: T,
@@ -18,6 +19,7 @@ export class InputControlBase<T> {
         controlType?: string,
         placeholder?: string,
         keyFilter?: string;
+        displayValueKey?: string;
     } = {}) {
         this.value = options.value;
         this.key = options.key || '';
@@ -27,5 +29,6 @@ export class InputControlBase<T> {
         this.controlType = options.controlType || '';
         this.placeholder = options.placeholder || '';
         this.keyFilter = options.keyFilter || InputControlDataType.Alphanumeric;
+        this.displayValueKey = options.displayValueKey || '';
     }
 }

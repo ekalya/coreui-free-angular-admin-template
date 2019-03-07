@@ -49,7 +49,22 @@ export class DynamicFormComponent implements OnInit, OnChanges {
     if(this.model === undefined || this.form === undefined) {
       return;
     }
-    this.form.patchValue(this.model);
+    //this.form.patchValue(this.model);
+    this.formMetaData.forEach(fmd => {
+      try{
+        if(fmd.displayValueKey){
+          if(this.model[fmd.key]){
+            this.form.controls[fmd.key].setValue(this.model[fmd.key][fmd.displayValueKey]);
+          }
+        }
+        else {
+        this.form.controls[fmd.key].setValue(this.model[fmd.key]);
+        }
+      }
+      catch(Error){
+
+      }
+    });
   }
   closeForm() {
     this.closeFormEventEmitter.emit(true);

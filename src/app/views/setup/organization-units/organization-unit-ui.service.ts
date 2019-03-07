@@ -21,7 +21,7 @@ export class OrganizationUnitUIService {
         value: '',
         required: true,
         order: 1
-      }), new InputControlSingleSelectList({
+      })/*, new InputControlSingleSelectList({
         key: 'location',
         label: 'location',
         cols: this.locationUIService.getColumns(),
@@ -32,7 +32,7 @@ export class OrganizationUnitUIService {
         value: '',
         required: true,
         order: 2
-      })
+      })*/
     ];
 
     return metadata.sort((a, b) => a.order - b.order);
