@@ -1,0 +1,6 @@
+<input type="text" pInputText  [value]="selectedValue"/>
+<app-dynamic-list-plus
+[title]="title"
+[listItems]="listItems"
+(itemSelectionChange)="itemSelectedItemChange($event)"
+[cols]="cols"></app-dynamic-list-plus>

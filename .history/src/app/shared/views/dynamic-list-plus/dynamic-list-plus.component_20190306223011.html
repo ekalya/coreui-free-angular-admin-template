@@ -1,0 +1,91 @@
+<div class="content-section implementation">
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+
+<p-panel>
+<p-header>
+    <div class="ui-helper-clearfix">
+        <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px"> <i class="fa fa-align-justify"></i> {{ title }} </span>
+        <p-splitButton [style]="{'float':'right'}" label="Add" icon="pi pi-plus" (onClick)="add()" [model]="items"></p-splitButton>
+    </div>
+</p-header>
+    <!-- Form to add to List-->
+    <div *ngIf="enableInputForm === true && inputForm === 1 && displayForm === true">
+    <app-dynamic-form  
+    [formMetaData]="controls" 
+    [model]="model"
+    [action]="action"
+    (formValues)="modelFormSaveAction($event)"
+    [hideSaveButton]="hideSaveButton"
+    [hideCloseButton]="hideCloseButton"
+    (closeFormEventEmitter)="closeFormEvent($event)"></app-dynamic-form>
+    </div>
+
+    <p-table
+    #tt 
+    [columns]="cols"
+    [value]="listItems"
+    sortMode="multiple"
+    [paginator]="true"
+    [rows]="8"
+    [first]="first"
+    selectionMode="single" [(selection)]="selectedObject"
+    contextMenuSelectionMode="joint"
+    [contextMenu]="cm"
+    [resizableColumns]="true"
+    [scrollable]="true" scrollHeight="400px"
+    [reorderableColumns]="true"
+    (onRowSelect)="onRowSelect($event)">
+    <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+                  <col *ngFor="let col of columns">
+            </colgroup>
+    </ng-template>
+    <ng-template pTemplate="caption">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText placeholder="Global Filter" (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of cols"
+                    [pSortableColumn]="col.field"
+                    pResizableColumn
+                    pReorderableColumn>
+                        {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData" [pContextMenuRow]="rowData">
+                  <td *ngFor="let col of columns"  class="ui-resizable-column">
+                        {{rowData[col.field]}}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft" let-state>
+            showing {{ state.rows >  state.totalRecords ? state.totalRecords : state.rows  }} of {{ state.totalRecords }}
+        </ng-template>
+        <ng-template pTemplate="paginatorright" let-state>
+            page: {{state.page + 1}}
+        </ng-template>
+    </p-table>
+    <p-dialog *ngIf="enableInputForm === true && inputForm === 2 && displayForm === true" header="Details" [(visible)]="displayForm" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+            <div class="ui-g ui-fluid" *ngIf="model">
+                <app-dynamic-form  
+                [formMetaData]="controls" 
+                [model]="model"
+                [action]="action"
+                [hideSaveButton]="hideSaveButton"
+                [hideCloseButton]="hideCloseButton"
+                (formValues)="modelFormSaveAction($event)"
+                (closeFormEventEmitter)="closeFormEvent($event)"></app-dynamic-form>
+            </div>
+    </p-dialog>
+    <p-contextMenu #cm [model]="items"></p-contextMenu>
+<p-footer>
+
+</p-footer>
+</p-panel>
+</div>
+
+

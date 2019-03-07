@@ -1,0 +1,3 @@
+<p-tree [value]="filesTree2" selectionMode="single" [(selection)]="selectedFile"
+    (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"></p-tree>
+<div style="margin-top:8px">Selected Node: {selectedFile ? selectedFile.label : 'none'}</div>

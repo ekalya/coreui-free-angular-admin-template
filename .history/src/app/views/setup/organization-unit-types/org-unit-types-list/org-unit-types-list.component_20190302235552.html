@@ -1,0 +1,7 @@
+<p-tree [value]="filesTree2" selectionMode="single" [(selection)]="selectedFile"
+    (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"></p-tree>
+
+
+    <h3>Context Menu</h3>
+    <p-tree [value]="filesTree6" selectionMode="single" [(selection)]="selectedFile2" [contextMenu]="cm"></p-tree>
+    <p-contextMenu #cm [model]="items"></p-contextMenu>

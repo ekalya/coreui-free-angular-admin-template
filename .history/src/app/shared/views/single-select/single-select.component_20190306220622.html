@@ -1,0 +1,12 @@
+<input type="text"/>
+<app-dynamic-list-plus
+[title]="title"
+[listItems]="listItems"
+[controls]="controls"
+[enableInputForm]="true"
+[inputForm]="1"
+(itemAddedEvent)="itemAddedEvent($event)"
+(itemUpdatedEvent)="itemUpdatedEvent($event)"
+(itemSelectionChange)="locationSelectedItemChange($event)"
+[model]="model"
+[cols]="cols"></app-dynamic-list-plus>

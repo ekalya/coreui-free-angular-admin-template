@@ -1,0 +1,14 @@
+<p-toast></p-toast>
+<h3>organization-units</h3>
+<p-tree [value]="orgUnits" layout="horizontal" selectionMode="single" [(selection)]="selectedOrgUnit" [contextMenu]="cm" ></p-tree>
+<p-contextMenu #cm [model]="items"></p-contextMenu>
+<p-dialog *ngIf="enableInputForm === true && inputForm === 2 && displayForm === true" header="Details" [(visible)]="displayForm" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+        <app-dynamic-form  
+        [formMetaData]="controls" 
+        [model]="model"
+        [action]="action"
+        [hideSaveButton]="hideSaveButton"
+        [hideCloseButton]="hideCloseButton"
+        (formValues)="modelFormSaveAction($event)"
+        (closeFormEventEmitter)="closeFormEvent($event)"></app-dynamic-form>
+</p-dialog>
