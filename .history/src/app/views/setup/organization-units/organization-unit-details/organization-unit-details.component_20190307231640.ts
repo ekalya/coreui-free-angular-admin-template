@@ -42,6 +42,7 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.organizationUnitService.getAll().subscribe(data => {
       this.orgUnits = data;
+      console.log(this.orgUnits);
     });
     this.locationService.getAll().subscribe(data => {
       this.locations = data;
@@ -113,7 +114,7 @@ addChildToOrgUnit(newChild: OrganizationUnit, updatedOrgUnit: OrganizationUnit, 
           return;
         }
       });
-      this.addChildToOrgUnit(newChild, updatedOrgUnit, org.children);
+      this.updateOrgUnit(updatedOrgUnit, org.children);
   });
 }
 setValues(old: OrganizationUnit, updated: OrganizationUnit) {

@@ -126,6 +126,7 @@ loadOrgs() {
     this.organizationUnitService.getAll().subscribe(data => {
         this.traverse(data);
         this.orgUnits = data;
+        console.log(this.orgUnits);
     });
 }
 }

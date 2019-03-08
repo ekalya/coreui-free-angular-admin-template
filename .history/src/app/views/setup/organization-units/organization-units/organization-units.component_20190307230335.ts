@@ -61,6 +61,7 @@ addChild(node: TreeNode) {
     this.displayOrgDetailsForm = true;
     this.hideCloseButton = false;
     this.hideSaveButton = false;
+    this.model = new OrganizationUnit();
     this.action = 'CREATE';
 }
 details(node: TreeNode) {
@@ -126,6 +127,7 @@ loadOrgs() {
     this.organizationUnitService.getAll().subscribe(data => {
         this.traverse(data);
         this.orgUnits = data;
+        console.log(this.orgUnits);
     });
 }
 }

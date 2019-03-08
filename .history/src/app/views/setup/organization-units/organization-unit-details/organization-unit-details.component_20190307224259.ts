@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { MessageService, TreeNode } from 'primeng/api';
 import { OrganizationUnitService, LocationService } from '../../../../core/services';
 import { OrganizationUnitUIService } from '../organization-unit-ui.service';
@@ -13,7 +13,6 @@ import { LocationUIService } from '../../location/location-details/location-ui.s
   providers: [MessageService]
 })
 export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
-  @Output() public formCloseEvent: EventEmitter<any> = new EventEmitter<any>();
   form: FormGroup;
   controls: InputControlBase<any>[] = [];
   @Input() public model: OrganizationUnit;
@@ -41,7 +40,9 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.organizationUnitService.getAll().subscribe(data => {
+      this.traverse(data);
       this.orgUnits = data;
+      console.log(this.orgUnits);
     });
     this.locationService.getAll().subscribe(data => {
       this.locations = data;
@@ -57,7 +58,7 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
   actionMenuClickEvent(event) {
     if (this.action === 'CREATE') {
       this.newOrg.name = this.form.value.name;
-      this.addChildToOrgUnit(this.newOrg , this.model, this.orgUnits as OrganizationUnit[]);
+      this.model.children.push(this.newOrg);
     } else if (this.action === 'UPDATE') {
       this.model.name = this.form.value.name;
       this.updateOrgUnit(this.model, this.orgUnits as OrganizationUnit[]);
@@ -74,11 +75,12 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
   }
   itemSelectedItemChange(location: any) {
     if (this.action === 'CREATE') {
+      this.locationName = location.name;
       this.newOrg.location = location;
     } else if (this.action === 'UPDATE') {
+      this.locationName = location.name;
       this.model.location = location;
     }
-    this.locationName = location.name;
   }
   displayValues() {
   if (this.model && this.model.location) {
@@ -101,23 +103,16 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
         this.updateOrgUnit(updatedOrgUnit, org.children);
     });
 }
-addChildToOrgUnit(newChild: OrganizationUnit, updatedOrgUnit: OrganizationUnit, orgs: OrganizationUnit[]) {
-  orgs.forEach((org: OrganizationUnit) => {
-      if (org.id === updatedOrgUnit.id) {
-        org.children.push(newChild);
-        return;
-      }
-      org.children.forEach(child => {
-        if (org.id === updatedOrgUnit.id) {
-          org.children.push(newChild);
-          return;
-        }
-      });
-      this.addChildToOrgUnit(newChild, updatedOrgUnit, org.children);
-  });
-}
 setValues(old: OrganizationUnit, updated: OrganizationUnit) {
   old.name = updated.name;
   old.location = updated.location;
+}
+traverse(allOrgs: OrganizationUnit[]) {
+  allOrgs.forEach(org => {
+      org.children.forEach(child => {
+          child.parent = org;
+      });
+      this.traverse(org.children);
+  });
 }
 }

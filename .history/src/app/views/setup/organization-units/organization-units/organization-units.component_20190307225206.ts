@@ -61,6 +61,7 @@ addChild(node: TreeNode) {
     this.displayOrgDetailsForm = true;
     this.hideCloseButton = false;
     this.hideSaveButton = false;
+    this.model = new OrganizationUnit();
     this.action = 'CREATE';
 }
 details(node: TreeNode) {

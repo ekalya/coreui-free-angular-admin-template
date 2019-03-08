@@ -43,34 +43,44 @@ constructor(
     }
 
 ngOnInit() {
-    this.loadOrgs();
-    this.items = [
-        {label: 'Add child', icon: 'fa fa-plus-square', command: (event) => this.addChild(this.selectedOrgUnit)},
-        {label: 'Details', icon: 'pi pi-search', command: (event) => this.details(this.selectedOrgUnit)},
-        {label: 'Edit', icon: 'pi pi-pencil', command: (event) => this.edit(this.selectedOrgUnit)},
-        {label: 'Delete child', icon: 'fa fa-remove', command: (event) => this.deleteChild(this.selectedOrgUnit)}
-    ];
-    this.locationService.getAll().subscribe(data => {
-        this.listItems = data;
-    });
-    this.cols = this.locationUIService.getColumns();
-    this.title = 'Locations';
+    this.organizationUnitService.getAll().subscribe(data => {
+        this.traverse(data);
+        this.orgUnits = data;
+        console.log(this.orgUnits);
+});
+this.items = [
+    {label: 'Add child', icon: 'fa fa-plus-square', command: (event) => this.addChild(this.selectedOrgUnit)},
+    {label: 'Details', icon: 'pi pi-search', command: (event) => this.details(this.selectedOrgUnit)},
+    {label: 'Edit', icon: 'pi pi-pencil', command: (event) => this.edit(this.selectedOrgUnit)},
+    {label: 'Delete child', icon: 'fa fa-remove', command: (event) => this.deleteChild(this.selectedOrgUnit)}
+];
+this.locationService.getAll().subscribe(data => {
+    this.listItems = data;
+});
+this.cols = this.locationUIService.getColumns();
+this.title = 'Locations';
 }
 addChild(node: TreeNode) {
-    this.model = this.selectedOrgUnit as OrganizationUnit;
+    console.log(node);
     this.displayOrgDetailsForm = true;
     this.hideCloseButton = false;
     this.hideSaveButton = false;
+    this.model = new OrganizationUnit();
     this.action = 'CREATE';
 }
 details(node: TreeNode) {
+    let orgs = [...this.orgUnits];
+    console.log(orgs[orgs.indexOf(this.selectedOrgUnit)]);
+    console.log(this.selectedOrgUnit);
     this.model = this.selectedOrgUnit as OrganizationUnit;
+    console.log(this.model);
     this.action = 'READ';
     this.hideCloseButton = false;
     this.hideSaveButton = true;
     this.displayOrgDetailsForm = true;
 }
 edit(node: TreeNode) {
+    console.log(node.parent);
     this.model = this.selectedOrgUnit as OrganizationUnit;
     this.action = 'UPDATE';
     this.hideCloseButton = false;
@@ -91,9 +101,39 @@ private expandRecursive(node: TreeNode, isExpand: boolean) {
         } );
     }
 }
-orgDetailsFormCloseEvent(event) {
+modelFormSaveAction(form: FormGroup) {
+    this.displayOrgDetailsForm = false;
+    this.hideCloseButton = true;
+    this.hideSaveButton = true;
+    let orgUnit = new OrganizationUnit();
+    orgUnit.name = form.value.name;
+    orgUnit.label = form.value.name;
+    orgUnit.parent = this.selectedOrgUnit as OrganizationUnit;
+    this.controls.filter(ctrl => ctrl.key === 'location').forEach( ct => {
+        orgUnit.location = ct.value;
+    });
+    if( this.action === 'CREATE') {
+        this.selectedOrgUnit.children.push(orgUnit);
+    }
+    else {
+        this.selectedOrgUnit.label = orgUnit.name;
+        (this.selectedOrgUnit as  OrganizationUnit).name = orgUnit.name;
+        (this.selectedOrgUnit as  OrganizationUnit).location = orgUnit.location;
+    }
+    let orgUnits = [...this.orgUnits];
+    orgUnits[orgUnits.indexOf(this.selectedOrgUnit)] = this.selectedOrgUnit;
+    this.orgUnits = orgUnits;
+    this.orgUnits.forEach(o => {
+        console.log(o);
+        this.organizationUnitService.update(o as OrganizationUnit).subscribe(response => {
+            this.orgUnits = [];
+            this.orgUnits.push(response);
+            this.messageService.add({severity: 'success', summary: 'Saved successfully', detail: 'Successfully Saved'});
+        });
+    });
+}
+closeFormEvent(event) {
 this.displayOrgDetailsForm = false;
-this.loadOrgs();
 }
 selectedItemChange(event) {
     this.selectedValue = event.name;
@@ -107,25 +147,18 @@ traverse(allOrgs: OrganizationUnit[]) {
         this.traverse(org.children);
     });
 }
-setParent(o: OrganizationUnit): void {
+findParent(o: OrganizationUnit): OrganizationUnit {
     this.orgUnits .forEach((org: OrganizationUnit) => {
         if (o.id ===  org.id) {
-            return;
+            return null;
         }
         org.children.forEach(child => {
             if ( child.id === o.id) {
-                o.parent = org;
-                return;
+                return org;
             }
         });
         this.traverse(org.children);
     });
-    return;
-}
-loadOrgs() {
-    this.organizationUnitService.getAll().subscribe(data => {
-        this.traverse(data);
-        this.orgUnits = data;
-    });
+    return null;
 }
 }

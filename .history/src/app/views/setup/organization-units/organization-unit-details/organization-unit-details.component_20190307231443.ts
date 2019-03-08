@@ -42,6 +42,7 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.organizationUnitService.getAll().subscribe(data => {
       this.orgUnits = data;
+      console.log(this.orgUnits);
     });
     this.locationService.getAll().subscribe(data => {
       this.locations = data;
@@ -100,21 +101,6 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
         });
         this.updateOrgUnit(updatedOrgUnit, org.children);
     });
-}
-addChildToOrgUnit(newChild: OrganizationUnit, updatedOrgUnit: OrganizationUnit, orgs: OrganizationUnit[]) {
-  orgs.forEach((org: OrganizationUnit) => {
-      if (org.id === updatedOrgUnit.id) {
-        org.children.push(newChild);
-        return;
-      }
-      org.children.forEach(child => {
-        if (org.id === updatedOrgUnit.id) {
-          org.children.push(newChild);
-          return;
-        }
-      });
-      this.addChildToOrgUnit(newChild, updatedOrgUnit, org.children);
-  });
 }
 setValues(old: OrganizationUnit, updated: OrganizationUnit) {
   old.name = updated.name;

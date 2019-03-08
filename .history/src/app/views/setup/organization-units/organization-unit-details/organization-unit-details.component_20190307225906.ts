@@ -42,6 +42,7 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.organizationUnitService.getAll().subscribe(data => {
       this.orgUnits = data;
+      console.log(this.orgUnits);
     });
     this.locationService.getAll().subscribe(data => {
       this.locations = data;
@@ -57,7 +58,7 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
   actionMenuClickEvent(event) {
     if (this.action === 'CREATE') {
       this.newOrg.name = this.form.value.name;
-      this.addChildToOrgUnit(this.newOrg , this.model, this.orgUnits as OrganizationUnit[]);
+      this.model.children.push(this.newOrg);
     } else if (this.action === 'UPDATE') {
       this.model.name = this.form.value.name;
       this.updateOrgUnit(this.model, this.orgUnits as OrganizationUnit[]);
@@ -100,21 +101,6 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
         });
         this.updateOrgUnit(updatedOrgUnit, org.children);
     });
-}
-addChildToOrgUnit(newChild: OrganizationUnit, updatedOrgUnit: OrganizationUnit, orgs: OrganizationUnit[]) {
-  orgs.forEach((org: OrganizationUnit) => {
-      if (org.id === updatedOrgUnit.id) {
-        org.children.push(newChild);
-        return;
-      }
-      org.children.forEach(child => {
-        if (org.id === updatedOrgUnit.id) {
-          org.children.push(newChild);
-          return;
-        }
-      });
-      this.addChildToOrgUnit(newChild, updatedOrgUnit, org.children);
-  });
 }
 setValues(old: OrganizationUnit, updated: OrganizationUnit) {
   old.name = updated.name;

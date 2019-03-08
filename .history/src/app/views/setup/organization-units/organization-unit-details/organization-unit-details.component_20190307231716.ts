@@ -42,6 +42,7 @@ export class OrganizationUnitDetailsComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.organizationUnitService.getAll().subscribe(data => {
       this.orgUnits = data;
+      console.log(this.orgUnits);
     });
     this.locationService.getAll().subscribe(data => {
       this.locations = data;

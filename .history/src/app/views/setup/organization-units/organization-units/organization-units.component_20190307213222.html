@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <h3>organization-units</h3>
-<p-tree [value]="orgUnits" selectionMode="single" [(selection)]="selectedOrgUnit" [contextMenu]="cm" ></p-tree>
+<p-tree [value]="orgUnits" layout="horizontal" selectionMode="single" [(selection)]="selectedOrgUnit" [contextMenu]="cm" ></p-tree>
 <p-contextMenu #cm [model]="items"></p-contextMenu>
 <p-dialog *ngIf="displayOrgDetailsForm === true"
 header="Details" 
@@ -10,9 +10,7 @@ showEffect="fade"
 [modal]="true" 
 [style]="{width: '300px'}">
     <div class="ui-g ui-fluid" *ngIf="model">
-    <app-organization-unit-details 
-    [model]="model"
-    [action]="action"
-    (formCloseEvent)="orgDetailsFormCloseEvent($event)"></app-organization-unit-details>
+     <app-organization-unit-details [model]="model"
+     [orgUnits]=" orgUnits"></app-organization-unit-details>
     </div>
 </p-dialog>

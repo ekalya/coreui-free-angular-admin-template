@@ -43,24 +43,29 @@ constructor(
     }
 
 ngOnInit() {
-    this.loadOrgs();
-    this.items = [
-        {label: 'Add child', icon: 'fa fa-plus-square', command: (event) => this.addChild(this.selectedOrgUnit)},
-        {label: 'Details', icon: 'pi pi-search', command: (event) => this.details(this.selectedOrgUnit)},
-        {label: 'Edit', icon: 'pi pi-pencil', command: (event) => this.edit(this.selectedOrgUnit)},
-        {label: 'Delete child', icon: 'fa fa-remove', command: (event) => this.deleteChild(this.selectedOrgUnit)}
-    ];
-    this.locationService.getAll().subscribe(data => {
-        this.listItems = data;
-    });
-    this.cols = this.locationUIService.getColumns();
-    this.title = 'Locations';
+    this.organizationUnitService.getAll().subscribe(data => {
+        this.traverse(data);
+        this.orgUnits = data;
+        console.log(this.orgUnits);
+});
+this.items = [
+    {label: 'Add child', icon: 'fa fa-plus-square', command: (event) => this.addChild(this.selectedOrgUnit)},
+    {label: 'Details', icon: 'pi pi-search', command: (event) => this.details(this.selectedOrgUnit)},
+    {label: 'Edit', icon: 'pi pi-pencil', command: (event) => this.edit(this.selectedOrgUnit)},
+    {label: 'Delete child', icon: 'fa fa-remove', command: (event) => this.deleteChild(this.selectedOrgUnit)}
+];
+this.locationService.getAll().subscribe(data => {
+    this.listItems = data;
+});
+this.cols = this.locationUIService.getColumns();
+this.title = 'Locations';
 }
 addChild(node: TreeNode) {
     this.model = this.selectedOrgUnit as OrganizationUnit;
     this.displayOrgDetailsForm = true;
     this.hideCloseButton = false;
     this.hideSaveButton = false;
+    this.model = new OrganizationUnit();
     this.action = 'CREATE';
 }
 details(node: TreeNode) {
@@ -91,9 +96,38 @@ private expandRecursive(node: TreeNode, isExpand: boolean) {
         } );
     }
 }
+modelFormSaveAction(form: FormGroup) {
+    this.displayOrgDetailsForm = false;
+    this.hideCloseButton = true;
+    this.hideSaveButton = true;
+    let orgUnit = new OrganizationUnit();
+    orgUnit.name = form.value.name;
+    orgUnit.label = form.value.name;
+    orgUnit.parent = this.selectedOrgUnit as OrganizationUnit;
+    this.controls.filter(ctrl => ctrl.key === 'location').forEach( ct => {
+        orgUnit.location = ct.value;
+    });
+    if (this.action === 'CREATE') {
+        this.selectedOrgUnit.children.push(orgUnit);
+    } else if (this.action === 'UPDATE') {
+        this.selectedOrgUnit.label = orgUnit.name;
+        (this.selectedOrgUnit as  OrganizationUnit).name = orgUnit.name;
+        (this.selectedOrgUnit as  OrganizationUnit).location = orgUnit.location;
+    }
+    let orgUnits = [...this.orgUnits];
+    orgUnits[orgUnits.indexOf(this.selectedOrgUnit)] = this.selectedOrgUnit;
+    this.orgUnits = orgUnits;
+    this.orgUnits.forEach(o => {
+        console.log(o);
+        this.organizationUnitService.update(o as OrganizationUnit).subscribe(response => {
+            this.orgUnits = [];
+            this.orgUnits.push(response);
+            this.messageService.add({severity: 'success', summary: 'Saved successfully', detail: 'Successfully Saved'});
+        });
+    });
+}
 orgDetailsFormCloseEvent(event) {
 this.displayOrgDetailsForm = false;
-this.loadOrgs();
 }
 selectedItemChange(event) {
     this.selectedValue = event.name;
@@ -121,11 +155,5 @@ setParent(o: OrganizationUnit): void {
         this.traverse(org.children);
     });
     return;
-}
-loadOrgs() {
-    this.organizationUnitService.getAll().subscribe(data => {
-        this.traverse(data);
-        this.orgUnits = data;
-    });
 }
 }
