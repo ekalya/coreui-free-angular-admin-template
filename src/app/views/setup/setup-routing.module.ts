@@ -61,6 +61,20 @@ const routes: Routes = [
         }
       },
       {
+        path: 'jobs',
+        loadChildren: './jobs/jobs.module#JobsModule',
+        data: {
+          title: 'Jobs'
+        }
+      },
+      {
+        path: 'positions',
+        loadChildren: './positions/positions.module#PositionsModule',
+        data: {
+          title: 'Jobs'
+        }
+      },
+      {
         path: 'organization-unit-types',
         loadChildren: './organization-unit-types/organization-unit-types.module#OrganizationUnitTypesModule',
         data: {

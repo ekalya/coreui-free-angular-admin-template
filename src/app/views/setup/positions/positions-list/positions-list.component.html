@@ -1,0 +1,13 @@
+<p-toast></p-toast>
+<app-dynamic-list-plus
+[title]="title"
+[listItems]="listItems"
+[cols]="cols"
+[enableInputForm]="true"
+[inputForm]="1"
+[controls]="controls"
+[model]="model"
+(itemAddedEvent)="itemAddedEvent($event)"
+(itemUpdatedEvent)="itemUpdatedEvent($event)"
+(itemDeleteEvent)="itemDeleteEvent($event)"
+(itemSelectionChange)="itemSelectedChangeEvent($event)"></app-dynamic-list-plus>

@@ -70,6 +70,16 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
+        name: 'Jobs',
+        url: '/setup/jobs',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Positions',
+        url: '/setup/positions',
+        icon: 'icon-puzzle'
+      },
+      {
         name: 'Users',
         url: '/setup/users/',
         icon: 'icon-user'

@@ -22,6 +22,7 @@ export class DynamicListPlusComponent {
   @Output() public listActionMenuClick: EventEmitter<any> = new EventEmitter<any>();
   @Output() public itemAddedEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() public itemUpdatedEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public itemDeleteEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() public itemSelectionChange: EventEmitter<any> = new EventEmitter<any>();
 
 
@@ -108,7 +109,7 @@ export class DynamicListPlusComponent {
       this.messageService.add({severity: 'error', summary: 'No record selected', detail: 'This action requires an item to be selected'});
       return;
     }
-    this.listActionMenuClick.emit({action: this.action});
+    this.itemDeleteEvent.emit(this.selectedObject);
   }
   modelFormSaveAction(form: FormGroup) {
     this.displayForm = false;

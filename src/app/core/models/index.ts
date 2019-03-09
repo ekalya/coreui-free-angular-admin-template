@@ -29,5 +29,8 @@ export * from './currency.model';
 export * from './location.model';
 export * from './organization-unit-type';
 export * from './organization-unit.model';
+export * from './job.model';
+export * from './position.model';
+
 
 

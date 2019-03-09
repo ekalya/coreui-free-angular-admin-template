@@ -16,6 +16,8 @@ export * from './location.service';
 export * from './node.service';
 export * from './organization-unit-types.service';
 export * from './organization-unit.service';
+export * from './job.service';
+export * from './position.service';
 
 
 
