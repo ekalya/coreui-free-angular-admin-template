@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PaymentTransaction, PaymentConfirmationService } from '../../../core';
-import { Subject } from 'rxjs';
+import { Component } from '@angular/core';
+import { PaymentTransaction } from '../../../core';
+import { PaymentTransactionsUIService } from './payment-transactions-ui.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -8,26 +9,21 @@ import { Subject } from 'rxjs';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent {
   paymentTransactions: PaymentTransaction[] = [];
-  dtTrigger: Subject<boolean> = new Subject<boolean>();
-  dtOptions: DataTables.Settings = {};
-  constructor(private paymentConfirmationService: PaymentConfirmationService) { }
+  title: string;
+  cols: any[];
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private paymentTransactionsUIService: PaymentTransactionsUIService) {
+      this.activatedRoute.data.subscribe((res) => {
+        this.paymentTransactions = res.trans.paymentConfirmation;
+      });
+      this.title = 'Transactions List';
+      this.cols = this.paymentTransactionsUIService.getColumns();
+    }
 
-  ngOnInit() {
+    itemSelectedChangeEvent(event) {
 
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 25
-    };
-
-    this.paymentConfirmationService.getAll().subscribe(data => {
-      this.paymentTransactions = data.paymentConfirmation;
-      this.dtTrigger.next(true);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
-  }
+    }
 }
