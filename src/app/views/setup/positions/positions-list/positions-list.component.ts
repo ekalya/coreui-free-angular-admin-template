@@ -60,7 +60,6 @@ export class PositionsListComponent implements OnInit {
     }
   }
   positionDetailsFormCloseEvent(event: any) {
-    console.log('close details form');
     this.displayPositionDetailsForm = false;
   }
 

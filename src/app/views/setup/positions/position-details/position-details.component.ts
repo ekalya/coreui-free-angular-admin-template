@@ -55,7 +55,6 @@ export class PositionDetailsComponent implements OnInit, OnChanges {
   this.form = form;
   }
   actionMenuClickEvent(event) {
-    console.log(this.menuAction);
     this.model.name = this.form.value.name;
     if (this.menuAction.action === 'CREATE') {
       this.positionService.update(this.model).subscribe(data => {

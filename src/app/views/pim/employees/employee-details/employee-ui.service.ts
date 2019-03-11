@@ -46,7 +46,6 @@ export class EmployeeUIService implements UIInterface {
   getColumns() {
   const columns: any[] = [];
   this.getMetadata().forEach( md => {
-    console.log(md.controlType);
     if (md.controlType === 'textbox') {
       columns.push({ field: md.key, header: md.key });
     }

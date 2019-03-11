@@ -24,7 +24,7 @@ export class DynamicFormInputControlComponent {
     this.ctrl.value = selectedItem;
     this.form.controls[this.ctrl.key].setValue(this.selectedValue);
   }
-  toggleList(){
+  toggleList() {
     this.displayList = !(this.displayList === true);
   }
 

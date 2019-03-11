@@ -40,7 +40,6 @@ export class WorkShiftUIService implements UIInterface {
   getColumns() {
   const columns: any[] = [];
   this.getMetadata().forEach( md => {
-    console.log(md.controlType);
     if (md.controlType === 'textbox'
     || md.controlType === 'timeOnlyFrom'
     || md.controlType === 'timeOnlyTo') {

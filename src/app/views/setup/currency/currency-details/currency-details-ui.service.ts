@@ -60,7 +60,6 @@ export class CurrencyDetailsUIService {
   getColumns() {
   const columns: any[] = [];
   this.getMetadata().forEach( md => {
-    console.log(md.controlType);
     if (md.controlType === 'textbox'
     || md.controlType === 'togglebutton') {
       columns.push({ field: md.key, header: md.key });
