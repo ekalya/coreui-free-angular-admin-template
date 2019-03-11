@@ -4,7 +4,6 @@ import { ApiService } from './api.service';
 import { PaymentConfirmation } from '../models/payment-confirmation';
 import { PaymentConfirmationList } from '../models/payment-confirmation-list';
 import { PaymentConfirmationPostReponse } from '../models/payment-confirmation-post-reponse';
-import { DailyTransactionCounts } from '../models';
 import { PaymentConfirmationDailyTrans } from '../models/payment-confirmation-daily-trans';
 
 @Injectable({
@@ -13,7 +12,6 @@ import { PaymentConfirmationDailyTrans } from '../models/payment-confirmation-da
 export class PaymentConfirmationService {
   resource = '/paymentconfirmations/';
   constructor(private apiService: ApiService) { }
-
   create(paymentConfirmation: PaymentConfirmation): Observable<PaymentConfirmationPostReponse> {
     return this.apiService.put<PaymentConfirmationPostReponse>(this.resource, paymentConfirmation);
   }

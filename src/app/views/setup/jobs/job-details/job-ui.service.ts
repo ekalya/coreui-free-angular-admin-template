@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { InputControlBase } from '../../../../core/models';
+import { InputControlBase, UIInterface } from '../../../../core/models';
 import { InputControlTextBox } from '../../../../core/controls';
 
 @Injectable({
   providedIn: 'root'
 })
-export class JobUIService {
+export class JobUIService implements UIInterface {
 
   getMetadata() {
 

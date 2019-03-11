@@ -5,6 +5,7 @@ import { TransactionsRoutingModule } from './transactions-routing.module';
 import { TableComponent } from './table/table.component';
 import { DataTableComponent } from './pages/data-table.component';
 import { SharedModule } from '../../shared/shared.module';
+import { TransactionsService } from '../../core/services';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     TransactionsRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [TransactionsService]
 })
 export class TransactionsModule {
- }
+}

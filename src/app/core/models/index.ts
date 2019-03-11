@@ -27,10 +27,23 @@ export * from './table-column';
 export * from './dynamic-forms-bridge.model';
 export * from './currency.model';
 export * from './location.model';
-export * from './organization-unit-type';
 export * from './organization-unit.model';
 export * from './job.model';
 export * from './position.model';
+export * from './employment-status.model';
+export * from './generic-component';
+export * from './generic-model.model';
+export * from './uiinterface';
+export * from './pay-grade';
+export * from './work-shift.model';
+export * from './nationality.model';
+export * from './organization-unit.model';
+export * from './employee.model';
+
+
+
+
+
 
 
 

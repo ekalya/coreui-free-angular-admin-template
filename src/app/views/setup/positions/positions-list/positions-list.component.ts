@@ -13,9 +13,10 @@ export class PositionsListComponent implements OnInit {
   listItems: Position[] = [];
   cols: any[] = [];
   title: string;
-  selectedItem = new Position();
-  model: Position;
+  model: Position = new Position();
+  action: string;
   controls: InputControlBase<any>[] = [];
+  displayPositionDetailsForm: boolean;
   constructor(
     private positionService: PositionService,
     private positionUIService: PositionUIService,
@@ -23,6 +24,7 @@ export class PositionsListComponent implements OnInit {
       this.cols = this.positionUIService.getColumns();
       this.controls = this.positionUIService.getMetadata();
       this.title = 'Positions List';
+      this.action = 'READ';
     }
 
   ngOnInit() {
@@ -31,33 +33,35 @@ export class PositionsListComponent implements OnInit {
     });
   }
   itemSelectedChangeEvent(selectedItem: Position) {
-    this.selectedItem = selectedItem;
+    this.model = selectedItem;
   }
   itemUpdatedEvent(updatedItem: Position) {
-    let listItems = [...this.listItems];
-    if (updatedItem.id === undefined) {
-      this.positionService.create(updatedItem).subscribe(loc => {
-        this.messageService.add({severity: 'success', summary: 'Created successfully', detail: 'Successfully Created'});
-        this.listItems.push(loc);
-      });
-    } else {
-      this.positionService.update(updatedItem).subscribe(loc => {
-        this.messageService.add({severity: 'success', summary: 'Updated successfully', detail: 'Successfully Updated'});
-        listItems[this.listItems.indexOf(this.selectedItem)] = loc;
-      });
-    }
-    this.listItems = listItems;
+
   }
   itemAddedEvent(addedItem: Position) {
-    this.positionService.create(addedItem).subscribe(item => {
-      this.messageService.add({severity: 'success', summary: 'Created successfully', detail: 'Successfully Created'});
-      let listItems = [...this.listItems];
-      listItems.push(item);
-      this.listItems = listItems;
-    });
+
   }
   itemDeleteEvent(item: Position) {
     this.messageService.add({severity: 'error', summary: 'Not allowed', detail: 'Not allowed'});
+  }
+  listActionMenuClick(event: any) {
+    if (event.action === 'CREATE') {
+      this.action = event;
+      this.model = new Position();
+      this.displayPositionDetailsForm = true;
+    } else if (event.action === 'READ') {
+      this.action = event;
+      this.displayPositionDetailsForm = true;
+    } else if (event.action === 'UPDATE') {
+      this.action = event;
+      this.displayPositionDetailsForm = true;
+    } else if (event.action === 'DELETE') {
+      this.itemDeleteEvent(this.model);
+    }
+  }
+  positionDetailsFormCloseEvent(event: any) {
+    console.log('close details form');
+    this.displayPositionDetailsForm = false;
   }
 
 }

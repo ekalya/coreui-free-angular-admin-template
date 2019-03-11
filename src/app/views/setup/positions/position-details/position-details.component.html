@@ -1,3 +1,25 @@
-<p>
-  position-details works!
-</p>
+<p-toast></p-toast>
+<app-dynamic-form  
+[formMetaData]="controls" 
+[model]="model"
+[hideSaveButton]="hideSaveButton"
+[hideCloseButton]="hideCloseButton"
+(formEmitterEvent)="formEmitterEvent($event)"
+(closeFormEventEmitter)="closeFormEventEmitter($event)"></app-dynamic-form>
+
+<!-- job -->
+<div class="ui-inputgroup">
+    <input type="text"
+    [(value)]="jobName"
+    pInputText placeholder="select item"
+    class="form-control">   
+    <button pButton type="button" icon="fa fa-list" class="ui-button-warn" (click)="toggleShowLocationsList()"></button>
+</div>        
+<app-dynamic-list-plus *ngIf="displayJobsList"
+[title]="jobs_list_title"
+[listItems]="jobs"
+(itemSelectionChange)="itemSelectedItemChange($event)"
+[cols]="jobsColumns"
+[menuHidden]="true"></app-dynamic-list-plus>
+<!-- job -->
+<app-submit-reset (actionMenuClickEvent)="actionMenuClickEvent($event)"></app-submit-reset>

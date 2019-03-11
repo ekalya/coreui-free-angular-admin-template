@@ -7,3 +7,5 @@ export * from './input-control-dropdown.control';
 export * from './input-control-text-box-filter.control';
 export * from './input-control-dynamic-list';
 export * from './input-control-single-select-list.control';
+export * from './input-control-time-only-from.control';
+export * from './input-control-time-only-to.control';

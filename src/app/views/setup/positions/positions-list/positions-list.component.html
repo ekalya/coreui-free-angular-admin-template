@@ -3,11 +3,24 @@
 [title]="title"
 [listItems]="listItems"
 [cols]="cols"
-[enableInputForm]="true"
-[inputForm]="1"
-[controls]="controls"
-[model]="model"
+[enableInputForm]="false"
+(listActionMenuClick)="listActionMenuClick($event)"
 (itemAddedEvent)="itemAddedEvent($event)"
 (itemUpdatedEvent)="itemUpdatedEvent($event)"
 (itemDeleteEvent)="itemDeleteEvent($event)"
 (itemSelectionChange)="itemSelectedChangeEvent($event)"></app-dynamic-list-plus>
+<p-dialog *ngIf="displayPositionDetailsForm === true"
+header="Details" 
+[(visible)]="displayPositionDetailsForm" 
+[responsive]="true" 
+showEffect="fade"
+[modal]="true" 
+[style]="{width: '300px'}">
+    <div class="ui-g ui-fluid" *ngIf="model">
+    <app-position-details 
+    [model]="model"
+    [positions]="listItems"
+    [menuAction]="action"
+    (formCloseEvent)="positionDetailsFormCloseEvent($event)"></app-position-details>
+    </div>
+</p-dialog>

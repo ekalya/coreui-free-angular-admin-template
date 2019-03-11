@@ -4,7 +4,6 @@ import { CompanyComponent } from './company/company.component';
 import { BranchesComponent } from './branches/branches.component';
 import { BranchComponent } from './branches/branch.component';
 import { AuthGuard } from '../../core';
-import { BankListComponent } from './banks/bank-list/bank-list.component';
 
 const routes: Routes = [
   {
@@ -75,10 +74,31 @@ const routes: Routes = [
         }
       },
       {
-        path: 'organization-unit-types',
-        loadChildren: './organization-unit-types/organization-unit-types.module#OrganizationUnitTypesModule',
+        path: 'employmentstatus',
+        loadChildren: './employment-status/employment-status.module#EmploymentStatusModule',
         data: {
-          title: 'Org Unit Types'
+          title: 'Jobs'
+        }
+      },
+      {
+        path: 'paygrades',
+        loadChildren: './pay-grades/pay-grades.module#PayGradesModule',
+        data: {
+          title: 'Pay Grades'
+        }
+      },
+      {
+        path: 'workshifts',
+        loadChildren: './work-shifts/work-shifts.module#WorkShiftsModule',
+        data: {
+          title: 'Pay Grades'
+        }
+      },
+      {
+        path: 'nationalities',
+        loadChildren: './nationalities/nationalities.module#NationalitiesModule',
+        data: {
+          title: 'Nationalities'
         }
       },
       {

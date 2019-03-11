@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Job, InputControlBase } from '../../../../core/models';
+import { Job, InputControlBase, GenericComponent } from '../../../../core/models';
 import { JobService } from '../../../../core/services';
 import { JobUIService } from '../job-details/job-ui.service';
 import { MessageService } from 'primeng/api';
@@ -10,19 +10,12 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./jobs-list.component.scss'],
   providers: [MessageService]
 })
-export class JobsListComponent implements OnInit {
-  listItems: Job[] = [];
-  cols: any[] = [];
-  title: string;
-  selectedItem = new Job();
-  model: Job;
-  controls: InputControlBase<any>[] = [];
+export class JobsListComponent extends GenericComponent<Job> implements OnInit {
   constructor(
     private jobService: JobService,
     private jobUIService: JobUIService,
     private messageService: MessageService) {
-      this.cols = this.jobUIService.getColumns();
-      this.controls = this.jobUIService.getMetadata();
+      super(jobService, messageService, jobUIService);
       this.title = 'Jobs List';
     }
 
@@ -35,27 +28,10 @@ export class JobsListComponent implements OnInit {
     this.selectedItem = selectedItem;
   }
   itemUpdatedEvent(updatedItem: Job) {
-    let listItems = [...this.listItems];
-    if (updatedItem.id === undefined) {
-      this.jobService.create(updatedItem).subscribe(loc => {
-        this.messageService.add({severity: 'success', summary: 'Created successfully', detail: 'Successfully Created'});
-        this.listItems.push(loc);
-      });
-    } else {
-      this.jobService.update(updatedItem).subscribe(loc => {
-        this.messageService.add({severity: 'success', summary: 'Updated successfully', detail: 'Successfully Updated'});
-        listItems[this.listItems.indexOf(this.selectedItem)] = loc;
-      });
-    }
-    this.listItems = listItems;
+    this.updateItem(updatedItem);
   }
   itemAddedEvent(addedItem: Job) {
-    this.jobService.create(addedItem).subscribe(item => {
-      this.messageService.add({severity: 'success', summary: 'Created successfully', detail: 'Successfully Created'});
-      let listItems = [...this.listItems];
-      listItems.push(item);
-      this.listItems = listItems;
-    });
+    this.addItem(addedItem);
   }
   itemDeleteEvent(item: Job) {
     this.messageService.add({severity: 'error', summary: 'Not allowed', detail: 'Not allowed'});

@@ -71,6 +71,10 @@ export const routes: Routes = [
         loadChildren: './views/transactions/transactions.module#TransactionsModule'
       },
       {
+        path: 'pim',
+        loadChildren: './views/pim/pim.module#PIMModule'
+      },
+      {
         path: 'setup',
         loadChildren: './views/setup/setup.module#SetupModule'
       }

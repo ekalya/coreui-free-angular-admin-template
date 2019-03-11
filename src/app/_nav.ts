@@ -30,6 +30,18 @@ export const navItems: NavData[] = [
     ]
   },
   {
+    name: 'PIM',
+    url: '/pim',
+    icon: 'icon-settings',
+    children: [
+      {
+        name: 'Employees',
+        url: '/pim/employees',
+        icon: 'icon-puzzle'
+      }
+    ]
+  },
+  {
     name: 'Setup',
     url: '/setup',
     icon: 'icon-settings',
@@ -37,11 +49,6 @@ export const navItems: NavData[] = [
       {
         name: 'Company',
         url: '/setup/company',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Branches',
-        url: '/setup/branches',
         icon: 'icon-puzzle'
       },
       {
@@ -60,11 +67,6 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
-        name: 'Org Unit Types',
-        url: '/setup/organization-unit-types',
-        icon: 'icon-puzzle'
-      },
-      {
         name: 'Org Units',
         url: '/setup/organization-units',
         icon: 'icon-puzzle'
@@ -77,6 +79,26 @@ export const navItems: NavData[] = [
       {
         name: 'Positions',
         url: '/setup/positions',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Pay Grades',
+        url: '/setup/paygrades',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Work Shifts',
+        url: '/setup/workshifts',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Nationalities',
+        url: '/setup/nationalities',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Employment Status',
+        url: '/setup/employmentstatus',
         icon: 'icon-puzzle'
       },
       {

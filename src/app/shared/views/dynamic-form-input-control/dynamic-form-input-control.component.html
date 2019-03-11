@@ -36,6 +36,18 @@
             </p-header>
         </p-listbox>
 
+        <!-- timeOnlyFrom -->
+        <div *ngSwitchCase="'timeOnlyFrom'" class="form-control">
+          <p-calendar [formControlName]="ctrl.key" [timeOnly]="true"></p-calendar>
+        </div>
+        
+
+        <!-- timeOnlyTo -->
+        <div *ngSwitchCase="'timeOnlyTo'" class="form-control">
+          <p-calendar [formControlName]="ctrl.key" [timeOnly]="true"></p-calendar>
+        </div>
+        
+
         <!-- 6. Picklist -->
         <div *ngSwitchCase="'picklist'">
           <p-pickList  [source]="ctrl.options" [target]="ctrl.value" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="label" 

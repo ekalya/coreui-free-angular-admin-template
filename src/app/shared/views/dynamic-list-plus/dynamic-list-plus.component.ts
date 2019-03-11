@@ -78,11 +78,11 @@ export class DynamicListPlusComponent {
 
   details() {
     this.action = 'READ';
+    this.listActionMenuClick.emit({action: this.action});
     if (this.selectedObject === undefined) {
       this.messageService.add({severity: 'error', summary: 'No record selected', detail: 'This action requires an item to be selected'});
         return;
     }
-    this.listActionMenuClick.emit({action: this.action});
     this.model = this.listItems[this.listItems.indexOf(this.selectedObject)];
     this.displayForm = true;
     this.hideSaveButton = true;
@@ -90,13 +90,13 @@ export class DynamicListPlusComponent {
   }
   update() {
     this.action = 'UPDATE';
+    this.listActionMenuClick.emit({action: this.action});
     if (this.selectedObject === undefined) {
       this.messageService.add({severity: 'error', summary: 'No record selected', detail: 'This action requires an item to be selected'});
       return;
     }
 
 
-    this.listActionMenuClick.emit({action: this.action});
     this.model = this.cloneObj(this.listItems[this.listItems.indexOf(this.selectedObject)]);
     this.displayForm = true;
     this.hideSaveButton = false;
@@ -105,6 +105,7 @@ export class DynamicListPlusComponent {
 
   delete() {
     this.action = 'DELETE';
+    this.listActionMenuClick.emit({action: this.action});
     if (this.selectedObject === undefined) {
       this.messageService.add({severity: 'error', summary: 'No record selected', detail: 'This action requires an item to be selected'});
       return;
