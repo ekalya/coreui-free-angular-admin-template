@@ -41,10 +41,12 @@ import { LoginModule } from './login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from './store/store.module';
 import { SharedModule } from './shared';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 @NgModule({
   imports: [
     BrowserModule,
+    NgxWebstorageModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

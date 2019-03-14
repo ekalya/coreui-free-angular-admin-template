@@ -10,6 +10,7 @@ import {
   MenuService,
   BankService
 } from './services';
+import { AuthExpiredInterceptor, ErrorHandlerInterceptor } from './http';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,16 @@ import {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
+    },
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthExpiredInterceptor,
+        multi: true
+    },
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ErrorHandlerInterceptor,
+        multi: true
     }
   ]
 })

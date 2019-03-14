@@ -1,45 +1,26 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '../services/auth/auth.service';
-import {
-    HttpInterceptor,
-    HttpRequest,
-    HttpHandler,
-    HttpEvent,
-    HttpErrorResponse} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { HttpError } from './error';
 
 @Injectable()
-export class  AuthInterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
+    constructor(private localStorage: LocalStorageService, private sessionStorage: SessionStorageService) {}
 
-    constructor(private authService: AuthService) {}
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        if (!request || !request.url) {
+            return next.handle(request);
+        }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const auth = this.authService.currentUser ?
-        'Basic ' + btoa(this.authService.currentUser.username + ':' + this.authService.currentUser.password) : null;
-
-        const xhr = req.clone({
-            headers: req.headers.set('X-Requested-With', 'XMLHttpRequest')
-                                .set('authorization', auth)
-                                .set('Content-Type', 'application/json')
-        });
-        return next.handle(xhr)
-        .pipe(
-            retry(1),
-            catchError((error: HttpErrorResponse) => {
-                const errorMessage: HttpError  = {code: 0, message: ''};
-                if (error.error instanceof ErrorEvent) {
-                    // client-side error
-                    errorMessage.message = error.error.message;
-                } else {
-                    // server-side error
-                    errorMessage.code = error.status;
-                    errorMessage.message = error.message;
+        const token = this.localStorage.retrieve('authenticationToken') || this.sessionStorage.retrieve('authenticationToken');
+        if (!!token) {
+            request = request.clone({
+                setHeaders: {
+                    Authorization: 'Bearer ' + token
                 }
-                return throwError(errorMessage);
-            })
-        );
+            });
+        }
+        return next.handle(request);
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User, AuthService, AlertService } from '../core';
+import { User, AuthService, AlertService, LoginService, StateStorageService } from '../core';
 import { MessageService } from 'primeng/api';
 
 
@@ -23,10 +23,14 @@ export class LoginContainerComponent implements OnInit {
     authenticated: false,
     password: ''
   };
+  authenticationError: boolean;
+  credentials: any;
   constructor(private authService: AuthService,
     private router: Router,
     private alertService: AlertService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private loginService: LoginService,
+    private stateStorageService: StateStorageService) {
     this.authService.logout();
   }
 
@@ -52,6 +56,32 @@ export class LoginContainerComponent implements OnInit {
     }, ()  =>  {
 
     });
+  }
+
+  login2(user: User) {
+    this.loginService
+        .login({
+            username: user.username,
+            password: user.password,
+            rememberMe: true
+        })
+        .then(() => {
+            this.authenticationError = false;
+            if (this.router.url === '/register' || /^\/activate\//.test(this.router.url) || /^\/reset\//.test(this.router.url)) {
+                this.router.navigate(['']);
+            }
+
+            // previousState was set in the authExpiredInterceptor before being redirected to login modal.
+            // since login is successful, go to stored previousState and clear previousState
+            const redirect = this.stateStorageService.getUrl();
+            if (redirect) {
+                this.stateStorageService.storeUrl(null);
+                this.router.navigate([redirect]);
+            }
+        })
+        .catch((error) => {
+            this.authenticationError = true;
+        });
   }
 
 }

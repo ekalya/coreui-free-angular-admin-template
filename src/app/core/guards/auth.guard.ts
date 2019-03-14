@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
+import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
+import { StateStorageService } from '../services';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private localStorage: LocalStorageService,
+    private sessionStorage: SessionStorageService,
+    private router: Router,
+    private stateStorageService: StateStorageService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -15,11 +21,14 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    if (this.authService.currentUser && this.authService.currentUser.authenticated === true) {
+    console.log('check login ......on the way to :' + url);
+    const token = this.localStorage.retrieve('authenticationToken') || this.sessionStorage.retrieve('authenticationToken');
+    console.log('token:' + token);
+    if (!!token) {
       return true;
     }
     // Store the attempted URL for redirecting
-    this.authService.redirectUrl = url;
+    this.stateStorageService.storeUrl(url);
     // Navigate to the login page with extras
     this.router.navigate(['/login']);
     return false;
