@@ -14,7 +14,9 @@ export class AuthExpiredInterceptor implements HttpInterceptor {
                 (event: HttpEvent<any>) => {},
                 (err: any) => {
                     if (err instanceof HttpErrorResponse) {
+                        console.log(err);
                         if (err.status === 401) {
+                            console.log('auth exprired......');
                             this.loginService.logout();
                         }
                     }

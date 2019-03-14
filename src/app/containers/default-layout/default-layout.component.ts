@@ -1,6 +1,6 @@
 import {Component, OnDestroy, ComponentFactoryResolver, OnInit} from '@angular/core';
 import { navItems } from './../../_nav';
-import { AuthService, MenuItem } from '../../core';
+import { AuthService, MenuItem, LoginService } from '../../core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { select } from '@angular-redux/store';
@@ -20,7 +20,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   public menuItems = this.subject.asObservable();
   @select() menuItems$: Observable<MenuItem[]>;
 
-  constructor(private authService: AuthService,
+  constructor(private loginService: LoginService,
     private router: Router) {
     this.changes = new MutationObserver(() => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
@@ -38,9 +38,8 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     this.changes.disconnect();
   }
   logout() {
-    this.authService.logout().subscribe(() => {
-      this.router.navigate(['/login']);
-    });
+    this.loginService.logout();
+    this.router.navigate(['/login']);
   }
   onDeactivate(event: any) {}
   onActivate() {}
